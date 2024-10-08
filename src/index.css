@@ -8,6 +8,10 @@
   }
 
   body {
-    @apply min-h-dvh w-dvw max-w-[dvw];
+    @apply min-h-dvh w-dvw max-w-[dvw] bg-white;
+  }
+
+  img {
+    @apply bg-no-repeat object-cover object-center;
   }
 }

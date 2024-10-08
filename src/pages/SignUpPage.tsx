@@ -1,9 +1,11 @@
-import React from 'react'
+import React from "react";
 
 function SignUpPage() {
   return (
-    <div>SignUpPage</div>
-  )
+    <div>
+      <h1>SignUpPage</h1>
+    </div>
+  );
 }
 
-export default SignUpPage
+export default SignUpPage;

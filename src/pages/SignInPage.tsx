@@ -1,9 +1,11 @@
-import React from 'react'
+import React from "react";
 
 function SignInPage() {
   return (
-    <div>SignInPage</div>
-  )
+    <div>
+      <h1>SignInPage</h1>
+    </div>
+  );
 }
 
-export default SignInPage
+export default SignInPage;

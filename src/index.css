@@ -11,7 +11,25 @@
     @apply min-h-dvh w-dvw max-w-[dvw] bg-white;
   }
 
+  h1 {
+    @apply text-5xl sm:text-7xl lg:text-8xl 2xl:text-9xl;
+  }
+
+  h3 {
+    @apply text-xl lg:text-2xl 2xl:text-3xl;
+  }
+
   img {
     @apply bg-no-repeat object-cover object-center;
+  }
+}
+
+@layer components {
+  .hide-scroll {
+    scrollbar-width: none;
+  }
+
+  .hide-scroll::-webkit-scrollbar {
+    display: none;
   }
 }

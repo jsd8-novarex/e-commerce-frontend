@@ -25,7 +25,7 @@ function Footer() {
         <div>
           <p className='pt-7'>Copyright 2024 © Pangaea. All Rights Reserved.</p>
         </div>
-        <div className='pt-7 text-center text-7xl md:text-9xl'>PANGAEA</div>
+        <div className='pt-7 text-center text-7xl md:text-9xl'>PANGAEA.</div>
       </div>
     </footer>
   );

@@ -6,10 +6,10 @@ function Layout() {
   return (
     <div className='relative flex h-dvh min-h-dvh w-dvw flex-row flex-wrap overflow-x-hidden bg-white'>
       <NavigationBar />
-      <div className='flex-grow'>
+      <div className='flex-grow pb-8'>
         <Outlet />
       </div>
-      {/* <Footer /> */}
+      <Footer />
     </div>
   );
 }

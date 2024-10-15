@@ -4,7 +4,7 @@ import ProductDetail from "../components/productPage/ProductDetail";
 
 function ProductPage() {
   return (
-    <div className='grid sm:grid-cols-12 gap-3 sm:gap-3 sm:px-4'>
+    <div className='grid gap-3 sm:grid-cols-12 sm:gap-3 sm:px-4'>
       <ProductImages />
       <ProductDetail />
     </div>

@@ -23,3 +23,13 @@
     @apply bg-no-repeat object-cover object-center;
   }
 }
+
+@layer components {
+  .hide-scroll {
+    scrollbar-width: none;
+  }
+
+  .hide-scroll::-webkit-scrollbar {
+    display: none;
+  }
+}

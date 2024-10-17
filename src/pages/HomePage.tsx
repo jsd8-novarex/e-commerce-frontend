@@ -1,15 +1,12 @@
 import ShowcaseSection from "../components/ShowcaseSection";
+import { ShowCaseSectionData } from "../constraints/SHOWCASE_DATA";
 
 function HomePage() {
   return (
-    <main className='hide-scroll h-[91.7vh] w-dvw snap-y snap-mandatory overflow-hidden overflow-y-auto scroll-smooth ease-in-out'>
-      <ShowcaseSection />
-      <section className='h-full w-full snap-center snap-always bg-green-500'>
-        <h1>section1</h1>
-      </section>
-      <section className='h-full w-full snap-center snap-always bg-blue-500'>
-        <h1>section1</h1>
-      </section>
+    <main className='hide-scroll h-[91.5vh] w-dvw snap-y snap-mandatory overflow-hidden overflow-y-auto scroll-smooth ease-in-out'>
+      {ShowCaseSectionData.map((data, index) => (
+        <ShowcaseSection key={index} data={data} />
+      ))}
     </main>
   );
 }

@@ -3,49 +3,48 @@ import React from "react";
 function ProductDetail() {
   return (
     // <section className='col-start-8 col-end-13 bg-red-500'>
-    <section className='grid grid-rows-1 bg-red-500 sm:col-span-4 sm:col-start-9'>
-      <p>content</p>
-      <div>
-        <h3>Mens Recycled Cashmere Cardigan - Black</h3>
-        <h3>$275</h3>
-        <br />
-        <ul className='flex gap-2'>
-          <li>Womens</li>
-          <li>Mens</li>
-        </ul>
+    <section className='sm:col-span-4 sm:col-start-9'>
+
+      <h3>Mens Recycled Cashmere Cardigan - Black</h3>
+      <span><h3 className='text-gray-500 my-4'>$275</h3></span>
+
+      <ul className='flex my-4 border-b-2'>
+        <li className='m-2'><a href="">Womens</a></li>
+        <li className='m-2'><a href="">Mens</a></li>
+      </ul>
+
+      <div className='flex flex-col mt-7'>
+        <span>Color</span>
+        <div className='mt-7'>
+          <span className='bg-white border-2 border-black rounded-full px-4 py-2 mx-1 my-4'></span>
+          <span className='bg-black border-2 border-white rounded-full px-4 py-2 mx-1 my-4'></span>
+        </div>
       </div>
-      <br />
-      <div>
-        <h4>
-          <b>Color</b>
-        </h4>
-        <ul className='flex gap-2'>
-          <li>Black</li>
-          <li>Oatmeal</li>
-        </ul>
-        <br />
+
+      <div className='mt-10'>
+        <span>Size</span>
+        <div className='flex justify-around mt-5'>
+          {/* //button */}
+          <div><a href="">XXS</a></div>
+          <div><a href="">XS</a></div>
+          <div><a href="">S</a></div>
+          <div><a href="">M</a></div>
+          <div><a href="">L</a></div>
+          <div><a href="">XL</a></div>
+          <div><a href="">XXL</a></div>
+        </div>
       </div>
-      <div>
-        <h4>Size</h4>
-        <ul className='flex gap-4'>
-          <li>XXS</li>
-          <li>XS</li>
-          <li>S</li>
-          <li>M</li>
-          <li>L</li>
-          <li>XL</li>
-          <li>XXL</li>
-        </ul>
+
+      <div className='mt-7'>
+        <span>Description</span>
+        <p className='text-gray-500'><small>WRAP YOURSELF IN WARMTH WITH THE PANGAIA RECYCLED CASHMERE CARDIGAN. MADE FROM A LUXURIOUS BLEND OF RECYCLED CASHMERE, 
+          THIS CARDIGAN OFFERS SOFTNESS AND DURABLENESS IN ONE ELEGANT PIECE.</small></p>
       </div>
-      <br />
-      <div>
-        <h4>Description</h4>
-        <p>
-          WRAP YOURSELF IN WARMTH WITH THE PANGAIA RECYCLED CASHMERE CARDIGAN. MADE FROM A LUXURIOUS
-          BLEND OF RECYCLED CASHMERE, THIS CARDIGAN OFFERS SOFTNESS AND DURABLENESS IN ONE ELEGANT
-          PIECE.
-        </p>
+
+      <div className='mt-7 flex justify-center'>
+        <button type="button" className ='text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800'>ADD TO BAG</button>
       </div>
+
     </section>
   );
 }

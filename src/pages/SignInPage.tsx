@@ -1,10 +1,11 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 function SignInPage() {
   return (
     <div className='flex h-dvh w-dvw items-center justify-center bg-white md:bg-stone-100'>
       <div className='flex h-fit w-dvw flex-col justify-center bg-white p-10 md:w-1/2 lg:w-1/3 xl:w-1/3'>        
-          <div className="py-5">
+          <div className="mb-8">
             <h1 className='text-center text-4xl font-bold md:text-5xl'>Pangaea</h1>
           </div>
           <form>          
@@ -34,10 +35,10 @@ function SignInPage() {
           </div>
           </form>
           <div className='text-right hover:text-gray-400 mt-2'>
-            <a href=''>Forgot Password?</a>
+            <Link to="./">Forgot Password?</Link>
           </div>
           <div className='py-5 text-center underline hover:text-gray-400 md:text-xl mt-5'>
-            <a href=''>Create new account</a>
+            <Link to="./">Create new account</Link>
           </div>        
       </div>
     </div>

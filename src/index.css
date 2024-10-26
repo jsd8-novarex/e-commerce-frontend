@@ -32,4 +32,9 @@
   .hide-scroll::-webkit-scrollbar {
     display: none;
   }
+
+
+  .btn-black {
+    @apply btn btn-primary w-24 border-black bg-black text-white hover:border-black hover:bg-black hover:text-white
+  }
 }

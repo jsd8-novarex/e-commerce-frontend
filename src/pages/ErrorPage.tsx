@@ -11,11 +11,7 @@ function ErrorPage() {
         </div>
         <p>The page you are looking for doesn't exist.</p>
         <div className='mt-12'>
-          <button
-            type='button'
-            className='btn btn-primary w-24 border-black bg-black text-white hover:border-black hover:bg-black hover:text-white'
-            onClick={() => navigate("/")}
-          >
+          <button type='button' className='btn-black' onClick={() => navigate("/")}>
             home
           </button>
         </div>

@@ -32,4 +32,13 @@
   .hide-scroll::-webkit-scrollbar {
     display: none;
   }
+
+  /* AuthrnticationForm*/
+  .auth-form__input {
+    @apply h-8 w-full border-b-2 border-x-gray-800 px-2 outline-none md:h-10;
+  }
+
+  .auth-form__btn {
+    @apply mt-2 h-8 w-full bg-black text-white hover:bg-gray-600 md:h-10 md:text-xl;
+  }
 }

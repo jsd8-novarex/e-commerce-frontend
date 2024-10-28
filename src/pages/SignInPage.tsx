@@ -4,28 +4,25 @@ import AuthenticationForm from "../components/AuthenticationForm";
 function SignInPage() {
   return (
     <AuthenticationForm>
-      <form className="flex flex-col gap-y-4 mt-2">        
-          <input
-            type='email'
-            placeholder='Enter your email'
-            className='auth-form__input'
-            minLength={8}
-            required
-          />      
-        
-          <input
-            type='password'
-            placeholder='Enter your password'
-            className='auth-form__input'
-            minLength={8}
-            required
-          />
-        
+      <form className='mt-8 flex flex-col gap-y-6'>
+        <input
+          type='email'
+          placeholder='Enter your email'
+          className='auth-form__input'
+          minLength={8}
+          required
+        />
+
+        <input
+          type='password'
+          placeholder='Enter your password'
+          className='auth-form__input'
+          minLength={8}
+          required
+        />
+
         <div className='flex justify-center'>
-          <button
-            type='submit'
-            className='auth-form__btn'
-          >
+          <button type='submit' className='auth-form__btn'>
             LOGIN
           </button>
         </div>

@@ -8,7 +8,7 @@
   }
 
   body {
-    @apply min-h-dvh w-dvw max-w-[dvw] bg-white;
+    @apply min-h-dvh bg-white;
   }
 
   h1 {
@@ -35,7 +35,7 @@
 
   /* AuthrnticationForm*/
   .auth-form__input {
-    @apply h-8 w-full border-b-2 border-x-gray-800 px-2 outline-none md:h-10;
+    @apply h-8 w-full border-2 border-black px-2 outline-none md:h-10;
   }
 
   .auth-form__btn {

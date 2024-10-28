@@ -3,7 +3,7 @@ import { useNavigate } from "react-router";
 function ErrorPage() {
   const navigate = useNavigate();
   return (
-    <div className='grid h-dvh w-dvw grid-rows-6 p-4 text-xl sm:p-8 md:p-12'>
+    <div className='grid h-dvh w-full grid-rows-6 p-4 text-xl sm:p-8 md:p-12'>
       <span>404</span>
       <div className='row-start-2 sm:row-start-3'>
         <div className='my-8'>

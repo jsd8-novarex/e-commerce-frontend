@@ -3,8 +3,8 @@ import ProductCard from "../components/collectionsPage/ProductCard";
 
 function CollectionsPage() {
   return (
-    <main className='relative grid min-h-dvh w-dvw grid-cols-12 gap-y-4'>
-      <section className='col-start-1 col-end-13 p-4 lg:col-start-2 lg:col-end-12 2xl:col-start-3 2xl:col-end-11'>
+    <main className='relative grid min-h-screen grid-cols-12 gap-y-4'>
+      <section className='col-span-full px-8 py-8 sm:px-16 lg:px-32'>
         <div className='mb-8'>
           <p>Home / Shop All</p>
         </div>
@@ -17,12 +17,15 @@ function CollectionsPage() {
           </p>
         </div>
       </section>
-      <CollectionsFilterBar />
-      <section className='col-start-1 col-end-13 grid grid-cols-1 gap-4 justify-self-center p-4 sm:grid-cols-2 lg:col-start-2 lg:col-end-12 lg:grid-cols-3 2xl:col-start-3 2xl:col-end-11 2xl:grid-cols-4'>
-        <ProductCard />
-        <ProductCard />
-        <ProductCard />
-        <ProductCard />
+      {/* <CollectionsFilterBar />  */}
+      <section className='col-span-full px-8 py-8 sm:px-16 lg:px-32'>
+        <div className='grid grid-cols-12 gap-4 justify-self-center'>
+          {Array.from({ length: 20 }).map((_, index) => (
+            <div key={index} className='col-span-full sm:col-span-6 lg:col-span-3'>
+              <ProductCard />
+            </div>
+          ))}
+        </div>
       </section>
     </main>
   );

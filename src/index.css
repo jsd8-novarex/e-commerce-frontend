@@ -8,11 +8,15 @@
   }
 
   body {
-    @apply min-h-dvh w-dvw max-w-[dvw] bg-white;
+    @apply min-h-dvh bg-white;
   }
 
   h1 {
     @apply text-5xl sm:text-7xl lg:text-8xl 2xl:text-9xl;
+  }
+
+  h2 {
+    @apply text-2xl lg:text-3xl;
   }
 
   h3 {
@@ -25,6 +29,7 @@
 }
 
 @layer components {
+  /* hide-scroll */
   .hide-scroll {
     scrollbar-width: none;
   }
@@ -33,8 +38,22 @@
     display: none;
   }
 
-
+  /* button  */
   .btn-black {
-    @apply btn btn-primary w-24 border-black bg-black text-white hover:border-black hover:bg-black hover:text-white
+    @apply btn btn-primary w-24 border-black bg-black text-white hover:border-black hover:bg-black hover:text-white;
+  }
+
+  /* HamburgerMenu */
+  .hamburger-span {
+    @apply m-0.5 h-0.5 bg-black transition-all duration-300;
+  }
+
+  /* AuthenticationForm */
+  .auth-form___input {
+    @apply h-8 w-full border border-black px-2 md:h-10;
+  }
+
+  .auth-form___btn {
+    @apply mt-2 h-8 w-full bg-black text-white hover:bg-gray-600 md:h-10 md:text-xl;
   }
 }

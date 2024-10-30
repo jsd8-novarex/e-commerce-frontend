@@ -8,7 +8,7 @@
   }
 
   body {
-    @apply min-h-dvh bg-white;
+    @apply relative min-h-dvh bg-white;
   }
 
   h1 {

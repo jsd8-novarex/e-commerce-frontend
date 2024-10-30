@@ -31,8 +31,8 @@ function ProductCard() {
           <button className='h-8 w-8 rounded-full border-4 border-white bg-sky-500' />
           <button className='h-8 w-8 rounded-full border-4 border-white bg-slate-500' />
         </div>
-        <div className='p-2'>
-          <p>Mens 365 Heavyweight Hoodie</p>
+        <div className='p-1'>
+          <p className=" text-lg">Mens 365 Heavyweight Hoodie</p>
           <div className='pt-2'>
             <span className='text-xl'>$185</span>
           </div>

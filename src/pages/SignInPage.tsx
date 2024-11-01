@@ -1,23 +1,39 @@
-import React from "react";
+import { Link } from "react-router-dom";
+import AuthenticationForm from "../components/AuthenticationForm";
 
 function SignInPage() {
   return (
-    <div className='flex justify-center'>
-      <div className='flex w-full flex-col p-10 md:w-2/4'>
-        <div className='text-center text-xl'>SignInPage</div>
-        <h1>Log in</h1>
-        <h3 className='text-xs'>Enter your email and we'll send you a login code</h3>
-        <div className='py-2.5'>
-          <h3>Email</h3>
-          <input type='email' className='w-full border border-black'></input>
-        </div>
+    <AuthenticationForm>
+      <form className='mt-8 flex flex-col gap-y-6'>
+        <input
+          type='email'
+          placeholder='Enter your email'
+          className='auth-form__input'
+          minLength={8}
+          required
+        />
+
+        <input
+          type='password'
+          placeholder='Enter your password'
+          className='auth-form__input'
+          minLength={8}
+          required
+        />
+
         <div className='flex justify-center'>
-          <button type='submit' className='w-full bg-black text-white'>
-            Continue
+          <button type='submit' className='auth-form__btn'>
+            LOGIN
           </button>
         </div>
+      </form>
+      <div className='mt-2 text-right hover:text-gray-400'>
+        <Link to='/'>Forgot Password?</Link>
       </div>
-    </div>
+      <div className='mt-5 py-5 text-center underline hover:text-gray-400 md:text-xl'>
+        <Link to='/'>Create new account</Link>
+      </div>
+    </AuthenticationForm>
   );
 }
 

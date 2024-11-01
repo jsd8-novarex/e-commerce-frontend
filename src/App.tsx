@@ -9,6 +9,7 @@ import ErrorPage from "./pages/ErrorPage";
 import ProfilePage from "./pages/ProfilePage";
 import TransactionPage from "./pages/TransactionPage";
 import PaymentPage from "./pages/PaymentPage";
+import SignInAdminPage from "./pages/SignInAdminPage";
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
         </Route>
         <Route path='sign-in' element={<SignInPage />} caseSensitive />
         <Route path='sign-up' element={<SignUpPage />} caseSensitive />
+        <Route path='sign-in-admin' element={<SignInAdminPage />} caseSensitive />
         <Route path='*' element={<ErrorPage />} />
       </Routes>
     </>

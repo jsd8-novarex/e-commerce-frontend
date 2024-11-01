@@ -1,4 +1,3 @@
-import React from "react";
 import ProductImages from "../components/productPage/ProductImages";
 import ProductDetail from "../components/productPage/ProductDetail";
 import { ShowImageProductData } from "../constraints/SHOWIMAGE_DATA";

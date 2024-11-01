@@ -1,14 +1,33 @@
+import { useEffect, useState } from "react";
 import { Outlet } from "react-router-dom";
-import NavigationBar from "./NavigationBar";
-import Footer from "./Footer";
+import NavigationBar from "./navigation/NavigationBar";
+import CartSidebar from "./CartSidebar";
+// import Footer from "./Footer";
 
 function Layout() {
+  const [isCartSidebarOpen, setIsCartSidebarOpen] = useState<boolean>(false);
+
+  useEffect(() => {
+    if (isCartSidebarOpen) {
+      document.body.style.overflowY = "hidden ";
+    } else {
+      document.body.style.overflowY = "auto";
+    }
+
+    return () => {
+      document.body.style.overflowY = "auto";
+    };
+  }, [isCartSidebarOpen]);
+
+  const toggleCartSidebar = () => {
+    setIsCartSidebarOpen((prev) => !prev);
+  };
+
   return (
-    <div className='relative flex h-dvh min-h-dvh w-dvw flex-row flex-wrap overflow-x-hidden bg-white'>
-      <NavigationBar />
-      <div className='flex-grow'>
-        <Outlet />
-      </div>
+    <div className='flex h-full flex-col bg-white'>
+      <NavigationBar toggleCartSidebar={toggleCartSidebar} />
+      <CartSidebar isCartSidebarOpen={isCartSidebarOpen} toggleCartSidebar={toggleCartSidebar} />
+      <Outlet />
       {/* <Footer /> */}
     </div>
   );

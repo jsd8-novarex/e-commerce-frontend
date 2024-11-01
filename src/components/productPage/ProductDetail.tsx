@@ -2,50 +2,48 @@ import React from "react";
 
 function ProductDetail() {
   return (
-    // <section className='col-start-8 col-end-13 bg-red-500'>
-    <section className='grid grid-rows-1 bg-red-500 sm:col-span-4 sm:col-start-9'>
-      <p>content</p>
+    <section className='ml-2 sm:col-span-9 sm:col-start-9 sm:w-full'>
       <div>
         <h3>Mens Recycled Cashmere Cardigan - Black</h3>
-        <h3>$275</h3>
-        <br />
-        <ul className='flex gap-2'>
-          <li>Womens</li>
-          <li>Mens</li>
-        </ul>
+        <span><h3 className='text-gray-500 my-4'>$275</h3></span>
       </div>
-      <br />
-      <div>
-        <h4>
-          <b>Color</b>
-        </h4>
-        <ul className='flex gap-2'>
-          <li>Black</li>
-          <li>Oatmeal</li>
-        </ul>
-        <br />
+
+      <ul className='flex my-4 border-b-2'>
+        <li className='m-2'><a href="">Womens</a></li>
+        <li className='m-2'><a href="">Mens</a></li>
+      </ul>
+
+      <div className='flex flex-col mt-7'>
+        <span>Color</span>
+        <div className='mt-7'>
+          <button className='bg-white border-2 border-black rounded-full px-4 py-4 mx-1 my-4'></button>
+          <button className='bg-black border-2 border-white rounded-full px-4 py-4 mx-1 my-4'></button>
+        </div>
       </div>
-      <div>
-        <h4>Size</h4>
-        <ul className='flex gap-4'>
-          <li>XXS</li>
-          <li>XS</li>
-          <li>S</li>
-          <li>M</li>
-          <li>L</li>
-          <li>XL</li>
-          <li>XXL</li>
-        </ul>
+
+      <div className='mt-10'>
+        <span>Size</span>
+        <div className='flex overflow-x-auto space-x-4 py-2'>
+            <button className='px-4 py-4'>XXS</button>
+            <button className='px-4 py-4'>XS</button>
+            <button className='px-4 py-4'>S</button>
+            <button className='px-4 py-4'>M</button>
+            <button className='px-4 py-4'>L</button>
+            <button className='px-4 py-4'>XL</button>
+            <button className='px-4 py-4'>XXL</button>
+        </div>
       </div>
-      <br />
-      <div>
-        <h4>Description</h4>
-        <p>
-          WRAP YOURSELF IN WARMTH WITH THE PANGAIA RECYCLED CASHMERE CARDIGAN. MADE FROM A LUXURIOUS
-          BLEND OF RECYCLED CASHMERE, THIS CARDIGAN OFFERS SOFTNESS AND DURABLENESS IN ONE ELEGANT
-          PIECE.
-        </p>
+
+      <div className='mt-7'>
+        <span>Description</span>
+        <p className='text-gray-500'><small>WRAP YOURSELF IN WARMTH WITH THE PANGAIA RECYCLED CASHMERE CARDIGAN. MADE FROM A LUXURIOUS BLEND OF RECYCLED CASHMERE,
+          THIS CARDIGAN OFFERS SOFTNESS AND DURABLENESS IN ONE ELEGANT PIECE.</small></p>
       </div>
+
+      <div className='mt-7 flex justify-center'>
+        <button type="button" className='text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm w-full py-2.5 text-center me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800'>ADD TO BAG</button>
+      </div>
+
     </section>
   );
 }

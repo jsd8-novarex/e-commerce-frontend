@@ -24,7 +24,7 @@ function Layout() {
   };
 
   return (
-    <div className='flex h-full flex-col bg-white'>
+    <div className='relative flex h-full flex-col bg-white'>
       <NavigationBar toggleCartSidebar={toggleCartSidebar} />
       <CartSidebar isCartSidebarOpen={isCartSidebarOpen} toggleCartSidebar={toggleCartSidebar} />
       <Outlet />

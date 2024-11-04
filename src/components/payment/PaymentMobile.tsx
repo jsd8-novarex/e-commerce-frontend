@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import { useState } from "react";
 
-const PaymentMobile: React.FC = () => {
+function PaymentMobile() {
   const [isSummaryVisible, setIsSummaryVisible] = useState(false);
   const [quantity, setQuantity] = useState(1); // ตั้งค่าเริ่มต้นเป็น 1
   const [isPriceVisible, setIsPriceVisible] = useState(true);
@@ -239,6 +239,6 @@ const PaymentMobile: React.FC = () => {
       </div>
     </section>
   );
-};
+}
 
 export default PaymentMobile;

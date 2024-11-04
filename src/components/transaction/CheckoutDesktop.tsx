@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-const CheckoutDesktop: React.FC = () => {
+function CheckoutDesktop() {
   const [isSummaryVisible, setIsSummaryVisible] = useState(false);
   const [quantity, setQuantity] = useState(1);
   const [isPriceVisible, setIsPriceVisible] = useState(true);
@@ -144,6 +144,6 @@ const CheckoutDesktop: React.FC = () => {
       </section>
     </>
   );
-};
+}
 
 export default CheckoutDesktop;

@@ -1,9 +1,11 @@
+import EditButton from "../button/EditButton";
+
 function DesktopProfilePage() {
   return (
-    <main className='hidden h-full w-full bg-white sm:mb-36 sm:ml-auto sm:mr-auto sm:mt-16 sm:px-4 md:block md:px-16 lg:px-24'>
-      <div className='flex justify-between'>
+    <main className='hidden h-full w-full bg-white sm:mb-36 sm:ml-auto sm:mr-auto sm:mt-16 md:block'>
+      <div className='flex items-center justify-between gap-x-2'>
         {/* Sidebar */}
-        <div className='w-72'>
+        <div className='min-w-60'>
           <h1 className='mb-5 text-2xl uppercase text-gray-800'>Account</h1>
           <div>
             <button className='mb-3 flex h-12 w-full items-center text-gray-700'>
@@ -28,27 +30,11 @@ function DesktopProfilePage() {
             </div>
           </div>
         </div>
-
-        {/* Profile Information */}
-        <div className='w-[calc(100%-280px)] bg-[#fdfaf5] p-8 shadow-md'>
+        {/* Profile Information */} {/*w-[calc(100%-280px)] แก้ไข*/}
+        <div className='w-[calc(100%-280px)] rounded-md bg-[#fdfaf5] p-8 shadow-md'>
           <div className='mb-6 flex items-center justify-between'>
             <h2 className='text-xl font-semibold text-gray-800'>Profile information</h2>
-            <button>
-              <svg
-                xmlns='http://www.w3.org/2000/svg'
-                fill='none'
-                viewBox='0 0 24 24'
-                strokeWidth='1.5'
-                stroke='currentColor'
-                className='h-6 w-6'
-              >
-                <path
-                  strokeLinecap='round'
-                  strokeLinejoin='round'
-                  d='m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10'
-                />
-              </svg>
-            </button>
+            <EditButton />
           </div>
 
           <hr className='mb-6' />
@@ -93,3 +79,4 @@ function DesktopProfilePage() {
 }
 
 export default DesktopProfilePage;
+//

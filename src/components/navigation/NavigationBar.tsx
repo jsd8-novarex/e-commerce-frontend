@@ -13,7 +13,7 @@ function NavigationBar({ toggleCartSidebar }: NavigationBarPropsType) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState<boolean>(false);
 
   return (
-    <nav className=' fixed w-full top-0 z-10'>
+    <nav className='fixed top-0 z-10 w-full'>
       <div className='relative flex items-center justify-between bg-white px-4 py-5 md:px-8'>
         <div className='block sm:hidden'>
           <HamburgerMenu

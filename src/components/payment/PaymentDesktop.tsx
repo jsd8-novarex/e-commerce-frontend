@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const PaymentDesktop: React.FC = () => {
+function PaymentDesktop() {
   const [isSummaryVisible, setIsSummaryVisible] = useState(false);
   const [quantity, setQuantity] = useState(1);
   const [isPriceVisible, setIsPriceVisible] = useState(true);
@@ -253,6 +253,6 @@ const PaymentDesktop: React.FC = () => {
       </section>
     </>
   );
-};
+}
 
 export default PaymentDesktop;

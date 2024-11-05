@@ -7,7 +7,7 @@ function Backdrop({ isCartSidebarOpen, toggleCartSidebar }: BackdropPropsType) {
   return (
     <div
       onClick={toggleCartSidebar}
-      className={`absolute inset-0 h-full w-full bg-black/50 z-[11] ${isCartSidebarOpen ? "visible" : "invisible"}`}
+      className={`absolute inset-0 z-[11] h-full w-full bg-black/50 ${isCartSidebarOpen ? "visible" : "invisible"}`}
     />
   );
 }

@@ -10,7 +10,7 @@ function CartSidebar({ isCartSidebarOpen, toggleCartSidebar }: CartSidebarPropsT
     <>
       <Backdrop isCartSidebarOpen={isCartSidebarOpen} toggleCartSidebar={toggleCartSidebar} />
       <div
-        className={`fixed top-0 right-0 z-[12] flex h-full w-full flex-col bg-white transition-all duration-300 sm:w-[520px] ${isCartSidebarOpen ? "translate-x-0" : "translate-x-full"}`}
+        className={`fixed right-0 top-0 z-[12] flex h-full w-full flex-col bg-white transition-all duration-300 sm:w-[520px] ${isCartSidebarOpen ? "translate-x-0" : "translate-x-full"}`}
       >
         <div className='flex items-center justify-between border-y-2 border-slate-100 p-4'>
           <h3 className='text-xl'>Your cart is empty</h3>

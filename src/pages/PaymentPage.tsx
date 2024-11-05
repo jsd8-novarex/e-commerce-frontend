@@ -1,9 +1,9 @@
-import PaymentD from "../components/PaymentPage/PaymentDesktop";
-import PaymentM from "../components/PaymentPage/PaymentMobile";
+import PaymentD from "../components/payment/PaymentDesktop";
+import PaymentM from "../components/payment/PaymentMobile";
 
 function PaymentPage() {
   return (
-    <div className='h-dvh w-dvw'>
+    <div className='min-h-dvh w-full py-24'>
       <PaymentM />
       <PaymentD />
     </div>

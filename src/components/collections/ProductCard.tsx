@@ -1,6 +1,6 @@
 function ProductCard() {
   return (
-    <div className='relative bg-slate-50 p-2'>
+    <div className='relative rounded-ss-xl rounded-ee-xl border-2 bg-white overflow-hidden'>
       <div className='absolute right-0 top-0 flex h-16 w-16 items-center justify-center'>
         <button className='z-[1] mx-1 flex h-12 w-12 items-center justify-center rounded-full border-4 border-white bg-red-500'>
           <svg
@@ -25,16 +25,16 @@ function ProductCard() {
           alt='Mens 365 Heavyweight Hoodie'
         />
       </div>
-      <div>
+      <div className="p-4">
         <div className='py-2'>
           <button className='h-8 w-8 rounded-full border-4 border-white bg-black' />
           <button className='h-8 w-8 rounded-full border-4 border-white bg-sky-500' />
           <button className='h-8 w-8 rounded-full border-4 border-white bg-slate-500' />
         </div>
-        <div className='p-1'>
-          <p className=" text-lg">Mens 365 Heavyweight Hoodie</p>
+        <div className='pb-2'>
+          <p className='text-xl '>Mens 365 Heavyweight Hoodie</p>
           <div className='pt-2'>
-            <span className='text-xl'>$185</span>
+            <span className='text-base'>$185</span>
           </div>
         </div>
       </div>

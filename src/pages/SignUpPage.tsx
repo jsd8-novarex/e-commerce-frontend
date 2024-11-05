@@ -4,10 +4,10 @@ import AuthenticationForm from "../components/AuthenticationForm";
 function SignUpPage() {
   return (
     <AuthenticationForm>
-      <div className='mb-4 flex justify-center text-2xl font-bold'>
+      {/* <div className='mb-4 text-center text-2xl font-bold'>
         <h2>Create an Account</h2>
-      </div>
-      <form className='flex flex-col gap-y-6'>
+      </div> */}
+      <form className='flex flex-col gap-y-6 px-4'>
         <input
           type='email'
           placeholder='Email address'

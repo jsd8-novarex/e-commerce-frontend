@@ -1,12 +1,11 @@
-import { Link } from "react-router-dom";
 import AuthenticationForm from "../components/AuthenticationForm";
 
 function SignInAdminPage() {
   return (
     <AuthenticationForm>
-      <div className='mb-4 flex justify-center text-xl font-bold'>
+      {/* <div className='mb-4 flex justify-center text-xl font-bold'>
         <h2>Login as a Admin User</h2>
-      </div>
+      </div> */}
       <form className='mt-2 flex flex-col gap-y-6'>
         <input
           type='email'
@@ -30,9 +29,9 @@ function SignInAdminPage() {
           </button>
         </div>
       </form>
-      <div className='mt-2 text-right hover:text-gray-400'>
+      {/* <div className='mt-2 text-right hover:text-gray-400'>
         <Link to='/'>Forgot Password?</Link>
-      </div>
+      </div> */}
     </AuthenticationForm>
   );
 }

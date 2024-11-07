@@ -28,10 +28,10 @@ function CartSidebar({ isCartSidebarOpen, toggleCartSidebar }: CartSidebarPropsT
           </button>
         </div>
         <div className='flex flex-grow items-center justify-center'>
-          <div className='flex flex-col items-center justify-center gap-y-8'>
+          {/* <div className='flex flex-col items-center justify-center gap-y-8'>
             <h2>Your cart is empty </h2>
             <button className='btn-black w-48'>Continue shopping</button>
-          </div>
+          </div> */}
         </div>
       </div>
     </>

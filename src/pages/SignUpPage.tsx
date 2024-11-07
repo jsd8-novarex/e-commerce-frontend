@@ -1,43 +1,62 @@
-import React from "react";
 import AuthenticationForm from "../components/AuthenticationForm";
+import { NavLink } from "react-router-dom";
 
 function SignUpPage() {
   return (
-    <AuthenticationForm>
-      {/* <div className='mb-4 text-center text-2xl font-bold'>
-        <h2>Create an Account</h2>
-      </div> */}
-      <form className='flex flex-col gap-y-6 px-4'>
-        <input
-          type='email'
-          placeholder='Email address'
-          className='auth-form__input'
-          minLength={8}
-          required
-        />
-
-        <input
-          type='password'
-          placeholder='Password'
-          className='auth-form__input'
-          minLength={8}
-          required
-        />
-
-        <input
-          type='password'
-          placeholder='Confirm password'
-          className='auth-form__input'
-          minLength={8}
-          required
-        />
-
-        <div className='flex justify-center'>
-          <button type='submit' className='auth-form__btn'>
-            SING UP
-          </button>
-        </div>
-      </form>
+    <AuthenticationForm message='Create Account'>
+      <div className='row-start-3 row-end-7 flex flex-col items-center justify-center'>
+        <form className='mb-4 flex min-w-72 flex-col gap-y-4 sm:w-96'>
+          <div className='flex flex-col'>
+            <label htmlFor='email' className='auth-form__label'>
+              Email
+            </label>
+            <input
+              id='email'
+              type='email'
+              placeholder='Enter your email'
+              className='auth-form__input'
+              minLength={8}
+              required
+            />
+          </div>
+          <div className='flex flex-col'>
+            <label htmlFor='password' className='auth-form__label'>
+              Password
+            </label>
+            <input
+              id='password'
+              type='password'
+              placeholder='Enter your password'
+              className='auth-form__input'
+              minLength={8}
+              required
+            />
+          </div>
+          <div className='flex flex-col'>
+            <label htmlFor='confirm-password' className='auth-form__label'>
+              Confirm Password
+            </label>
+            <input
+              id='confirm-password'
+              type='password'
+              placeholder='Enter your confirm password'
+              className='auth-form__input'
+              minLength={8}
+              required
+            />
+          </div>
+          <div className='flex flex-col justify-center'>
+            <button type='submit' className='auth-form__btn'>
+              Sign Up
+            </button>
+          </div>
+        </form>
+      </div>
+      <div className='row-start-7 text-center'>
+        <NavLink to='/sign-up' className='mt-5 py-5 underline hover:text-gray-400 md:text-xl'>
+          Sign in to your account
+        </NavLink>
+      </div>
     </AuthenticationForm>
   );
 }

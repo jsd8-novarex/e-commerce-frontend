@@ -36,7 +36,7 @@ function PaymentDesktop() {
             </div>
 
             <div>
-              <div className='mt-4 flex border p-4'>
+              <div className='mt-4 flex justify-between border p-4'>
                 <div>Delivery</div>
                 <div>
                   <button>edit</button>
@@ -52,7 +52,7 @@ function PaymentDesktop() {
                 <div className='flex'>
                   <div className='mr-6 flex flex-col'>
                     <span>Mr.name</span>
-                    <span>Address</span>
+                    <span>Addresssssssssssssssssssssssssssssssssssssssssss</span>
                     <span>Tel.</span>
                   </div>
                   <div>
@@ -69,7 +69,7 @@ function PaymentDesktop() {
             <div className='mt-4 border p-4'>
               <div>Payment</div>
             </div>
-            <div className='border p-4'>
+            <div className='border border-t-0 p-4'>
               <div className='flex justify-between border-b-2 pb-4'>
                 <span>Billing address</span>
                 <button>edit</button>
@@ -81,13 +81,13 @@ function PaymentDesktop() {
                 <span>Tel.</span>
               </div>
             </div>
-            <div className='border p-4'>
+            <div className='border border-t-0 p-4'>
               <input type='checkbox' />
               <label htmlFor='Full tax invoice requested' className='ml-2'>
                 Full tax invoice requested
               </label>
             </div>
-            <div className='border p-4'>
+            <div className='border border-t-0 p-4 leading-8'>
               <div>
                 <p>
                   <strong>Payment methods</strong>
@@ -126,7 +126,7 @@ function PaymentDesktop() {
                           <div className='mb-4'>
                             <label htmlFor='ccn'>Card number*</label>
                             <input
-                              type='tel'
+                              type='text'
                               inputMode='numeric'
                               pattern='[0-9]{13,19}'
                               className='w-full border p-1'
@@ -174,7 +174,7 @@ function PaymentDesktop() {
                               processing of my data, in accordance with Novarex' Privacy Policy.
                             </label>
                           </div>
-                          <div className='flex justify-center'>
+                          <div className='flex justify-end pt-8'>
                             <button className='bg-black px-16 py-4 text-white'>Pay</button>
                           </div>
                         </form>
@@ -237,7 +237,7 @@ function PaymentDesktop() {
               <span>${1000 * quantity}</span>
             </div>
 
-            <div className='flex justify-between border p-4'>
+            <div className='flex justify-between border border-t-0 p-4'>
               <div className='flex flex-col'>
                 <span>Shipping</span>
                 <span>DHL e-commerce-Standard delivery</span>

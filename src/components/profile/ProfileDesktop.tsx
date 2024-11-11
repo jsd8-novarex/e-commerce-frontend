@@ -1,11 +1,12 @@
 import EditButton from "../button/EditButton";
+import { profileData } from "../../constraints/PROFILE_DATA";
 
 function DesktopProfilePage() {
   return (
     <main className='hidden h-full w-full bg-white sm:mb-36 sm:ml-auto sm:mr-auto sm:mt-16 md:block'>
-      <div className='flex items-center justify-between gap-x-2'>
+      <div className='flex items-center justify-center gap-x-2'>
         {/* Sidebar */}
-        <div className='min-w-60'>
+        <div className='min-w-60 md:min-w-48 lg:mr-8'>
           <h1 className='mb-5 text-2xl uppercase text-gray-800'>Account</h1>
           <div>
             <button className='mb-3 flex h-12 w-full items-center text-gray-700'>
@@ -30,8 +31,8 @@ function DesktopProfilePage() {
             </div>
           </div>
         </div>
-        {/* Profile Information */} {/*w-[calc(100%-280px)] แก้ไข*/}
-        <div className='w-[calc(100%-280px)] rounded-md bg-[#fdfaf5] p-8 shadow-md'>
+        {/* Profile Information */}
+        <div className='w-[850px] bg-[#fdfaf5] p-8 shadow-md'>
           <div className='mb-6 flex items-center justify-between'>
             <h2 className='text-xl font-semibold text-gray-800'>Profile information</h2>
             <EditButton />
@@ -42,16 +43,16 @@ function DesktopProfilePage() {
           <div className='flex justify-between'>
             <div>
               <p className='mb-2 text-gray-600'>
-                <strong>Name</strong>: Mr. Name
+                <strong>Name</strong>: {profileData.name}
               </p>
               <p className='mb-2 text-gray-600'>
-                <strong>E-mail</strong>: email@gmail.com
+                <strong>Email</strong>: {profileData.email}
               </p>
               <p className='mb-2 text-gray-600'>
-                <strong>Telephone</strong>: +123456789
+                <strong>Tel</strong>: {profileData.tel}
               </p>
               <p className='mb-2 text-gray-600'>
-                <strong>Date of birth</strong>: Jan 1, 0001
+                <strong>Date of birth</strong>: {profileData.dob}
               </p>
               <p className='mb-2 text-gray-600'>
                 <strong>Password</strong>: ********
@@ -63,9 +64,10 @@ function DesktopProfilePage() {
                 <strong>Billing address</strong>:
               </p>
               <p className='mb-2 text-gray-600'>
-                Mr. name <br />
-                Address <br />
-                tel.
+                {profileData.name} <br />
+                {profileData.address.address}
+                {profileData.address.subdistrict}, {profileData.address.district}
+                {profileData.address.province}, {profileData.address.postal_code}, {profileData.tel}
               </p>
               <p className='text-gray-600'>
                 Billing name and address must match the credit card you will be using.
@@ -79,4 +81,3 @@ function DesktopProfilePage() {
 }
 
 export default DesktopProfilePage;
-//

@@ -1,15 +1,40 @@
-function ProductCard() {
+import { Link } from "react-router-dom";
+import { ProductDataType } from "../../constraints/PRODUCT_DATA_V2";
+import useCartStore from "../../store/cartItems.store";
+import dayjs from "dayjs";
+
+type ProductCardPropsType = {
+  productData: ProductDataType;
+};
+
+function ProductCard({ productData }: ProductCardPropsType) {
+  const addToCart = useCartStore((state) => state.addToCart);
+  const price = productData.price ? productData.price : "N/A";
+
+  const handleAddToCart = () => {
+    const newProduct = {
+      productId: productData.id,
+      productChoiceId: productData.product_choice[0].id,
+      name: productData.name,
+      price: productData.price,
+      quantity: 1,
+      timestamp: dayjs().toISOString(),
+    };
+
+    addToCart(newProduct);
+  };
+
   return (
-    <div className='relative rounded-ss-xl rounded-ee-xl border-2 bg-white overflow-hidden'>
+    <div className='relative overflow-hidden rounded-ee-xl rounded-ss-xl drop-shadow-xl'>
       <div className='absolute right-0 top-0 flex h-16 w-16 items-center justify-center'>
-        <button className='z-[1] mx-1 flex h-12 w-12 items-center justify-center rounded-full border-4 border-white bg-red-500'>
+        <button onClick={handleAddToCart} className='btn btn-circle z-[2] mx-1 h-12 w-12 bg-white'>
           <svg
             xmlns='http://www.w3.org/2000/svg'
             fill='none'
             viewBox='0 0 24 24'
             strokeWidth='1.5'
             stroke='currentColor'
-            className='size-5 text-white'
+            className='size-5'
           >
             <path
               strokeLinecap='round'
@@ -19,22 +44,19 @@ function ProductCard() {
           </svg>
         </button>
       </div>
-      <div className='bg-white'>
-        <img
-          src='https://pangaia.com/cdn/shop/files/Recycled-Cotton-Hoodie-Black-1.png?crop=center&height=1023&v=1724674090&width=768'
-          alt='Mens 365 Heavyweight Hoodie'
-        />
+      <div className='bg-slate-100'>
+        <Link to={"/product"}>
+          <img
+            src='https://pangaia.com/cdn/shop/files/Recycled-Cotton-Hoodie-Black-1.png?crop=center&height=1023&v=1724674090&width=768'
+            alt='Mens 365 Heavyweight Hoodie'
+          />
+        </Link>
       </div>
-      <div className="p-4">
-        <div className='py-2'>
-          <button className='h-8 w-8 rounded-full border-4 border-white bg-black' />
-          <button className='h-8 w-8 rounded-full border-4 border-white bg-sky-500' />
-          <button className='h-8 w-8 rounded-full border-4 border-white bg-slate-500' />
-        </div>
-        <div className='pb-2'>
-          <p className='text-xl '>Mens 365 Heavyweight Hoodie</p>
-          <div className='pt-2'>
-            <span className='text-base'>$185</span>
+      <div className='absolute bottom-0 w-full px-4 py-2 sm:py-3 xl:py-4'>
+        <div className='flex w-full justify-between gap-x-1 lg:gap-x-4'>
+          <p className='text-base font-semibold'>{productData.name}</p>
+          <div className='flex items-end'>
+            <span className='text-lg font-semibold xl:text-xl'>${price}</span>
           </div>
         </div>
       </div>

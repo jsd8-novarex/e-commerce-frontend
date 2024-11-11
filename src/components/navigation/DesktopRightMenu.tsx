@@ -8,7 +8,7 @@ function DesktopRightMenu({ toggleCartSidebar }: DesktopRightMenuPropsType) {
   return (
     <ul className='flex items-center justify-between gap-4'>
       <li className='hidden sm:block'>
-        <NavLink to={"/sign-in"} className='p-2'>
+        <NavLink to={"/sign-in"} className='p-2 uppercase text-white'>
           LOGIN
         </NavLink>
       </li>
@@ -20,7 +20,7 @@ function DesktopRightMenu({ toggleCartSidebar }: DesktopRightMenuPropsType) {
             viewBox='0 0 24 24'
             strokeWidth='1.5'
             stroke='currentColor'
-            className='size-6'
+            className='size-6 text-white'
           >
             <path
               strokeLinecap='round'

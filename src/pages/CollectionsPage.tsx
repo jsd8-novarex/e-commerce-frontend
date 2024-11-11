@@ -1,9 +1,10 @@
-import CollectionsFilterBar from "../components/collections/CollectionsFilterBar";
+// import CollectionsFilterBar from "../components/collections/CollectionsFilterBar";
 import ProductCard from "../components/collections/ProductCard";
+import { product_list } from "../constraints/PRODUCT_DATA_V2";
 
 function CollectionsPage() {
   return (
-    <main className='relative grid min-h-screen grid-cols-12 gap-y-4 px-5 pt-32 sm:px-10'>
+    <main className='relative grid min-h-screen grid-cols-12 gap-y-10 px-5 pt-32 sm:px-10'>
       <section className='col-span-full'>
         <div className='mb-8'>
           <p>Home / Shop All</p>
@@ -17,12 +18,12 @@ function CollectionsPage() {
           </p>
         </div>
       </section>
-      <CollectionsFilterBar />
-      <section className='col-span-full'>
-        <div className='grid grid-cols-12 gap-4 justify-self-center'>
-          {Array.from({ length: 10 }).map((_, index) => (
-            <div key={index} className='col-span-full sm:col-span-6 lg:col-span-3'>
-              <ProductCard />
+      {/* <CollectionsFilterBar /> */}
+      <section className='col-span-full mb-16 px-2'>
+        <div className='grid grid-cols-12 gap-x-4 gap-y-8 justify-self-center sm:gap-8'>
+          {product_list.map((item) => (
+            <div key={item.id} className='col-span-full sm:col-span-6 lg:col-span-4 xl:col-span-3'>
+              <ProductCard productData={item} />
             </div>
           ))}
         </div>

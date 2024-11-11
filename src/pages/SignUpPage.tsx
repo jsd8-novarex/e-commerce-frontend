@@ -3,7 +3,7 @@ import { NavLink } from "react-router-dom";
 
 function SignUpPage() {
   return (
-    <AuthenticationForm message='Create Account'>
+    <AuthenticationForm status="sign-up" message='Create Account'>
       <div className='row-start-3 row-end-7 flex flex-col items-center justify-center'>
         <form className='mb-4 flex min-w-72 flex-col gap-y-4 sm:w-96'>
           <div className='flex flex-col'>
@@ -53,7 +53,7 @@ function SignUpPage() {
         </form>
       </div>
       <div className='row-start-7 text-center'>
-        <NavLink to='/sign-up' className='mt-5 py-5 underline hover:text-gray-400 md:text-xl'>
+        <NavLink to='/sign-in' className='mt-5 py-5 underline hover:text-gray-400 md:text-xl'>
           Sign in to your account
         </NavLink>
       </div>

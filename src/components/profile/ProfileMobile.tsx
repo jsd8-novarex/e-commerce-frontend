@@ -1,17 +1,28 @@
 import React, { useState } from "react";
 import EditButton from "../button/EditButton";
+import { profileData } from "../../constraints/PROFILE_DATA";
 
+interface VisibilityState {
+  isOrderHistoryVisible: boolean;
+  isProfileVisible: boolean;
+  isAddressVisible: boolean;
+  isPaymentsVisible: boolean;
+}
 
 const MobileProfilePage: React.FC = () => {
-  const [isOrderhistoryVisible, setIsOrderhistorVisible] = useState(false);
-  const [isProfileVisible, setIsProfileVisible] = useState(false);
-  const [isAddressVisible, setIsAddressVisible] = useState(false);
-  const [isPaymentsVisible, setIsPaymentsVisible] = useState(false);
+  const [visibility, setVisibility] = useState<VisibilityState>({
+    isOrderHistoryVisible: false,
+    isProfileVisible: false,
+    isAddressVisible: false,
+    isPaymentsVisible: false,
+  });
 
-  const toggleOrderHistory = () => setIsOrderhistorVisible(!isOrderhistoryVisible);
-  const toggleProfile = () => setIsProfileVisible(!isProfileVisible);
-  const toggleAddress = () => setIsAddressVisible(!isAddressVisible);
-  const togglePayments = () => setIsPaymentsVisible(!isPaymentsVisible);
+  const toggleVisibility = (checked: keyof VisibilityState) => {
+    setVisibility((prev) => ({
+      ...prev,
+      [checked]: !prev[checked],
+    }));
+  };
 
   return (
     <div className='flex h-full flex-col items-center py-4 md:hidden'>
@@ -28,13 +39,13 @@ const MobileProfilePage: React.FC = () => {
         <div className='mt-4'>
           <button
             className='flex w-full items-center justify-between border-b border-t py-2 text-left'
-            onClick={toggleOrderHistory}
+            onClick={() => toggleVisibility("isOrderHistoryVisible")}
           >
             <span className='font-semibold'>Order History</span>
-            <span>{isOrderhistoryVisible ? "▲" : "▼"}</span>
+            <span>{visibility.isOrderHistoryVisible ? "▲" : "▼"}</span>
           </button>
 
-          {isOrderhistoryVisible && (
+          {visibility.isOrderHistoryVisible && (
             <div className='border border-t-0 p-4'>
               <p>Order history content goes here...</p>
             </div>
@@ -45,44 +56,45 @@ const MobileProfilePage: React.FC = () => {
         <div className='mt-4'>
           <button
             className='flex w-full items-center justify-between border-b border-t py-2 text-left'
-            onClick={toggleProfile}
+            onClick={() => toggleVisibility("isProfileVisible")}
           >
             <span className='font-semibold'>Profile Information</span>
-            <span>{isProfileVisible ? "▲" : "▼"}</span>
+            <span>{visibility.isProfileVisible ? "▲" : "▼"}</span>
           </button>
 
-          {isProfileVisible && (
+          {visibility.isProfileVisible && (
             <div className='flex justify-between border border-t-0 p-4'>
               <div>
                 <p>
-                  <strong>Name:</strong> Mr. Name
+                  <strong>Name:</strong> {profileData.name}
                 </p>
                 <p>
-                  <strong>E-mail:</strong> email@gmail.com
+                  <strong>E-mail:</strong> {profileData.email}
                 </p>
                 <p>
-                  <strong>Telephone:</strong> +123456789
+                  <strong>Telephone:</strong> {profileData.tel}
                 </p>
                 <p>
-                  <strong>Date of birth:</strong> Jan 1, 0001
+                  <strong>Date of birth:</strong> {profileData.dob}
                 </p>
                 <p>
                   <strong>Password:</strong> ********
                 </p>
-                {/* <p className="mt-2 text-sm text-gray-500">
-                  You're subscribed to the Hermes newsletter.
-                </p> */}
                 <hr className='my-4' />
                 <p className='font-semibold'>Billing address</p>
-                <p>Mr.Name</p>
-                <p>Address</p>
-                <p>+123456789</p>
+                <p>{profileData.name}</p>
+                <p>
+                  {profileData.address.address}
+                  {profileData.address.subdistrict}, {profileData.address.district}
+                  {profileData.address.province}, {profileData.address.postal_code}
+                </p>
+                <p>{profileData.tel}</p>
                 <p className='mt-2 text-sm text-gray-500'>
                   Billing name and address must match the credit card you will be using.
                 </p>
               </div>
               <div>
-                <EditButton  />
+                <EditButton />
               </div>
             </div>
           )}
@@ -92,13 +104,13 @@ const MobileProfilePage: React.FC = () => {
         <div className='mt-4'>
           <button
             className='flex w-full items-center justify-between border-b border-t py-2 text-left'
-            onClick={toggleAddress}
+            onClick={() => toggleVisibility("isAddressVisible")}
           >
             <span className='font-semibold'>Address Book</span>
-            <span>{isAddressVisible ? "▲" : "▼"}</span>
+            <span>{visibility.isAddressVisible ? "▲" : "▼"}</span>
           </button>
 
-          {isAddressVisible && (
+          {visibility.isAddressVisible && (
             <div className='border border-t-0 p-4'>
               <p>Address book content goes here...</p>
             </div>
@@ -109,13 +121,13 @@ const MobileProfilePage: React.FC = () => {
         <div className='mt-4'>
           <button
             className='flex w-full items-center justify-between border-b border-t py-2 text-left'
-            onClick={togglePayments}
+            onClick={() => toggleVisibility("isPaymentsVisible")}
           >
             <span className='font-semibold'>Payments</span>
-            <span>{isPaymentsVisible ? "▲" : "▼"}</span>
+            <span>{visibility.isPaymentsVisible ? "▲" : "▼"}</span>
           </button>
 
-          {isPaymentsVisible && (
+          {visibility.isPaymentsVisible && (
             <div className='border border-t-0 p-4'>
               <p>Payment information goes here...</p>
             </div>

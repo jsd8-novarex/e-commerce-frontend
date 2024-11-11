@@ -24,7 +24,7 @@ function NavigationBar({ toggleCartSidebar }: NavigationBarPropsType) {
         </div>
         <DesktopLeftMenu />
         <NavLink to={"/"}>
-          <h3 className='font-bold'>PANGAEA</h3>
+          <h3 className='font-bold uppercase'>Shining</h3>
         </NavLink>
         <DesktopRightMenu toggleCartSidebar={toggleCartSidebar} />
       </div>

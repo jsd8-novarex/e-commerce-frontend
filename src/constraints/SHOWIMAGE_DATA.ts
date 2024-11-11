@@ -5,6 +5,55 @@ export type ShowImageProductDataType = {
   alternate: string;
 };
 
+export type ShowImageProduct2DataType = {
+  id: string;
+  product_id: string;
+  url: string;
+  create_timestamp: string;
+  last_updated_timestamp: string;
+  creator_id: string;
+  last_op_id: string;
+};
+
+export const ShowImageProductData2: ShowImageProduct2DataType[] = [
+  {
+    id: "1",
+    product_id: "ad599766-362e-480f-a1d6-23830980307f",
+    url: "https://pangaia.com/cdn/shop/files/Cashmere-Cardigan-Black-1.png?crop=center&height=1023&v=1727177408&width=768",
+    create_timestamp: "2024-05-03 13:03:53.259615+00",
+    last_updated_timestamp: "2024-05-03 13:03:53.259615+00",
+    creator_id: "earth",
+    last_op_id: "earth",
+  },
+  {
+    id: "2",
+    product_id: "ad599766-362e-480f-a1d6-23830980307f",
+    url: "https://pangaia.com/cdn/shop/files/Cashmere-Cardigan-Black-Male-1.jpg?crop=center&height=1023&v=1727177408&width=768",
+    create_timestamp: "2024-05-03 13:03:53.259615+00",
+    last_updated_timestamp: "2024-05-03 13:03:53.259615+00",
+    creator_id: "earth",
+    last_op_id: "earth",
+  },
+  {
+    id: "3",
+    product_id: "ad599766-362e-480f-a1d6-23830980307f",
+    url: "https://pangaia.com/cdn/shop/files/Cashmere-Cardigan-Black-Male-2.jpg?crop=center&height=1023&v=1727177408&width=768",
+    create_timestamp: "2024-05-03 13:03:53.259615+00",
+    last_updated_timestamp: "2024-05-03 13:03:53.259615+00",
+    creator_id: "earth",
+    last_op_id: "earth",
+  },
+  {
+    id: "4",
+    product_id: "ad599766-362e-480f-a1d6-23830980307f",
+    url: "https://pangaia.com/cdn/shop/files/Cashmere-Cardigan-Black-2.jpg?crop=center&height=1023&v=1727177408&width=768",
+    create_timestamp: "2024-05-03 13:03:53.259615+00",
+    last_updated_timestamp: "2024-05-03 13:03:53.259615+00",
+    creator_id: "earth",
+    last_op_id: "earth",
+  },
+];
+
 export type ShowImageProductType = ShowImageProductDataType[];
 
 export const ShowImageProductData: ShowImageProductType = [

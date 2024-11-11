@@ -10,6 +10,7 @@ import ProfilePage from "./pages/ProfilePage";
 import TransactionPage from "./pages/TransactionPage";
 import PaymentPage from "./pages/PaymentPage";
 import SignInAdminPage from "./pages/SignInAdminPage";
+import AdminPage from "./pages/AdminPage";
 import AboutUsPage from "./pages/AboutUsPage";
 
 function App() {
@@ -28,6 +29,7 @@ function App() {
         <Route path='sign-in' element={<SignInPage />} caseSensitive />
         <Route path='sign-up' element={<SignUpPage />} caseSensitive />
         <Route path='sign-in-admin' element={<SignInAdminPage />} caseSensitive />
+        <Route path='admin' element={<AdminPage />} caseSensitive />
         <Route path='*' element={<ErrorPage />} />
       </Routes>
     </>

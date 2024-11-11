@@ -3,7 +3,7 @@ import AuthenticationForm from "../components/AuthenticationForm";
 
 function SignInAdminPage() {
   return (
-    <AuthenticationForm status="sign-in-admin" message="Admin">
+    <AuthenticationForm status='sign-in-admin' message='Admin'>
       <div className='row-start-3 row-end-7 flex flex-col items-center justify-center'>
         <form className='flex min-w-72 flex-col gap-y-4 sm:w-96'>
           <div className='flex flex-col'>

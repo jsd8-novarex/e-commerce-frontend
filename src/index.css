@@ -57,10 +57,9 @@
     @apply mt-2 h-8 w-full bg-black text-white hover:bg-gray-600 md:h-12 md:text-xl;
   }
 
-  
   /* AuthrnticationForm*/
-  .auth-form__label{
-    @apply label label-text
+  .auth-form__label {
+    @apply label label-text;
   }
 
   .auth-form__input {

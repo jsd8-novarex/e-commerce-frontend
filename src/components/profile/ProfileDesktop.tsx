@@ -59,19 +59,18 @@ function DesktopProfilePage() {
               </p>
             </div>
 
-            <div className='ml-12 border-l pl-6'>
-              <p className='mb-2 text-gray-600'>
+            <div className='ml-12 flex flex-col gap-y-2 border-l pl-6 text-gray-600'>
+              <p>
                 <strong>Billing address</strong>:
               </p>
-              <p className='mb-2 text-gray-600'>
-                {profileData.name} <br />
-                {profileData.address.address}
-                {profileData.address.subdistrict}, {profileData.address.district}
-                {profileData.address.province}, {profileData.address.postal_code}, {profileData.tel}
+              <p>{profileData.name}</p>
+              <p>
+                {` 
+                ${profileData.address.address}
+                ${profileData.address.subdistrict}, ${profileData.address.district}
+                ${profileData.address.province}, ${profileData.address.postal_code}, ${profileData.tel}`}
               </p>
-              <p className='text-gray-600'>
-                Billing name and address must match the credit card you will be using.
-              </p>
+              <p>Billing name and address must match the credit card you will be using.</p>
             </div>
           </div>
         </div>

@@ -225,18 +225,8 @@ const AdminProductList: React.FC = () => {
                 <td className='px-4 py-3 text-sm text-gray-800'>{product.stock}</td>
 
                 <td className='px-4 py-3 text-sm text-gray-800'>
-                  <button
-                    onClick={() => handleEditProduct(product)}
-                    className='mr-2 rounded bg-blue-500 px-3 py-1 text-white hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500'
-                  >
-                    <EditButton />
-                  </button>
-                  <button
-                    onClick={() => handleDeleteProduct(product)}
-                    className='rounded bg-red-500 px-3 py-1 text-white hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-500'
-                  >
-                    <DeleteButton />
-                  </button>
+                  <EditButton onClick={() => handleEditProduct(product)} />
+                  <DeleteButton onClick={() => handleDeleteProduct(product)} />
                 </td>
               </tr>
             ))}
@@ -248,3 +238,5 @@ const AdminProductList: React.FC = () => {
 };
 
 export default AdminProductList;
+// 'mr-2 rounded bg-blue-500 px-3 py-1 text-white hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500'
+//'rounded bg-red-500 px-3 py-1 text-white hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-500'

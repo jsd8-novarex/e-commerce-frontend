@@ -5,7 +5,10 @@ type HamburgerMenuPropsType = {
 
 function HamburgerMenu({ isMobileMenuOpen, setIsMobileMenuOpen }: HamburgerMenuPropsType) {
   return (
-    <label htmlFor='hamburgerMenu' className='absolute top-6 left-4 z-[12] flex cursor-pointer flex-col p-2'>
+    <label
+      htmlFor='hamburgerMenu'
+      className='absolute left-4 top-6 z-[12] flex cursor-pointer flex-col p-2'
+    >
       <input
         id='hamburgerMenu'
         type='checkbox'

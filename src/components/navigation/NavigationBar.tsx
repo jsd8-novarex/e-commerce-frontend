@@ -24,8 +24,8 @@ function NavigationBar({ toggleCartSidebar }: NavigationBarPropsType) {
           "bg-black": isHome === false,
         })}
       >
-        <div className=' block sm:hidden'>
-          <div className=" block h-10 w-10 sm:hidden"/>
+        <div className='block sm:hidden'>
+          <div className='block h-10 w-10 sm:hidden' />
           <HamburgerMenu
             isMobileMenuOpen={isMobileMenuOpen}
             setIsMobileMenuOpen={setIsMobileMenuOpen}

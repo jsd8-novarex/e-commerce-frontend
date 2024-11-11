@@ -150,8 +150,8 @@ function PaymentMobile() {
           <div className='border p-4'>
             <div className='flex justify-between'>
               <div>
-                <input type='radio' checked={isCreditCard} onClick={togglePaymentmethod} />
-                <label htmlFor='credit card' className='ml-2'>
+                <input id='credit-card' type='checkbox' onClick={togglePaymentmethod} />
+                <label htmlFor='credit-card' className='ml-2'>
                   Credit card
                 </label>
               </div>

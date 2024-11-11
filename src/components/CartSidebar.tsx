@@ -8,11 +8,11 @@ type CartSidebarPropsType = {
 };
 
 function CartSidebar({ isCartSidebarOpen, toggleCartSidebar }: CartSidebarPropsType) {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const handleLink = (path: string) => {
-    toggleCartSidebar()
-    navigate(path)
-  }
+    toggleCartSidebar();
+    navigate(path);
+  };
   return (
     <>
       <Backdrop isCartSidebarOpen={isCartSidebarOpen} toggleCartSidebar={toggleCartSidebar} />
@@ -41,40 +41,50 @@ function CartSidebar({ isCartSidebarOpen, toggleCartSidebar }: CartSidebarPropsT
             <button className='btn-black w-48'>Continue shopping</button>
           </div>
         </div> */}
-        <div className="h-5/6">
-          <div className="flex border-2 m-5 gap-5">
-            <div className="w-1/4">
-              <img src="https://pangaia.com/cdn/shop/files/Cashmere-Cardigan-Black-1.png?crop=center&height=1023&v=1727177408&width=768" />              
+        <div className='h-5/6'>
+          <div className='m-5 flex gap-5 border-2'>
+            <div className='w-1/4'>
+              <img src='https://pangaia.com/cdn/shop/files/Cashmere-Cardigan-Black-1.png?crop=center&height=1023&v=1727177408&width=768' />
             </div>
-            <div className="flex w-2/4">
+            <div className='flex w-2/4'>
               {product_list.map((product) => (
-                <div key={product.id} className="flex flex-col justify-center ">
+                <div key={product.id} className='flex flex-col justify-center'>
                   <h4>{product.name}</h4>
-                  <p> {product.price}</p>
+                  <p> ${product.price}</p>
                 </div>
-              ))}              
+              ))}
             </div>
-            <div className="flex flex-col justify-center items-center px-2 gap-2 w-1/4">
-              <p className="border-2 w-7 text-center">1</p>
+            <div className='flex w-1/4 flex-col items-center justify-center gap-2 px-2'>
+              <p className='w-7 border-2 text-center'>1</p>
               <button>Remove</button>
-            </div>     
+            </div>
           </div>
         </div>
-          <form className="border-t-2">
-            <div className="flex justify-between p-5">
-              <div>
-                <h4>Total</h4>
-                <p>Including tax and shipping</p>
-              </div>
-              <div>
-                <h4>$TotalPrice</h4>
-              </div>
+        <form className='border-t-2'>
+          <div className='flex justify-between p-5'>
+            <div>
+              <h4>Total</h4>
+              <p>Including tax and shipping</p>
             </div>
-            <div className="flex justify-around p-5">              
-                <button onClick={()=> handleLink("/transaction")}  className="bg-black text-white w-40 h-12 hover:bg-gray-600">View shopping cart</button>                        
-                <button onClick={()=> handleLink("/payment")} className="bg-black text-white w-40 h-12 hover:bg-gray-600">Checkout</button>              
+            <div>
+              <h4>$TotalPrice</h4>
             </div>
-          </form>        
+          </div>
+          <div className='flex justify-around p-5'>
+            <button
+              onClick={() => handleLink("/transaction")}
+              className='h-12 w-40 bg-black text-white hover:bg-gray-600'
+            >
+              View shopping cart
+            </button>
+            <button
+              onClick={() => handleLink("/payment")}
+              className='h-12 w-40 bg-black text-white hover:bg-gray-600'
+            >
+              Checkout
+            </button>
+          </div>
+        </form>
       </div>
     </>
   );

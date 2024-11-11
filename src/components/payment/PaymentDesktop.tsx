@@ -52,7 +52,7 @@ function PaymentDesktop() {
                 <div className='flex'>
                   <div className='mr-6 flex flex-col'>
                     <span>Mr.name</span>
-                    <span>Addresssssssssssssssssssssssssssssssssssssssssss</span>
+                    <span>Address</span>
                     <span>Tel.</span>
                   </div>
                   <div>
@@ -98,8 +98,8 @@ function PaymentDesktop() {
               <div className='border p-4'>
                 <div className='flex justify-between'>
                   <div>
-                    <input type='radio' checked={isCreditCard} onClick={togglePaymentmethod} />
-                    <label htmlFor='credit card' className='ml-2'>
+                    <input id='credit-card' type='checkbox' onClick={togglePaymentmethod} />
+                    <label htmlFor='credit-card' className='ml-2'>
                       Credit card
                     </label>
                   </div>

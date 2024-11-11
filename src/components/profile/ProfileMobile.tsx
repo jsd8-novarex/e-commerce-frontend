@@ -84,9 +84,10 @@ const MobileProfilePage: React.FC = () => {
                 <p className='font-semibold'>Billing address</p>
                 <p>{profileData.name}</p>
                 <p>
-                  {profileData.address.address}
-                  {profileData.address.subdistrict}, {profileData.address.district}
-                  {profileData.address.province}, {profileData.address.postal_code}
+                  {` 
+                    ${profileData.address.address}
+                    ${profileData.address.subdistrict}, ${profileData.address.district}
+                    ${profileData.address.province}, ${profileData.address.postal_code}, ${profileData.tel}`}
                 </p>
                 <p>{profileData.tel}</p>
                 <p className='mt-2 text-sm text-gray-500'>

@@ -1,11 +1,13 @@
 import React from "react";
+import { product_list } from "../../constraints/PRODUCTS_DATA";
 
 function ProductDetail() {
+  const product = product_list[0];
   return (
     <section className='px-4 sm:sm:col-span-4'>
       <div>
-        <h3>Mens Recycled Cashmere Cardigan - Black</h3>
-        <h3 className='my-4 text-gray-500'>$275</h3>
+        <h3>{product.name}</h3>
+        <h3 className='my-4 text-gray-500'>${product.price}</h3>
       </div>
       <ul className='my-4 flex border-b-2'>
         <li className='m-2'>
@@ -37,11 +39,7 @@ function ProductDetail() {
       <div className='mt-7'>
         <span>Description</span>
         <p className='text-gray-500'>
-          <small>
-            WRAP YOURSELF IN WARMTH WITH THE PANGAIA RECYCLED CASHMERE CARDIGAN. MADE FROM A
-            LUXURIOUS BLEND OF RECYCLED CASHMERE, THIS CARDIGAN OFFERS SOFTNESS AND DURABLENESS IN
-            ONE ELEGANT PIECE.
-          </small>
+          <small>{product.description}</small>
         </p>
       </div>
       <div className='mt-7 flex justify-center'>

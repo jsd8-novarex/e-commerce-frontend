@@ -1,12 +1,17 @@
 import { PropsWithChildren } from "react";
 
-function AuthenticationForm({ children }: PropsWithChildren) {
+type AuthenticationFormPropsType = {
+  message?: string;
+};
+
+function AuthenticationForm({ message, children }: PropsWithChildren<AuthenticationFormPropsType>) {
   return (
-    <div className='flex h-dvh w-dvw items-center justify-center bg-white md:bg-stone-100'>
-      <div className='flex h-2/3 w-full flex-col justify-center gap-y-12 bg-white p-4 sm:justify-evenly sm:gap-y-4 sm:p-10 md:w-1/2 lg:w-1/3'>
-        <div className='mb-4 flex flex-col items-center gap-4 text-2xl font-bold'>
-          <h1 className='text-center text-4xl font-bold uppercase md:text-5xl'>Pangaea</h1>
-          <h2>Create an Account</h2>
+    <div className='grid h-dvh w-dvw grid-cols-12 bg-white'>
+      <div className='col-span-5 hidden bg-gradient-to-r from-[#000851] to-white md:block lg:col-span-7' />
+      <div className='col-span-full grid w-full grid-rows-7 p-4 md:col-span-7 lg:col-span-5 xl:p-12'>
+        <div className='row-start-2 flex flex-col items-center gap-4'>
+          <h2 className='text-4xl font-bold uppercase md:text-5xl'>Shining</h2>
+          <h3>{message}</h3>
         </div>
         {children}
       </div>

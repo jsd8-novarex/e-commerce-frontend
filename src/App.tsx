@@ -10,6 +10,8 @@ import ProfilePage from "./pages/ProfilePage";
 import TransactionPage from "./pages/TransactionPage";
 import PaymentPage from "./pages/PaymentPage";
 import SignInAdminPage from "./pages/SignInAdminPage";
+import AdminPage from "./pages/AdminPage";
+import AboutUsPage from "./pages/AboutUsPage";
 
 function App() {
   return (
@@ -22,10 +24,12 @@ function App() {
           <Route path='profile' element={<ProfilePage />} caseSensitive />
           <Route path='transaction' element={<TransactionPage />} caseSensitive />
           <Route path='payment' element={<PaymentPage />} caseSensitive />
+          <Route path='about' element={<AboutUsPage />} caseSensitive />
         </Route>
         <Route path='sign-in' element={<SignInPage />} caseSensitive />
         <Route path='sign-up' element={<SignUpPage />} caseSensitive />
         <Route path='sign-in-admin' element={<SignInAdminPage />} caseSensitive />
+        <Route path='admin' element={<AdminPage />} caseSensitive />
         <Route path='*' element={<ErrorPage />} />
       </Routes>
     </>

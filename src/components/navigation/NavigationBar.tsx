@@ -1,16 +1,13 @@
 import { useState } from "react";
 import { NavLink, useLocation } from "react-router-dom";
+import clsx from "clsx";
 import HamburgerMenu from "./HamburgerMenu";
 import MobileMenu from "./MobileMenu";
 import DesktopLeftMenu from "./DesktopLeftMenu";
 import DesktopRightMenu from "./DesktopRightMenu";
-import clsx from "clsx";
 
-type NavigationBarPropsType = {
-  toggleCartSidebar: () => void;
-};
 
-function NavigationBar({ toggleCartSidebar }: NavigationBarPropsType) {
+function NavigationBar() {
   const location = useLocation();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState<boolean>(false);
 
@@ -36,7 +33,7 @@ function NavigationBar({ toggleCartSidebar }: NavigationBarPropsType) {
         <NavLink to={"/"}>
           <h3 className='font-bold uppercase text-white'>Shining</h3>
         </NavLink>
-        <DesktopRightMenu toggleCartSidebar={toggleCartSidebar} />
+        <DesktopRightMenu/>
       </div>
     </nav>
   );

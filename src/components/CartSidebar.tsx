@@ -1,28 +1,30 @@
 import { useNavigate } from "react-router-dom";
 import Backdrop from "./Backdrop";
 import { product_list } from "../constraints/PRODUCT_DATA";
+import { useScrollLockStore } from "../store/scrollLock.store";
 
 type CartSidebarPropsType = {
   isCartSidebarOpen: boolean;
-  toggleCartSidebar: () => void;
 };
 
-function CartSidebar({ isCartSidebarOpen, toggleCartSidebar }: CartSidebarPropsType) {
+function CartSidebar({ isCartSidebarOpen }: CartSidebarPropsType) {
   const navigate = useNavigate();
+  const isPageScrollLocked = useScrollLockStore((state) => state.isPageScrollLocked);
+  const handleScrollLock = useScrollLockStore((state) => state.handleScrollLock);
+
   const handleLink = (path: string) => {
-    toggleCartSidebar();
+    handleScrollLock(false);
     navigate(path);
   };
   return (
     <>
-      <Backdrop isCartSidebarOpen={isCartSidebarOpen} toggleCartSidebar={toggleCartSidebar} />
+      <Backdrop isPageScrollLocked={isPageScrollLocked} handleScrollLock={handleScrollLock} />
       <div
         className={`fixed right-0 top-0 z-[12] flex h-full w-full flex-col bg-white transition-all duration-300 sm:w-[520px] ${isCartSidebarOpen ? "translate-x-0" : "translate-x-full"}`}
       >
         <div className='flex items-center justify-between border-y-2 border-slate-100 p-4'>
-          {/* <h3 className='text-xl'>Your cart is empty</h3> */}
           <h3 className='text-xl'>Your cart</h3>
-          <button type='button' onClick={toggleCartSidebar} className='p-2 text-center'>
+          <button type='button' onClick={() => handleScrollLock(false)} className='p-2 text-center'>
             <svg
               xmlns='http://www.w3.org/2000/svg'
               fill='none'

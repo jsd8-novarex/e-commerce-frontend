@@ -1,14 +1,15 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { Outlet } from "react-router-dom";
 import NavigationBar from "./navigation/NavigationBar";
 import CartSidebar from "./CartSidebar";
+import { useScrollLockStore } from "../store/scrollLock.store";
 // import Footer from "./Footer";
 
 function Layout() {
-  const [isCartSidebarOpen, setIsCartSidebarOpen] = useState<boolean>(false);
+  const isPageScrollLocked = useScrollLockStore((state) => state.isPageScrollLocked);
 
   useEffect(() => {
-    if (isCartSidebarOpen) {
+    if (isPageScrollLocked) {
       document.body.style.overflowY = "hidden ";
     } else {
       document.body.style.overflowY = "auto";
@@ -17,16 +18,12 @@ function Layout() {
     return () => {
       document.body.style.overflowY = "auto";
     };
-  }, [isCartSidebarOpen]);
-
-  const toggleCartSidebar = () => {
-    setIsCartSidebarOpen((prev) => !prev);
-  };
+  }, [isPageScrollLocked]);
 
   return (
     <div className='relative flex h-full flex-col bg-white'>
-      <NavigationBar toggleCartSidebar={toggleCartSidebar} />
-      <CartSidebar isCartSidebarOpen={isCartSidebarOpen} toggleCartSidebar={toggleCartSidebar} />
+      <NavigationBar />
+      <CartSidebar isCartSidebarOpen={isPageScrollLocked} />
       <Outlet />
       {/* <Footer /> */}
     </div>

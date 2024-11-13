@@ -4,7 +4,7 @@ import { product_list } from "../constraints/PRODUCT_DATA_V2";
 
 function CollectionsPage() {
   return (
-    <main className='relative grid min-h-screen grid-cols-12 gap-y-10 px-5 pt-32 sm:px-10'>
+    <main className='relative grid min-h-screen grid-cols-12 gap-y-10 px-5 pt-32 sm:px-10 2xl:px-[7.5%]'>
       <section className='col-span-full'>
         <div className='mb-8'>
           <p>Home / Shop All</p>

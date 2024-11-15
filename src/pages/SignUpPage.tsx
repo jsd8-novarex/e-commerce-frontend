@@ -1,5 +1,5 @@
-import AuthenticationForm from "../components/AuthenticationForm";
 import { NavLink } from "react-router-dom";
+import AuthenticationForm from "../components/AuthenticationForm";
 
 function SignUpPage() {
   return (

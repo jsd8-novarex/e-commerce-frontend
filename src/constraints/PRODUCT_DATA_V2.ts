@@ -5,12 +5,12 @@ export type ProductDataType = {
   gender_id: string;
   name: string;
   description: string;
-  product_choice: ProductChoiceType[]
+  product_choice: ProductChoiceType[];
   create_timestamp: string;
   last_updated_timestamp: string;
   creator_id: string;
   last_op_id: string;
-  tram_status: boolean
+  tram_status: boolean;
 };
 
 export type ProductChoiceType = {
@@ -25,7 +25,7 @@ export type ProductChoiceType = {
   last_updated_timestamp: string;
   creator_id: string;
   last_op_id: string;
-  tram_status: boolean
+  tram_status: boolean;
 };
 
 export type SizeDataType = {
@@ -286,5 +286,5 @@ export const product_list: ProductDataType[] = [
     creator_id: "earth",
     last_op_id: "earth",
     tram_status: false,
-  }
+  },
 ];

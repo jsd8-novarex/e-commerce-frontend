@@ -5,13 +5,12 @@ import CartSidebar from "./CartSidebar";
 // import Footer from "./Footer";
 
 function Layout() {
-
-  useScrollLock()
+  useScrollLock();
 
   return (
     <div className='relative flex h-full flex-col bg-white'>
       <NavigationBar />
-      <CartSidebar/>
+      <CartSidebar />
       <Outlet />
       {/* <Footer /> */}
     </div>

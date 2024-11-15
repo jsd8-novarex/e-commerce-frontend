@@ -1,5 +1,5 @@
-import ShowcaseSection from "../components/ShowcaseSection";
 import { ShowCaseSectionData } from "../constraints/SHOWCASE_DATA";
+import ShowcaseSection from "../components/ShowcaseSection";
 
 function HomePage() {
   return (

@@ -10,7 +10,7 @@ function DesktopRightMenu() {
         </NavLink>
       </li>
       <li>
-        <CartButton/>
+        <CartButton />
       </li>
     </ul>
   );

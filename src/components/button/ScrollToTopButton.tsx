@@ -33,7 +33,7 @@ function ScrollToTopButton() {
     <button
       onClick={handleScrollToTop}
       className={clsx(
-        "btn btn-circle fixed bottom-4 right-2 z-[5] bg-black/75 hover:bg-black/75 sm:right-4 lg:right-6 transition-all",
+        "btn btn-circle fixed bottom-4 right-2 z-[5] bg-black/75 transition-all hover:bg-black/75 sm:right-4 lg:right-6",
         { flex: isVisible, hidden: !isVisible },
       )}
     >

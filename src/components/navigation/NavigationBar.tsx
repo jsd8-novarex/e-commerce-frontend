@@ -1,5 +1,5 @@
-import { useState } from "react";
 import { NavLink, useLocation } from "react-router-dom";
+import { useScrollLockStore } from "../../store/scrollLock.store";
 import clsx from "clsx";
 import HamburgerMenu from "./HamburgerMenu";
 import MobileMenu from "./MobileMenu";
@@ -7,10 +7,12 @@ import DesktopLeftMenu from "./DesktopLeftMenu";
 import DesktopRightMenu from "./DesktopRightMenu";
 
 
+
 function NavigationBar() {
   const location = useLocation();
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState<boolean>(false);
+  const {openComponents, handleScrollLock} = useScrollLockStore()
 
+  const isMobileMenuOpen = openComponents['MobileMenu'] || false
   const isHome = location.pathname === "/";
 
   return (
@@ -25,7 +27,7 @@ function NavigationBar() {
           <div className='block h-10 w-10 sm:hidden' />
           <HamburgerMenu
             isMobileMenuOpen={isMobileMenuOpen}
-            setIsMobileMenuOpen={setIsMobileMenuOpen}
+            handleScrollLock={handleScrollLock}
           />
           {isMobileMenuOpen && <MobileMenu />}
         </div>

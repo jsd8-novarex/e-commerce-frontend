@@ -1,9 +1,9 @@
 type HamburgerMenuPropsType = {
   isMobileMenuOpen: boolean;
-  setIsMobileMenuOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  handleScrollLock: (componentName: string, isOpen: boolean) => void;
 };
 
-function HamburgerMenu({ isMobileMenuOpen, setIsMobileMenuOpen }: HamburgerMenuPropsType) {
+function HamburgerMenu({ isMobileMenuOpen, handleScrollLock }: HamburgerMenuPropsType) {
   return (
     <label
       htmlFor='hamburgerMenu'
@@ -13,7 +13,7 @@ function HamburgerMenu({ isMobileMenuOpen, setIsMobileMenuOpen }: HamburgerMenuP
         id='hamburgerMenu'
         type='checkbox'
         checked={isMobileMenuOpen}
-        onChange={() => setIsMobileMenuOpen((perv) => !perv)}
+        onChange={() => handleScrollLock("MobileMenu", !isMobileMenuOpen)}
         className='peer hidden'
       />
       <span className='hamburger-span w-2.5 origin-bottom peer-checked:translate-x-0.5 peer-checked:translate-y-0.5 peer-checked:rotate-45 peer-checked:bg-black' />

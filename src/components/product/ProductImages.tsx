@@ -1,7 +1,7 @@
-import { ShowImageProductDataType } from "../../constraints/SHOWIMAGE_DATA";
+import { ShowImageProduct2DataType } from "../../constraints/SHOWIMAGE_DATA";
 
 type ShowImageProductPropsType = {
-  data: ShowImageProductDataType[];
+  data: ShowImageProduct2DataType[];
 };
 
 function ProductImages({ data }: ShowImageProductPropsType) {
@@ -12,7 +12,7 @@ function ProductImages({ data }: ShowImageProductPropsType) {
           <div key={index} className='grid min-w-full snap-start'>
             <img
               src={item.url}
-              alt={item.information}
+              alt={item.product_choice_id}
               className='max-w-screen w-screen sm:w-auto'
             />
           </div>

@@ -1,13 +1,13 @@
 type BackdropPropsType = {
-  isCartSidebarOpen: boolean;
-  toggleCartSidebar: () => void;
+  isPageScrollLocked: boolean;
+  handleScrollLock: (componentName: string, isOpen: boolean) => void
 };
 
-function Backdrop({ isCartSidebarOpen, toggleCartSidebar }: BackdropPropsType) {
+function Backdrop({ isPageScrollLocked, handleScrollLock }: BackdropPropsType) {
   return (
     <div
-      onClick={toggleCartSidebar}
-      className={`absolute inset-0 z-[11] h-full w-full bg-black/50 ${isCartSidebarOpen ? "visible" : "invisible"}`}
+      onClick={() => handleScrollLock("CartSidebar",false)}
+      className={`absolute inset-0 z-[11] h-full w-full bg-black/50 ${isPageScrollLocked ? "visible" : "invisible"}`}
     />
   );
 }

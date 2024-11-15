@@ -1,20 +1,20 @@
 import { useNavigate } from "react-router-dom";
-import Backdrop from "./Backdrop";
 import useShoppingCartStore from "../store/shoppingCart.store";
 import ProductInCart from "./ProductInCart";
+import { useScrollLockStore } from "../store/scrollLock.store";
+import Backdrop from "./Backdrop";
 
-type CartSidebarPropsType = {
-  isCartSidebarOpen: boolean;
-  toggleCartSidebar: () => void;
-};
-
-function CartSidebar({ isCartSidebarOpen, toggleCartSidebar }: CartSidebarPropsType) {
+function CartSidebar() {
   const navigate = useNavigate();
+  const { openComponents, handleScrollLock } = useScrollLockStore();
+ 
+  const isCartSidebarOpen = openComponents["CartSidebar"] || false;
+
   const { cart, removeProductFromCart } = useShoppingCartStore();
   const itemLength = cart?.items.length;
 
   const handleLink = (path: string) => {
-    toggleCartSidebar();
+    handleScrollLock("CartSidebar", false);
     navigate(path);
   };
 
@@ -27,7 +27,7 @@ function CartSidebar({ isCartSidebarOpen, toggleCartSidebar }: CartSidebarPropsT
 
   return (
     <>
-      <Backdrop isCartSidebarOpen={isCartSidebarOpen} toggleCartSidebar={toggleCartSidebar} />
+      <Backdrop isPageScrollLocked={isCartSidebarOpen} handleScrollLock={handleScrollLock} />
       <div
         className={`fixed right-0 top-0 z-[12] flex h-full w-full flex-col bg-white transition-all duration-300 sm:w-[520px] ${isCartSidebarOpen ? "translate-x-0" : "translate-x-full"}`}
       >

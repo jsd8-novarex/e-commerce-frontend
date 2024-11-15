@@ -12,8 +12,10 @@ function ProductCard({ productData }: ProductCardPropsType) {
   const addProductToCart = useShoppingCartStore((state) => state.addProductToCart);
   const price = productData.product_choice[0].price ? productData.product_choice[0].price : "N/A";
   const timestamp = dayjs().toISOString();
-  const imageProduct = ShowImageProductData2.find((item) => item.product_choice_id === productData.product_choice[0].id)  
-  
+  const imageProduct = ShowImageProductData2.find(
+    (item) => item.product_choice_id === productData.product_choice[0].id,
+  );
+
   const handleAddToCart = () => {
     const newProduct = {
       id: timestamp,
@@ -26,8 +28,7 @@ function ProductCard({ productData }: ProductCardPropsType) {
       last_op_id: "admin",
     };
     addProductToCart(newProduct);
-  }; 
-  
+  };
 
   return (
     <div className='relative overflow-hidden rounded-ee-xl rounded-ss-xl drop-shadow-xl'>
@@ -51,10 +52,7 @@ function ProductCard({ productData }: ProductCardPropsType) {
       </div>
       <div className='bg-slate-100'>
         <Link to={"/product"}>
-          <img
-            src={imageProduct?.url}
-            alt='Mens 365 Heavyweight Hoodie'
-          />
+          <img src={imageProduct?.url} alt='Mens 365 Heavyweight Hoodie' />
         </Link>
       </div>
       <div className='absolute bottom-0 w-full px-4 py-2 sm:py-3 xl:py-4'>

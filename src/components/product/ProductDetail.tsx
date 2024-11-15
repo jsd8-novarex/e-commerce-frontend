@@ -1,13 +1,9 @@
-import React from "react";
-import { product_list } from "../../constraints/PRODUCTS_DATA";
-
 function ProductDetail() {
-  const product = product_list[0];
   return (
     <section className='px-4 sm:sm:col-span-4'>
       <div>
-        <h3>{product.name}</h3>
-        <h3 className='my-4 text-gray-500'>${product.price}</h3>
+        {/* <h3>{product.name}</h3>
+        <h3 className='my-4 text-gray-500'>${product.price}</h3> */}
       </div>
       <ul className='my-4 flex border-b-2'>
         <li className='m-2'>
@@ -38,9 +34,7 @@ function ProductDetail() {
       </div>
       <div className='mt-7'>
         <span>Description</span>
-        <p className='text-gray-500'>
-          <small>{product.description}</small>
-        </p>
+        <p className='text-gray-500'>{/* <small>{product.description}</small> */}</p>
       </div>
       <div className='mt-7 flex justify-center'>
         <button type='button' className='btn-black w-full'>

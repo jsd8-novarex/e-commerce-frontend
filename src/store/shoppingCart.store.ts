@@ -89,18 +89,18 @@ const useShoppingCartStore = create<ShoppingCartStoreType>((set) => ({
           },
         };
       }
-      return state;      
+      return state;
     }),
-    removeProductFromCart: (productChoiceId) =>
-      set((state) => ({
-        cart: state.cart
-          ? {
-              ...state.cart,
-              items: state.cart.items.filter((item) => item.product_choice_id !== productChoiceId),
-              last_updated_timestamp: dayjs().toISOString(),
-            }
-          : null,
-      })),
+  removeProductFromCart: (productChoiceId) =>
+    set((state) => ({
+      cart: state.cart
+        ? {
+            ...state.cart,
+            items: state.cart.items.filter((item) => item.product_choice_id !== productChoiceId),
+            last_updated_timestamp: dayjs().toISOString(),
+          }
+        : null,
+    })),
 }));
 
 export default useShoppingCartStore;

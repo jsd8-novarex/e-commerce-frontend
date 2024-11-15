@@ -1,7 +1,7 @@
+import { product_list } from "../constraints/PRODUCT_DATA_V2";
 // import CollectionsFilterBar from "../components/collections/CollectionsFilterBar";
 import ScrollToTopButton from "../components/button/ScrollToTopButton";
 import ProductCard from "../components/collections/ProductCard";
-import { product_list } from "../constraints/PRODUCT_DATA_V2";
 
 function CollectionsPage() {
   return (

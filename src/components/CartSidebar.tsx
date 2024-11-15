@@ -1,13 +1,13 @@
 import { useNavigate } from "react-router-dom";
 import useShoppingCartStore from "../store/shoppingCart.store";
-import ProductInCart from "./ProductInCart";
 import { useScrollLockStore } from "../store/scrollLock.store";
+import ProductInCart from "./ProductInCart";
 import Backdrop from "./Backdrop";
 
 function CartSidebar() {
   const navigate = useNavigate();
   const { openComponents, handleScrollLock } = useScrollLockStore();
- 
+
   const isCartSidebarOpen = openComponents["CartSidebar"] || false;
 
   const { cart, removeProductFromCart } = useShoppingCartStore();
@@ -35,7 +35,11 @@ function CartSidebar() {
           <h3 className='text-xl'>
             {itemLength === 0 ? "Your cart is empty" : `${itemLength} item(s) in your cart`}
           </h3>
-          <button type='button' onClick={toggleCartSidebar} className='p-2 text-center'>
+          <button
+            type='button'
+            onClick={() => handleScrollLock("CartSidebar", false)}
+            className='p-2 text-center'
+          >
             <svg
               xmlns='http://www.w3.org/2000/svg'
               fill='none'

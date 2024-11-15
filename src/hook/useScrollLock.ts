@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useScrollLockStore } from "../store/scrollLock.store";
 
 function useScrollLock() {
-  const {isAnyComponentOpen, openComponents} = useScrollLockStore();  
+  const { isAnyComponentOpen, openComponents } = useScrollLockStore();
 
   useEffect(() => {
     if (isAnyComponentOpen()) {
@@ -14,6 +14,8 @@ function useScrollLock() {
     return () => {
       document.body.style.overflowY = "auto";
     };
+    
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [openComponents]);
 }
 

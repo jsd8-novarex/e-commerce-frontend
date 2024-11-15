@@ -1,28 +1,33 @@
 import { Link } from "react-router-dom";
-import { ProductDataType } from "../../constraints/PRODUCT_DATA_V2";
-import useCartStore from "../../store/cartItems.store";
 import dayjs from "dayjs";
+import useShoppingCartStore from "../../store/shoppingCart.store";
+import { ProductDataType } from "../../constraints/PRODUCT_DATA_V2";
+import { ShowImageProductData2 } from "../../constraints/SHOWIMAGE_DATA";
 
 type ProductCardPropsType = {
   productData: ProductDataType;
 };
 
 function ProductCard({ productData }: ProductCardPropsType) {
-  const addToCart = useCartStore((state) => state.addToCart);
-  const price = productData.price ? productData.price : "N/A";
-
+  const addProductToCart = useShoppingCartStore((state) => state.addProductToCart);
+  const price = productData.product_choice[0].price ? productData.product_choice[0].price : "N/A";
+  const timestamp = dayjs().toISOString();
+  const imageProduct = ShowImageProductData2.find((item) => item.product_choice_id === productData.product_choice[0].id)  
+  
   const handleAddToCart = () => {
     const newProduct = {
-      productId: productData.id,
-      productChoiceId: productData.product_choice[0].id,
-      name: productData.name,
-      price: productData.price,
+      id: timestamp,
+      cart_id: "",
+      product_choice_id: productData.product_choice[0].id,
       quantity: 1,
-      timestamp: dayjs().toISOString(),
+      create_timestamp: timestamp,
+      last_updated_timestamp: timestamp,
+      creator_id: "admin",
+      last_op_id: "admin",
     };
-
-    addToCart(newProduct);
-  };
+    addProductToCart(newProduct);
+  }; 
+  
 
   return (
     <div className='relative overflow-hidden rounded-ee-xl rounded-ss-xl drop-shadow-xl'>
@@ -47,7 +52,7 @@ function ProductCard({ productData }: ProductCardPropsType) {
       <div className='bg-slate-100'>
         <Link to={"/product"}>
           <img
-            src='https://pangaia.com/cdn/shop/files/Recycled-Cotton-Hoodie-Black-1.png?crop=center&height=1023&v=1724674090&width=768'
+            src={imageProduct?.url}
             alt='Mens 365 Heavyweight Hoodie'
           />
         </Link>

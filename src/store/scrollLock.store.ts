@@ -1,12 +1,16 @@
 import { create } from "zustand";
 
 export type ScrollLockStateType = {
-  isPageScrollLocked: boolean;
-  handleScrollLock: (isScrollLocked: boolean) => void;
+  openComponents: Record<string, boolean>;
+  handleScrollLock: (componentName: string, isOpen: boolean) => void;
+  isAnyComponentOpen: () => boolean;
 };
 
-export const useScrollLockStore = create<ScrollLockStateType>((set) => ({
-  isPageScrollLocked: false,
-  handleScrollLock: (isScrollLocked) =>
-    set((state) => ({ isPageScrollLocked: (state.isPageScrollLocked = isScrollLocked) })),
+export const useScrollLockStore = create<ScrollLockStateType>((set, get) => ({
+  openComponents: {},
+  handleScrollLock: (componentName, isOpen) =>
+    set((state) => ({
+      openComponents: { ...state.openComponents, [componentName]: isOpen },
+    })),
+  isAnyComponentOpen: () => Object.values(get().openComponents).some((isOpen) => isOpen),
 }));

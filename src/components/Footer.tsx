@@ -2,7 +2,7 @@ import React from "react";
 
 function Footer() {
   return (
-    <footer>
+    <footer className=" w-full">
       <div className='flex flex-col bg-black px-6 py-6 text-white md:px-12 md:py-12'>
         <div>
           <div className='footer bg-black p-8 text-white md:p-10'>
@@ -37,7 +37,7 @@ function Footer() {
                   <input
                     type='text'
                     placeholder='username@site.com'
-                    className='input join-item input-bordered border-b-2 border-b-white bg-black'
+                    className='input join-item input-bordered border-b-2 border-b-white bg-black text-white'
                   />
                   <button className='btn btn-primary join-item rounded-none border-black bg-black hover:border-gray-600 hover:bg-gray-600'>
                     <svg
@@ -51,9 +51,9 @@ function Footer() {
                     >
                       <path
                         stroke='currentColor'
-                        stroke-linecap='round'
-                        stroke-linejoin='round'
-                        stroke-width='2'
+                        strokeLinecap='round'
+                        strokeLinejoin='round'
+                        strokeWidth='2'
                         d='m9 5 7 7-7 7'
                       />
                     </svg>
@@ -64,7 +64,7 @@ function Footer() {
           </div>
         </div>
         <div className='md:flex- flex flex-col items-center justify-between gap-4 md:flex-row'>
-          <p>Copyright 2024 © Pangaea. All Rights Reserved.</p>
+          <p>Copyright 2024 © SHINING. All Rights Reserved.</p>
 
           <p className='flex cursor-pointer gap-8 pr-10'>
             <a>

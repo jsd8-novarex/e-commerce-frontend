@@ -1,4 +1,12 @@
-export type ProductDataType = {
+export interface DefaultColumnType {
+  create_timestamp: string;
+  last_updated_timestamp: string;
+  creator_id: string;
+  last_op_id: string;
+  tram_status: boolean;
+}
+
+export interface ProductDataType extends DefaultColumnType {
   id: string;
   brand_id: string;
   category_id: string;
@@ -6,14 +14,9 @@ export type ProductDataType = {
   name: string;
   description: string;
   product_choice: ProductChoiceType[];
-  create_timestamp: string;
-  last_updated_timestamp: string;
-  creator_id: string;
-  last_op_id: string;
-  tram_status: boolean;
 };
 
-export type ProductChoiceType = {
+export interface ProductChoiceType extends DefaultColumnType {
   id: string;
   product_id: string;
   sku: string;
@@ -21,29 +24,16 @@ export type ProductChoiceType = {
   color: string;
   price: number;
   quantity: number;
-  create_timestamp: string;
-  last_updated_timestamp: string;
-  creator_id: string;
-  last_op_id: string;
-  tram_status: boolean;
 };
 
-export type SizeDataType = {
+export interface SizeDataType extends DefaultColumnType {
   id: string;
   name: string;
-  create_timestamp: string;
-  last_updated_timestamp: string;
-  creator_id: string;
-  last_op_id: string;
 };
 
-export type ColorDataType = {
+export interface ColorDataType extends DefaultColumnType {
   id: string;
   name: string;
-  create_timestamp: string;
-  last_updated_timestamp: string;
-  creator_id: string;
-  last_op_id: string;
 };
 
 export const product_list: ProductDataType[] = [

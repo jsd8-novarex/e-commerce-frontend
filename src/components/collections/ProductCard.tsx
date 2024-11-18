@@ -1,8 +1,10 @@
 import { Link } from "react-router-dom";
+import { v4 as uuidv4 } from "uuid";
 import dayjs from "dayjs";
 import useShoppingCartStore from "../../store/shoppingCart.store";
 import { ProductDataType } from "../../constraints/PRODUCT_DATA_V2";
 import { ShowImageProductData2 } from "../../constraints/SHOWIMAGE_DATA";
+import { isFormatPrice } from "../../helpers/utils";
 
 type ProductCardPropsType = {
   productData: ProductDataType;
@@ -18,7 +20,7 @@ function ProductCard({ productData }: ProductCardPropsType) {
 
   const handleAddToCart = () => {
     const newProduct = {
-      id: timestamp,
+      id: uuidv4(),
       cart_id: "",
       product_choice_id: productData.product_choice[0].id,
       quantity: 1,
@@ -59,7 +61,9 @@ function ProductCard({ productData }: ProductCardPropsType) {
         <div className='flex w-full justify-between gap-x-1 lg:gap-x-4'>
           <p className='text-base font-semibold'>{productData.name}</p>
           <div className='flex items-end'>
-            <span className='text-lg font-semibold xl:text-xl'>${price}</span>
+            <span className='text-lg font-semibold xl:text-xl'>
+              {typeof price === "number" ? isFormatPrice(price, 0) : price}
+            </span>
           </div>
         </div>
       </div>

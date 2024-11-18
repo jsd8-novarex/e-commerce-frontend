@@ -35,7 +35,6 @@ function PaymentMobile() {
           decreaseQuantity={decreaseQuantity}
           isSummaryVisible={isSummaryVisible}
           isPriceVisible={isPriceVisible}
-          quantity={quantity}
         />
         <div className='mt-4 flex border p-4'>
           <div>Account</div>

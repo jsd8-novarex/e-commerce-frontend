@@ -46,7 +46,6 @@ function CheckoutDesktop() {
             decreaseQuantity={decreaseQuantity}
             isSummaryVisible={isSummaryVisible}
             isPriceVisible={isPriceVisible}
-            quantity={quantity}
           />
         </div>
       </section>

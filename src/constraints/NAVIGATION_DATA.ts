@@ -1,7 +1,6 @@
-export type NavigationDataType = {
-  order: number;
-  name: string;
-  path: string;
+import { FilterOptionsDataType } from "./COLLECTIONS_FILTER_DATA";
+
+export interface NavigationDataType extends FilterOptionsDataType {
   showOnDesktop: boolean;
 };
 

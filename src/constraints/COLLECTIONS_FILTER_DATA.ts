@@ -1,10 +1,10 @@
-export type filterOptionsDataType = {
+export interface FilterOptionsDataType {
   order: number;
   name: string;
   path: string;
-};
+}
 
-export const filterOptionsData: filterOptionsDataType[] = [
+export const filterOptionsData: FilterOptionsDataType[] = [
   {
     order: 0,
     name: "Sweatshirts",

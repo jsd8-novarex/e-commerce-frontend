@@ -1,7 +1,5 @@
 import clsx from "clsx";
 import { useEffect, useState } from "react";
-// import { ComponentPropsWithRef } from "react";
-// type ScrollToTopButtonPropsType = Omit<ComponentPropsWithRef<"button">, "className">;
 
 function ScrollToTopButton() {
   const [isVisible, setIsVisible] = useState<boolean>(false);

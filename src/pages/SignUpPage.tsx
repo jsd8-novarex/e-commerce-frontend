@@ -1,11 +1,15 @@
 import { NavLink } from "react-router-dom";
 import AuthenticationForm from "../components/AuthenticationForm";
+import useRegistration from "../hook/user/useRegistration";
 
 function SignUpPage() {
+  const { isProcessing, dataForVerify, regStatus, handleInputChange, handleRegistration} =
+    useRegistration();
+
   return (
     <AuthenticationForm status='sign-up' message='Create Account'>
       <div className='row-start-3 row-end-7 flex flex-col items-center justify-center'>
-        <form className='mb-4 flex min-w-72 flex-col gap-y-4 sm:w-96'>
+        <form onSubmit={handleRegistration} className='mb-4 flex min-w-72 flex-col gap-y-4 sm:w-96'>
           <div className='flex flex-col'>
             <label htmlFor='email' className='auth-form__label'>
               Email
@@ -13,7 +17,11 @@ function SignUpPage() {
             <input
               id='email'
               type='email'
+              name='email'
               placeholder='Enter your email'
+              value={dataForVerify.email}
+              onChange={handleInputChange}
+              disabled={isProcessing}
               className='auth-form__input'
               minLength={8}
               required
@@ -26,7 +34,11 @@ function SignUpPage() {
             <input
               id='password'
               type='password'
+              name='password'
               placeholder='Enter your password'
+              value={dataForVerify.password}
+              onChange={handleInputChange}
+              disabled={isProcessing}
               className='auth-form__input'
               minLength={8}
               required
@@ -39,12 +51,17 @@ function SignUpPage() {
             <input
               id='confirm-password'
               type='password'
+              name='confirm_password'
               placeholder='Enter your confirm password'
+              value={dataForVerify.confirm_password}
+              onChange={handleInputChange}
+              disabled={isProcessing}
               className='auth-form__input'
               minLength={8}
               required
             />
           </div>
+          <div>{ regStatus && regStatus}</div>
           <div className='flex flex-col justify-center'>
             <button type='submit' className='auth-form__btn'>
               Sign Up

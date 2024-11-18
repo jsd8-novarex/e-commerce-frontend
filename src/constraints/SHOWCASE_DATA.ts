@@ -1,4 +1,4 @@
-export type ShowCaseSectionDataType = {
+export interface ShowCaseSectionDataType {
   name: string;
   information: string;
   url: string;

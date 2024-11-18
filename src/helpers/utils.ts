@@ -3,6 +3,16 @@ export const isPasswordValid = (password: string): boolean => {
   return passwordRegex.test(password);
 };
 
+export const isFormatPrice = (price: number, fractionDigits: number) => {
+  const formatPrice = price.toLocaleString("en-US", {
+    style: "currency",
+    currency: "USD",
+    minimumFractionDigits: fractionDigits,
+    maximumFractionDigits: fractionDigits,
+  });
+  return formatPrice;
+};
+
 export const handleInputChangeSingleValue = <T>(
   event: React.ChangeEvent<HTMLInputElement>,
   setState: React.Dispatch<React.SetStateAction<T>>,

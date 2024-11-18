@@ -30,6 +30,7 @@ export type CartProductItemType = {
 export type ShoppingCartStoreType = {
   cart: ShoppingCartType | null;
   addProductToCart: (newItem: CartProductItemType) => void;
+  updateProductQuantity: (productChoiceId: string, quantity: number) => void;
   removeProductFromCart: (productChoiceId: string) => void;
 };
 
@@ -82,10 +83,30 @@ const useShoppingCartStore = create<ShoppingCartStoreType>((set) => ({
                 ...newItem,
                 create_timestamp: dayjs().toISOString(),
                 last_updated_timestamp: dayjs().toISOString(),
+                last_op_id: newItem.last_op_id,
               },
             ],
             last_updated_timestamp: dayjs().toISOString(),
             last_op_id: newItem.last_op_id,
+          },
+        };
+      }
+      return state;
+    }),
+  updateProductQuantity: (productChoiceId, quantity) =>
+    set((state) => {
+      if (state.cart) {
+        const updatedItems = state.cart.items.map((item) =>
+          item.product_choice_id === productChoiceId
+            ? { ...item, quantity: quantity, last_updated_timestamp: dayjs().toISOString() }
+            : item,
+        );
+
+        return {
+          cart: {
+            ...state.cart,
+            items: updatedItems,
+            last_updated_timestamp: dayjs().toISOString(),
           },
         };
       }

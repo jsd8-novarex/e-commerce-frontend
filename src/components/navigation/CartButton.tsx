@@ -1,10 +1,10 @@
-// import useCartStore from "../../store/cartItems.store";
 import { useScrollLockStore } from "../../store/scrollLock.store";
+import useShoppingCartStore from "../../store/shoppingCart.store";
 
 function CartButton() {
   const handleScrollLock = useScrollLockStore((state) => state.handleScrollLock);
-  // const cart = useCartStore((state) => state.cart);
-  // const isItems = cart && cart?.items.length > 0 ? true : false;
+  const cart = useShoppingCartStore((state) => state.cart);
+  const isItems = cart && cart?.items.length > 0 ? true : false;
 
   return (
     <button
@@ -12,11 +12,11 @@ function CartButton() {
       className='indicator p-2'
       onClick={() => handleScrollLock("CartSidebar", true)}
     >
-      {/* {isItems && (
+      {isItems && (
         <span className='absolute left-5 top-0.5 rounded-full bg-red-700 px-1.5 py-0.5 text-[0.57rem] text-white'>
           {cart && cart?.items.length > 99 ? "99+" : cart?.items.length}
         </span>
-      )} */}
+      )}
       <svg
         xmlns='http://www.w3.org/2000/svg'
         fill='none'

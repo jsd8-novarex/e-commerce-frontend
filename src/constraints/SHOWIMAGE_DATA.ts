@@ -1,13 +1,10 @@
-export type ShowImageProduct2DataType = {
+import { DefaultColumnType } from "./PRODUCT_DATA_V2";
+
+export interface ShowImageProduct2DataType extends DefaultColumnType {
   id: string;
   product_choice_id: string;
   index: number;
   url: string;
-  create_timestamp: string;
-  last_updated_timestamp: string;
-  creator_id: string;
-  last_op_id: string;
-  tram_status: boolean;
 };
 
 export const ShowImageProductData2: ShowImageProduct2DataType[] = [

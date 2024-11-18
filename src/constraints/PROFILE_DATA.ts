@@ -1,4 +1,4 @@
-export type ProfileDataType = {
+export interface ProfileDataType {
   uuid: string;
   name: string;
   email: string;

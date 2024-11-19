@@ -1,9 +1,17 @@
-function ProductDetail() {
+import { ProductChoiceType, ProductDataType } from '../../constraints/PRODUCT_DATA_V2';
+
+type ProductDetailPropsType = {
+  findProductChoice: ProductDataType | undefined;
+  productChoiceData: ProductChoiceType | undefined;
+};
+
+
+function ProductDetail({ findProductChoice, productChoiceData }: ProductDetailPropsType) {
   return (
     <section className='px-4 sm:sm:col-span-4'>
       <div>
-        {/* <h3>{product.name}</h3>
-        <h3 className='my-4 text-gray-500'>${product.price}</h3> */}
+        <h3>{findProductChoice?.name}</h3>
+        <h3 className='my-4 text-gray-500'>${productChoiceData?.price}</h3>
       </div>
       <ul className='my-4 flex border-b-2'>
         <li className='m-2'>

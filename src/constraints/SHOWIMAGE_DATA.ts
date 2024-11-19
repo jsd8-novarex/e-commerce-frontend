@@ -5,7 +5,7 @@ export interface ShowImageProduct2DataType extends DefaultColumnType {
   product_choice_id: string;
   index: number;
   url: string;
-};
+}
 
 export const ShowImageProductData2: ShowImageProduct2DataType[] = [
   {

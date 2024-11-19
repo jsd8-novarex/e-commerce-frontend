@@ -3,7 +3,7 @@ import AuthenticationForm from "../components/AuthenticationForm";
 import useRegistration from "../hook/user/useRegistration";
 
 function SignUpPage() {
-  const { isProcessing, dataForVerify, regStatus, handleInputChange, handleRegistration} =
+  const { isProcessing, dataForVerify, regStatus, handleInputChange, handleRegistration } =
     useRegistration();
 
   return (
@@ -61,7 +61,7 @@ function SignUpPage() {
               required
             />
           </div>
-          <div>{ regStatus && regStatus}</div>
+          <div>{regStatus && regStatus}</div>
           <div className='flex flex-col justify-center'>
             <button type='submit' className='auth-form__btn'>
               Sign Up

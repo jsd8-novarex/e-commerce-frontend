@@ -14,7 +14,7 @@ export interface ProductDataType extends DefaultColumnType {
   name: string;
   description: string;
   product_choice: ProductChoiceType[];
-};
+}
 
 export interface ProductChoiceType extends DefaultColumnType {
   id: string;
@@ -24,17 +24,17 @@ export interface ProductChoiceType extends DefaultColumnType {
   color: string;
   price: number;
   quantity: number;
-};
+}
 
 export interface SizeDataType extends DefaultColumnType {
   id: string;
   name: string;
-};
+}
 
 export interface ColorDataType extends DefaultColumnType {
   id: string;
   name: string;
-};
+}
 
 export const product_list: ProductDataType[] = [
   {

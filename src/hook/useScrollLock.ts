@@ -14,8 +14,8 @@ function useScrollLock() {
     return () => {
       document.body.style.overflowY = "auto";
     };
-    
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [openComponents]);
 }
 

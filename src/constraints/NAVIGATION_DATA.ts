@@ -2,7 +2,7 @@ import { FilterOptionsDataType } from "./COLLECTIONS_FILTER_DATA";
 
 export interface NavigationDataType extends FilterOptionsDataType {
   showOnDesktop: boolean;
-};
+}
 
 export const navigationData: NavigationDataType[] = [
   {

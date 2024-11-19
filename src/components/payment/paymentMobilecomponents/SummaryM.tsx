@@ -1,8 +1,8 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import useShoppingCartStore from "../../../store/shoppingCart.store";
-import ProductInCart from "../../ProductInCart";
 import { product_list } from "../../../constraints/PRODUCT_DATA_V2";
+import ProductInCart from "../../cartSidebar/ProductInCart";
 
 interface SummaryDProps {
   toggleSummary: () => void;
@@ -14,7 +14,7 @@ interface SummaryDProps {
 
 const SummaryD: React.FC<SummaryDProps> = ({ toggleSummary, isSummaryVisible, isPriceVisible }) => {
   const navigate = useNavigate();
-  const { cart, removeProductFromCart } = useShoppingCartStore();
+  const { cart } = useShoppingCartStore();
   const items = cart?.items || [];
 
   const totalPrice = items.reduce((total, item) => {
@@ -62,13 +62,7 @@ const SummaryD: React.FC<SummaryDProps> = ({ toggleSummary, isSummaryVisible, is
                 </button>
               </div>
             ) : (
-              items.map((item) => (
-                <ProductInCart
-                  key={item.product_choice_id}
-                  item={item}
-                  removeProductFromCart={removeProductFromCart}
-                />
-              ))
+              items.map((item) => <ProductInCart key={item.product_choice_id} item={item} />)
             )}
           </div>
         </div>

@@ -1,10 +1,9 @@
-import { ProductChoiceType, ProductDataType } from '../../constraints/PRODUCT_DATA_V2';
+import { ProductChoiceType, ProductDataType } from "../../constraints/PRODUCT_DATA_V2";
 
 type ProductDetailPropsType = {
   findProductChoice: ProductDataType | undefined;
   productChoiceData: ProductChoiceType | undefined;
 };
-
 
 function ProductDetail({ findProductChoice, productChoiceData }: ProductDetailPropsType) {
   return (

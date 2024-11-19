@@ -14,7 +14,7 @@ export interface ProfileDataType {
   timestamp: string;
   creator_id: string;
   last_op_id: string;
-};
+}
 
 export const profileData: ProfileDataType = {
   uuid: "123456",

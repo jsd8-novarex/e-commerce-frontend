@@ -37,7 +37,6 @@
     display: none;
   }
 
-
   /*hide-number-spin*/
   .hide-number-spin {
     -moz-appearance: textfield;
@@ -48,7 +47,6 @@
     margin: 0;
   }
 
-  
   /* button  */
   .btn-black {
     @apply btn btn-primary w-24 rounded-none border-black bg-black text-white hover:border-black hover:bg-black hover:text-white;

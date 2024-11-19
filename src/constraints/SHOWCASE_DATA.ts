@@ -4,7 +4,7 @@ export interface ShowCaseSectionDataType {
   url: string;
   alternate: string;
   positionImg: string;
-};
+}
 
 export type ShowCaseSectionType = ShowCaseSectionDataType[];
 

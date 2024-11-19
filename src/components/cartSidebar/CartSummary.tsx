@@ -19,7 +19,7 @@ function CartSummary({ totalPrice, handleLink }: CartSummaryPropsType) {
       </div>
       <div className='flex justify-end px-4'>
         <button
-          onClick={() => handleLink("/payment")}
+          onClick={() => handleLink("/transaction")}
           className='h-12 w-40 bg-black font-bold text-white hover:bg-gray-600'
         >
           Checkout

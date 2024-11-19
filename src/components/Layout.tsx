@@ -11,7 +11,7 @@ function Layout() {
   // const isHomePage = location.pathname === "/";
 
   return (
-    <div className='relative flex gap-y-32 h-full flex-col bg-white'>
+    <div className='relative flex h-full flex-col gap-y-32 bg-white'>
       <NavigationBar />
       <CartSidebar />
       <Outlet />

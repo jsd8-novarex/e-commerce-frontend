@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import useShoppingCartStore, { CartProductItemType } from "../../store/shoppingCart.store";
 import { ProductChoiceType } from "../../constraints/PRODUCT_DATA_V2";
 import InputNumber from "../input/InputNumber";
@@ -11,6 +11,10 @@ type ProductInCartPropsType = {
 function CartItemActions({ item, productChoice }: ProductInCartPropsType) {
   const { removeProductFromCart, updateProductQuantity } = useShoppingCartStore();
   const [inputValue, setInputValue] = useState<string>(item.quantity.toString());
+
+  useEffect(() => {
+    setInputValue(item.quantity.toString());
+  }, [item.quantity]);
 
   const handleQuantityChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setInputValue(event.target.value);

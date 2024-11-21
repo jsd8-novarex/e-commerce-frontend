@@ -9,6 +9,11 @@ type DataForVerifyType = {
 
 function useRegistration() {
   const [regStatus, setRegStatus] = useState<string>("");
+  const [errors, setErrors] = useState<{ [key: string]: string }>({
+    email: "",
+    password: "",
+    confirmPassword: "",
+  });
   const [isProcessing, setIsProcessing] = useState<boolean>(false);
   const [dataForVerify, setDataForVerify] = useState<DataForVerifyType>({
     email: "",
@@ -30,28 +35,41 @@ function useRegistration() {
 
     setIsProcessing(true);
     setRegStatus("Verifying...");
+    setErrors({ email: "", password: "", confirmPassword: "" });
 
+    let valid = true;
+    const newErrors: { [key: string]: string } = {};
+
+    // ตรวจสอบเงื่อนไข error
     if (!isEmailValid(dataForVerify.email)) {
-      setRegStatus("Email is not Valid.");
-    } else if (!isPasswordValid(dataForVerify.password)) {
-      setRegStatus(
-        "The password must be more than 8 characters, at least 1 lower case, 1 upper case, 1 numeric character, and one special character.",
-      );
-    } else if (dataForVerify.password !== dataForVerify.confirm_password) {
-      setRegStatus("Password & Confirm Password do not match");
+      newErrors.email = "Email is not valid.";
+      valid = false;
+    }
+    if (!isPasswordValid(dataForVerify.password)) {
+      newErrors.password =
+        "Password must be at least 8 characters, with 1 lowercase, 1 uppercase, 1 number, and 1 special character.";
+      valid = false;
+    }
+    if (dataForVerify.password !== dataForVerify.confirm_password) {
+      newErrors.confirmPassword = "Passwords do not match.";
+      valid = false;
+    }
+
+    // แสดง error
+    if (!valid) {
+      setErrors(newErrors);
+      setRegStatus("Registration failed.");
     } else {
       setRegStatus("Successfully registered.");
-      setDataForVerify({
-        email: "",
-        password: "",
-        confirm_password: "",
-      });
+      setDataForVerify({ email: "", password: "", confirm_password: "" });
     }
+
     setIsProcessing(false);
   };
 
   return {
     regStatus,
+    errors,
     isProcessing,
     dataForVerify,
     handleInputChange,

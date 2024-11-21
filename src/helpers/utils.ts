@@ -4,9 +4,9 @@ export const isPasswordValid = (password: string): boolean => {
 };
 
 export const isFormatPrice = (price: number, fractionDigits: number) => {
-  const formatPrice = price.toLocaleString("en-US", {
+  const formatPrice = price.toLocaleString("th-TH", {
     style: "currency",
-    currency: "USD",
+    currency: "THB",
     minimumFractionDigits: fractionDigits,
     maximumFractionDigits: fractionDigits,
   });

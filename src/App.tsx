@@ -19,7 +19,7 @@ function App() {
       <Routes>
         <Route path='/' element={<Layout />}>
           <Route index element={<HomePage />} />
-          <Route path='product' element={<ProductPage />} caseSensitive />
+          <Route path='/product/:productChoiceId' element={<ProductPage />} caseSensitive />
           <Route path='collections' element={<CollectionsPage />} caseSensitive />
           <Route path='profile' element={<ProfilePage />} caseSensitive />
           <Route path='transaction' element={<TransactionPage />} caseSensitive />

@@ -1,43 +1,47 @@
 import { Link } from "react-router-dom";
-import { v4 as uuidv4 } from "uuid";
-import dayjs from "dayjs";
-import useShoppingCartStore from "../../store/shoppingCart.store";
+// import { v4 as uuidv4 } from "uuid";
+// import dayjs from "dayjs";
+// import useShoppingCartStore from "../../store/shoppingCart.store";
 import { ProductDataType } from "../../constraints/PRODUCT_DATA_V2";
 import { ShowImageProductData2 } from "../../constraints/SHOWIMAGE_DATA";
 import { isFormatPrice } from "../../helpers/utils";
 
 type ProductCardPropsType = {
   productData: ProductDataType;
+  isProductOptionsOpen: () => void;
 };
 
-function ProductCard({ productData }: ProductCardPropsType) {
-  const addProductToCart = useShoppingCartStore((state) => state.addProductToCart);
+function ProductCard({ productData, isProductOptionsOpen }: ProductCardPropsType) {
+  // const addProductToCart = useShoppingCartStore((state) => state.addProductToCart);
   const price = productData.product_choice[0].price ? productData.product_choice[0].price : "N/A";
-  const timestamp = dayjs().toISOString();
+  // const timestamp = dayjs().toISOString();
   const productChoiceId = productData.product_choice[0].id;
-  console.log(productChoiceId)
+  console.log(productChoiceId);
   const imageProduct = ShowImageProductData2.find(
     (item) => item.product_choice_id === productData.product_choice[0].id,
   );
 
-  const handleAddToCart = () => {
-    const newProduct = {
-      id: uuidv4(),
-      cart_id: "",
-      product_choice_id: productData.product_choice[0].id,
-      quantity: 1,
-      create_timestamp: timestamp,
-      last_updated_timestamp: timestamp,
-      creator_id: "admin",
-      last_op_id: "admin",
-    };
-    addProductToCart(newProduct);
-  };
+  // const handleAddToCart = () => {
+  //   const newProduct = {
+  //     id: uuidv4(),
+  //     cart_id: "",
+  //     product_choice_id: productData.product_choice[0].id,
+  //     quantity: 1,
+  //     create_timestamp: timestamp,
+  //     last_updated_timestamp: timestamp,
+  //     creator_id: "admin",
+  //     last_op_id: "admin",
+  //   };
+  //   addProductToCart(newProduct);
+  // };
 
   return (
     <div className='relative overflow-hidden rounded-ee-xl rounded-ss-xl drop-shadow-xl'>
       <div className='absolute right-0 top-0 flex h-16 w-16 items-center justify-center'>
-        <button onClick={handleAddToCart} className='btn btn-circle z-[2] mx-1 h-12 w-12 bg-white'>
+        <button
+          onClick={isProductOptionsOpen}
+          className='btn btn-circle z-[2] mx-1 h-12 w-12 bg-white'
+        >
           <svg
             xmlns='http://www.w3.org/2000/svg'
             fill='none'

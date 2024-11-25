@@ -2,6 +2,7 @@ import { useState } from "react";
 import DeliveryAddressD from "./paymentDesktopcomponents/DeliveryAddressD";
 import PaymentD from "./paymentDesktopcomponents/PaymentD";
 import SummaryD from "./paymentDesktopcomponents/SummaryD";
+import EditButton from "../button/EditButton";
 
 function PaymentDesktop() {
   const [isSummaryVisible, setIsSummaryVisible] = useState(false);
@@ -41,26 +42,21 @@ function PaymentDesktop() {
             <DeliveryAddressD />
 
             <div className='mt-4 border p-4'>
-              <div>Payment</div>
+              <div className='font-bold'>Payment</div>
             </div>
             <div className='border border-t-0 p-4'>
               <div className='flex justify-between border-b-2 pb-4'>
                 <span>Billing address</span>
-                <button>edit</button>
+                <EditButton />
               </div>
 
               <div className='flex flex-col pt-4'>
-                <span>Mr.name</span>
-                <span>Address</span>
-                <span>Tel.</span>
+                <span>Mr.name surname</span>
+                <span>John Doe, 456 Elm Street, Suite 3, Los Angeles, CA 90001, USA.</span>
+                <span>+66123456789</span>
               </div>
             </div>
-            <div className='border border-t-0 p-4'>
-              <input type='checkbox' />
-              <label htmlFor='Full tax invoice requested' className='ml-2'>
-                Full tax invoice requested
-              </label>
-            </div>
+
             <div className='border border-t-0 p-4 leading-8'>
               <div>
                 <p>

@@ -25,6 +25,7 @@ export type CartProductItemType = {
   last_updated_timestamp: string;
   creator_id: string;
   last_op_id: string;
+  selectedColor: string | null;
 };
 
 export type ShoppingCartStoreType = {

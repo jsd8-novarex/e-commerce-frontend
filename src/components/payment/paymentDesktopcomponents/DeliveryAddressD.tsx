@@ -1,27 +1,25 @@
 import React from "react";
+import EditButton from "../../button/EditButton";
 
 const DeliveryAddressD = () => {
   return (
     <>
       <div>
         <div className='mt-4 flex justify-between border p-4'>
-          <div>Delivery</div>
+          <div className='font-bold'>Delivery</div>
           <div>
-            <button>edit</button>
+            <EditButton />
           </div>
-        </div>
-        <div className='flex border border-t-0 p-4'>
-          <strong>Delivery address</strong>
         </div>
         <div className='flex flex-col justify-between border border-t-0 p-4'>
           <div>
-            <strong>Delivery address</strong>
+            <p>Delivery address</p>
           </div>
           <div className='flex'>
             <div className='mr-6 flex flex-col'>
-              <span>Mr.name</span>
-              <span>Address</span>
-              <span>Tel.</span>
+              <span>Mr.name surname</span>
+              <span>John Doe, 456 Elm Street, Suite 3, Los Angeles, CA 90001, USA.</span>
+              <span>+66123456789</span>
             </div>
             <div>
               <div>

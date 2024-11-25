@@ -2,6 +2,7 @@ import { useState } from "react";
 import SummaryM from "./paymentMobilecomponents/SummaryM";
 import DeliveryAddressM from "./paymentMobilecomponents/DeliveryAddressM";
 import PaymentM from "./paymentMobilecomponents/PaymentM";
+import EditButton from "../button/EditButton";
 
 function PaymentMobile() {
   const [isSummaryVisible, setIsSummaryVisible] = useState(false);
@@ -51,7 +52,7 @@ function PaymentMobile() {
         <div className='border border-t-0 p-4'>
           <div className='flex justify-between border-b-2 pb-4'>
             <span>Billing address</span>
-            <button>edit</button>
+            <EditButton />
           </div>
 
           <div className='flex flex-col pt-4'>
@@ -60,12 +61,7 @@ function PaymentMobile() {
             <span>Tel.</span>
           </div>
         </div>
-        <div className='border border-t-0 p-4'>
-          <input type='checkbox' />
-          <label htmlFor='Full tax invoice requested' className='ml-2'>
-            Full tax invoice requested
-          </label>
-        </div>
+
         <div className='border border-t-0 p-4 leading-8'>
           <div>
             <p>

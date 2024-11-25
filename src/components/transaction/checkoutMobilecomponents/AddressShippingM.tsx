@@ -1,35 +1,33 @@
 import React from "react";
-
+import EditButton from "../../button/EditButton";
 interface AddressShippingDProps {
   handleContinue: () => void;
 }
-
-const AddressShippingM: React.FC<AddressShippingDProps> = ({ handleContinue }) => {
+const AddressShippingD: React.FC<AddressShippingDProps> = ({ handleContinue }) => {
   return (
     <>
       <div>
         <div className='mt-4 flex border p-4'>
-          <div>Delivery</div>
-        </div>
-        <div className='flex border border-t-0 p-4'>
-          <div>Shipping address</div>
+          <div className='font-bold'>Delivery</div>
         </div>
         <div className='flex justify-between border border-t-0 p-4'>
           <div className='flex flex-col'>
-            <span>Mr.name</span>
-            <span>Address</span>
-            <span>Tel.</span>
+            <div>Shipping address</div>
+            <span>Mr.name surname</span>
+            <span>John Doe, 456 Elm Street, Suite 3, Los Angeles, CA 90001, USA.</span>
+            <span>+66123456789</span>
           </div>
           <div>
-            <button>edit</button>
+            <EditButton />
           </div>
         </div>
       </div>
+
       <div className='flex justify-center border border-t-0 p-2 underline'>
         <button>+ Add an address</button>
       </div>
-      <div className='flex justify-center border border-t-0 p-4'>
-        <p>Shipping method</p>
+      <div className='flex border border-t-0 p-4'>
+        <p className='font-bold'>Shipping method</p>
       </div>
       <div className='flex justify-between border border-t-0 p-4'>
         <div>
@@ -43,10 +41,10 @@ const AddressShippingM: React.FC<AddressShippingDProps> = ({ handleContinue }) =
         </button>
       </div>
       <div className='mt-4 flex border p-4'>
-        <div>Payment</div>
+        <div className='font-bold'>Payment</div>
       </div>
     </>
   );
 };
 
-export default AddressShippingM;
+export default AddressShippingD;

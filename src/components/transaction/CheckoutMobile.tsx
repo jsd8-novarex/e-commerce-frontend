@@ -36,7 +36,7 @@ function CheckoutMobile() {
         isPriceVisible={isPriceVisible}
       />
       <div className='mt-4 flex border p-4'>
-        <div>Account</div>
+        <div className='font-bold'>Account</div>
       </div>
       <div className='flex border border-t-0 p-4'>
         <div>email@gmail.com</div>

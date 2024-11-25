@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 import useShoppingCartStore from "../../../store/shoppingCart.store";
 import { product_list } from "../../../constraints/PRODUCT_DATA_V2";
@@ -6,8 +6,6 @@ import ProductInCart from "../../cartSidebar/ProductInCart";
 
 interface SummaryDProps {
   toggleSummary: () => void;
-  increaseQuantity: () => void;
-  decreaseQuantity: () => void;
   isSummaryVisible: boolean;
   isPriceVisible: boolean;
 }
@@ -17,11 +15,19 @@ const SummaryD: React.FC<SummaryDProps> = ({ toggleSummary, isSummaryVisible, is
   const { cart } = useShoppingCartStore();
   const items = cart?.items || [];
 
+  const productChoiceMap = useMemo(() => {
+    const map: Record<string, { price: number }> = {};
+    product_list.forEach((product) => {
+      product.product_choice.forEach((choice) => {
+        map[choice.id] = { price: choice.price };
+      });
+    });
+    return map;
+  }, []);
+
   const totalPrice = items.reduce((total, item) => {
-    const productData = product_list.find(
-      (product) => product.product_choice[0].id === item.product_choice_id,
-    );
-    const itemPrice = productData?.product_choice[0].price || 0;
+    const productChoice = productChoiceMap[item.product_choice_id];
+    const itemPrice = productChoice?.price || 0;
     return total + itemPrice * item.quantity;
   }, 0);
 
@@ -40,7 +46,7 @@ const SummaryD: React.FC<SummaryDProps> = ({ toggleSummary, isSummaryVisible, is
         <div>
           <span className='font-semibold'>SUMMARY</span>
           {isPriceVisible && totalItems > 0 && (
-            <span className='ml-6'>${totalPrice.toFixed(2)}</span>
+            <span className='ml-6'>You have {totalItems} item(s) in your cart</span>
           )}
         </div>
         <div>
@@ -54,7 +60,7 @@ const SummaryD: React.FC<SummaryDProps> = ({ toggleSummary, isSummaryVisible, is
             <div>You have {totalItems} item(s) in your cart</div>
           </div>
 
-          <div className='border border-t-0 px-4 pb-8 pt-4'>
+          <div className='max-h-96 overflow-y-auto border border-t-0 px-4 pb-8 pt-4'>
             {totalItems === 0 ? (
               <div className='flex justify-center pt-4'>
                 <button onClick={() => handleLink("/collections")} className='btn-black w-48'>

@@ -3,7 +3,7 @@ import AuthenticationForm from "../components/AuthenticationForm";
 import useRegistration from "../hook/user/useRegistration";
 
 function SignUpPage() {
-  const { isProcessing, dataForVerify, regStatus, handleInputChange, handleRegistration } =
+  const { isProcessing, dataForVerify, regStatus, errors, handleInputChange, handleRegistration } =
     useRegistration();
 
   return (
@@ -26,6 +26,7 @@ function SignUpPage() {
               minLength={8}
               required
             />
+            {errors.email && <small className='text-red-700'>{errors.email}</small>}
           </div>
           <div className='flex flex-col'>
             <label htmlFor='password' className='auth-form__label'>
@@ -43,6 +44,7 @@ function SignUpPage() {
               minLength={8}
               required
             />
+            {errors.password && <small className='text-red-700'>{errors.password}</small>}
           </div>
           <div className='flex flex-col'>
             <label htmlFor='confirm-password' className='auth-form__label'>
@@ -60,8 +62,11 @@ function SignUpPage() {
               minLength={8}
               required
             />
+            {errors.confirmPassword && (
+              <small className='text-red-700'>{errors.confirmPassword}</small>
+            )}
           </div>
-          <div>{regStatus && regStatus}</div>
+          <div>{regStatus && <div>{regStatus}</div>}</div>
           <div className='flex flex-col justify-center'>
             <button type='submit' className='auth-form__btn'>
               Sign Up

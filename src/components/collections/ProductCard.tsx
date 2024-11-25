@@ -15,6 +15,8 @@ function ProductCard({ productData, isProductOptionsOpen }: ProductCardPropsType
   // const addProductToCart = useShoppingCartStore((state) => state.addProductToCart);
   const price = productData.product_choice[0].price ? productData.product_choice[0].price : "N/A";
   // const timestamp = dayjs().toISOString();
+  const productChoiceId = productData.product_choice[0].id;
+  console.log(productChoiceId);
   const imageProduct = ShowImageProductData2.find(
     (item) => item.product_choice_id === productData.product_choice[0].id,
   );
@@ -57,8 +59,8 @@ function ProductCard({ productData, isProductOptionsOpen }: ProductCardPropsType
         </button>
       </div>
       <div className='bg-slate-100'>
-        <Link to={"/product"}>
-          <img src={imageProduct?.url} alt='Mens 365 Heavyweight Hoodie' />
+        <Link to={`/product/${productChoiceId}`}>
+          <img src={imageProduct?.url} alt={productData.name} />
         </Link>
       </div>
       <div className='absolute bottom-0 w-full px-4 py-2 sm:py-3 xl:py-4'>

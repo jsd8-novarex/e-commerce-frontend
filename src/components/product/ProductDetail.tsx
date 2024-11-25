@@ -41,7 +41,7 @@ function ProductDetail({ findProductChoice, productChoiceData }: ProductDetailPr
       </div>
       <div className='mt-7'>
         <span>Description</span>
-        <p className='text-gray-500'>{/* <small>{product.description}</small> */}</p>
+        <p className='text-gray-500'><small>{findProductChoice?.description}</small></p>
       </div>
       <div className='mt-7 flex justify-center'>
         <button type='button' className='btn-black w-full'>

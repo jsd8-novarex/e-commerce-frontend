@@ -12,8 +12,10 @@ import PaymentPage from "./pages/PaymentPage";
 import SignInAdminPage from "./pages/SignInAdminPage";
 import AdminPage from "./pages/AdminPage";
 import AboutUsPage from "./pages/AboutUsPage";
+// import useGetTest from "./hook/useGetTest";
 
 function App() {
+  // useGetTest()
   return (
     <>
       <Routes>

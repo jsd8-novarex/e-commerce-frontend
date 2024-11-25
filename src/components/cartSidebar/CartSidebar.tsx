@@ -12,9 +12,8 @@ function CartSidebar() {
   const navigate = useNavigate();
   const { openComponents, handleScrollLock } = useScrollLockStore();
   const cart = useShoppingCartStore((state) => state.cart);
-
-  const isCartSidebarOpen = openComponents["CartSidebar"] || false;
-  const itemLength = cart?.items.length || 0;
+  const isCartSidebarOpen = openComponents["CartSidebar"] || false;  
+  const totalItems = (cart?.items ?? []).reduce((total, item) => total + item.quantity, 0);
 
   const productChoiceMap = useMemo(() => {
     const map: Record<string, { price: number; quantity: number }> = {};
@@ -50,7 +49,7 @@ function CartSidebar() {
       >
         <div className='flex items-center justify-between border-y-2 px-5 py-4'>
           <h3 className='text-xl'>
-            {itemLength === 0 ? "Your cart is empty" : `${itemLength} item(s) in your cart`}
+            {totalItems === 0 ? "Your cart is empty" : `${totalItems} item(s) in your cart`}
           </h3>
           <button
             type='button'
@@ -71,7 +70,7 @@ function CartSidebar() {
         </div>
         {/* แสดงรายการสินค้า */}
         <div className='flex flex-grow flex-col gap-y-2 overflow-auto px-4 pt-4'>
-          {itemLength === 0 ? (
+          {totalItems === 0 ? (
             <div className='flex flex-grow items-center justify-center'>
               <div className='flex flex-col items-center justify-center gap-y-8'>
                 <h2>Your cart is empty </h2>
@@ -84,7 +83,7 @@ function CartSidebar() {
             cart?.items.map((item) => <ProductInCart key={item.id} item={item} />)
           )}
         </div>
-        {itemLength > 0 && <CartSummary totalPrice={totalPrice} handleLink={handleLink} />}
+        {totalItems > 0 && <CartSummary totalPrice={totalPrice} handleLink={handleLink} />}
       </div>
     </>
   );

@@ -29,11 +29,11 @@ function useAuthentication() {
 
     if (dataForVerify.email === "earth@gamil.com" && dataForVerify.password === "12345678") {
       setAuthStatus("Successfully authenticated.");
-    } else {
-      setAuthStatus("Invalid credentials. Please try again.");
       setTimeout(() => {
         navigate("/", { replace: true });
       }, 500);
+    } else {
+      setAuthStatus("Invalid credentials. Please try again.");      
     }
     setIsProcessing(false);
   };

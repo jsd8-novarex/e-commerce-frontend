@@ -29,6 +29,7 @@ function ProductInCart({ item }: ProductInCartPropsType) {
       <div className='flex w-48 items-center'>
         <div className='flex flex-col gap-y-1'>
           <h4 className='text-md font-bold'>{productData && productData.name}</h4>
+          <p>Color: {item.selectedColor}</p>
           <p>{productChoice && isFormatPrice(productChoice.price, 0)}</p>
         </div>
       </div>

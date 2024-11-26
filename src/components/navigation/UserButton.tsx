@@ -6,7 +6,7 @@ function UserButton() {
   const toggleDropdown = () => {
     setIsOpen(!isOpen);
   };
-  
+
   return (
     <>
       <button className='indicator p-2' onClick={toggleDropdown}>
@@ -26,7 +26,7 @@ function UserButton() {
         </svg>
       </button>
       {isOpen && (
-        <ul className='absolute mt-5 right-0 w-32 bg-zinc-800 p-2 shadow-2xl'>
+        <ul className='absolute right-0 mt-5 w-32 bg-zinc-800 p-2 shadow-2xl'>
           <Link to='/profile' onClick={toggleDropdown}>
             <li className='p-2 text-white hover:bg-gray-500'>Profile</li>
           </Link>

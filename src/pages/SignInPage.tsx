@@ -3,7 +3,7 @@ import AuthenticationForm from "../components/AuthenticationForm";
 import useAuthentication from "../hook/user/useAuthentication";
 
 function SignInPage() {
-  const { isProcessing, dataForVerify,authStatus, handleInputChange, handleAuthentication } =
+  const { isProcessing, dataForVerify, authStatus, handleInputChange, handleAuthentication } =
     useAuthentication();
 
   return (
@@ -17,7 +17,7 @@ function SignInPage() {
             <input
               id='email'
               type='email'
-              name="email"
+              name='email'
               placeholder='Enter your email'
               value={dataForVerify.email}
               onChange={handleInputChange}
@@ -33,7 +33,7 @@ function SignInPage() {
             <input
               id='password'
               type='password'
-              name="password"
+              name='password'
               placeholder='Enter your password'
               value={dataForVerify.password}
               minLength={8}

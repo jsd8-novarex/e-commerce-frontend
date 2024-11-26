@@ -87,7 +87,8 @@ export const product_list: ProductDataType[] = [
         creator_id: "earth",
         last_op_id: "earth",
         tram_status: false,
-      },{
+      },
+      {
         id: "c1b9f124-45d4-4c8f-983d-2093dbe1d957",
         product_id: "ad599766-362e-480f-a1d6-23830980307f",
         sku: "T001-Oatmeal-XL",
@@ -170,7 +171,8 @@ export const product_list: ProductDataType[] = [
         creator_id: "earth",
         last_op_id: "earth",
         tram_status: false,
-      },{
+      },
+      {
         id: "e4d8b6c3-7f9a-4b5e-9c3d-f1e2d6a8b7c4",
         product_id: "ad599766-362e-480f-a1d6-23830980307f",
         sku: "T001-Oatmeal-M",
@@ -183,7 +185,8 @@ export const product_list: ProductDataType[] = [
         creator_id: "earth",
         last_op_id: "earth",
         tram_status: false,
-      },{
+      },
+      {
         id: "e4d8b6c3-7f9a-4b5e-9c3d-f1e2d6a8b7c4",
         product_id: "ad599766-362e-480f-a1d6-23830980307f",
         sku: "T001-Oatmeal-L",
@@ -196,8 +199,8 @@ export const product_list: ProductDataType[] = [
         creator_id: "earth",
         last_op_id: "earth",
         tram_status: false,
-      }
-      ,{
+      },
+      {
         id: "e4d8b6c3-7f9a-4b5e-9c3d-f1e2d6a8b7c4",
         product_id: "ad599766-362e-480f-a1d6-23830980307f",
         sku: "T001-Oatmeal-XL",
@@ -254,7 +257,7 @@ export const product_list: ProductDataType[] = [
         creator_id: "earth",
         last_op_id: "earth",
         tram_status: false,
-      }
+      },
     ],
     create_timestamp: "2024-11-10 09:45:22.123456+00",
     last_updated_timestamp: "2024-11-10 09:45:22.123456+00",
@@ -442,4 +445,4 @@ export const product_list: ProductDataType[] = [
     last_op_id: "earth",
     tram_status: false,
   },
- ];
+];

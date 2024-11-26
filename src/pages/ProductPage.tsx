@@ -19,7 +19,7 @@ function ProductPage() {
 
   return (
     <div className='grid h-full w-full gap-3 py-32 sm:grid-cols-12 sm:px-10'>
-      <ProductImages data={filterData} productChoiceId = {productChoiceId} />
+      <ProductImages data={filterData} productChoiceId={productChoiceId} />
       <ProductDetail findProductChoice={findProductChoice} productChoiceData={productChoiceData} />
     </div>
   );

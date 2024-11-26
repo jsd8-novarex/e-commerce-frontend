@@ -35,7 +35,8 @@ export const ShowCaseSectionData: ShowCaseSectionType = [
   },
   {
     name: "Athleisure Collection",
-    information: "A style that combines the comfort of workout clothing with everyday wear that can be worn for various activities with ease.",
+    information:
+      "A style that combines the comfort of workout clothing with everyday wear that can be worn for various activities with ease.",
     url: "https://images.unsplash.com/photo-1569240192190-e37f8b0010be?q=80&w=2371&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     alternate:
       "https://images.unsplash.com/photo-1692844394432-dcd7c729762e?q=80&w=1962&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
@@ -48,5 +49,5 @@ export const ShowCaseSectionData: ShowCaseSectionType = [
     alternate:
       "https://images.unsplash.com/photo-1494765803320-93c95366f4b3?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     positionImg: "",
-  }
+  },
 ];

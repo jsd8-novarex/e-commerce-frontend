@@ -12,7 +12,7 @@ function CartSidebar() {
   const navigate = useNavigate();
   const { openComponents, handleScrollLock } = useScrollLockStore();
   const cart = useShoppingCartStore((state) => state.cart);
-  const isCartSidebarOpen = openComponents["CartSidebar"] || false;  
+  const isCartSidebarOpen = openComponents["CartSidebar"] || false;
   const totalItems = (cart?.items ?? []).reduce((total, item) => total + item.quantity, 0);
 
   const productChoiceMap = useMemo(() => {

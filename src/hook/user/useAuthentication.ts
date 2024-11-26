@@ -33,7 +33,7 @@ function useAuthentication() {
         navigate("/", { replace: true });
       }, 500);
     } else {
-      setAuthStatus("Invalid credentials. Please try again.");      
+      setAuthStatus("Invalid credentials. Please try again.");
     }
     setIsProcessing(false);
   };

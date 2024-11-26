@@ -37,20 +37,26 @@ function AuthenticationForm({
           />
         </svg>
       </button>
-      <div className=' col-span-5 hidden bg-gradient-to-r from-black to-blue-900 md:block lg:col-span-7'>
+      <div className='col-span-5 hidden bg-gradient-to-r from-black to-blue-900 md:block lg:col-span-7'>
         {status === "sign-in" && (
-          <div className='mx-16 justify-center h-full flex flex-col gap-8'>
-            <h2 className='sm:text-4xl md:text-5xl lg:text-6xl text-white'>Welcome back!</h2>
-            <p className='sm:text-3xl md:text-4xl lg:text-5xl text-white'>New styles are ready for you.</p>
+          <div className='mx-16 flex h-full flex-col justify-center gap-8'>
+            <h2 className='text-white sm:text-4xl md:text-5xl lg:text-6xl'>Welcome back!</h2>
+            <p className='text-white sm:text-3xl md:text-4xl lg:text-5xl'>
+              New styles are ready for you.
+            </p>
           </div>
         )}
         {status === "sign-up" && (
-          <div className='mx-16 justify-center h-full flex flex-col gap-8'>
-            <h2 className='sm:text-4xl md:text-5xl lg:text-6xl text-white'>Join SHINING</h2>
-            <p className='sm:text-3xl md:text-4xl lg:text-5xl text-white'>and discover your style!</p>
+          <div className='mx-16 flex h-full flex-col justify-center gap-8'>
+            <h2 className='text-white sm:text-4xl md:text-5xl lg:text-6xl'>Join SHINING</h2>
+            <p className='text-white sm:text-3xl md:text-4xl lg:text-5xl'>
+              and discover your style!
+            </p>
           </div>
         )}
-        {status === "sign-in-admin" && <h2 className='sm:text-4xl md:text-5xl lg:text-6xl text-center text-white'>Welcome"</h2>}
+        {status === "sign-in-admin" && (
+          <h2 className='text-center text-white sm:text-4xl md:text-5xl lg:text-6xl'>Welcome"</h2>
+        )}
       </div>
       <div className='col-span-full grid w-full grid-rows-7 p-4 md:col-span-7 lg:col-span-5 xl:p-12'>
         <div className='row-start-2 flex flex-col items-center gap-4'>

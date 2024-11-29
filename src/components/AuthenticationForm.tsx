@@ -38,25 +38,19 @@ function AuthenticationForm({
         </svg>
       </button>
       <div className='col-span-5 hidden bg-gradient-to-r from-black to-blue-900 md:block lg:col-span-7'>
-        {status === "sign-in" && (
+        {status === "sign-in" || status === "sign-up" || status === "sign-in-admin" ? (
           <div className='mx-16 flex h-full flex-col justify-center gap-8'>
-            <h2 className='text-white sm:text-4xl md:text-5xl lg:text-6xl'>Welcome back!</h2>
+            <h2 className='text-white text-xl sm:text-3xl md:text-5xl lg:text-6xl'>
+              {status === "sign-in" && "Welcome back!"}
+              {status === "sign-up" && "Join SHINING"}
+              {status === "sign-in-admin" && "Welcome"}
+            </h2>
             <p className='text-white sm:text-3xl md:text-4xl lg:text-5xl'>
-              New styles are ready for you.
+              {status === "sign-in" && "New styles are ready for you."}
+              {status === "sign-up" && "and discover your style!"}
             </p>
           </div>
-        )}
-        {status === "sign-up" && (
-          <div className='mx-16 flex h-full flex-col justify-center gap-8'>
-            <h2 className='text-white sm:text-4xl md:text-5xl lg:text-6xl'>Join SHINING</h2>
-            <p className='text-white sm:text-3xl md:text-4xl lg:text-5xl'>
-              and discover your style!
-            </p>
-          </div>
-        )}
-        {status === "sign-in-admin" && (
-          <h2 className='text-center text-white sm:text-4xl md:text-5xl lg:text-6xl'>Welcome"</h2>
-        )}
+        ) : null}
       </div>
       <div className='col-span-full grid w-full grid-rows-7 p-4 md:col-span-7 lg:col-span-5 xl:p-12'>
         <div className='row-start-2 flex flex-col items-center gap-4'>

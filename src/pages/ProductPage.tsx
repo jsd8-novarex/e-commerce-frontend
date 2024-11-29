@@ -1,5 +1,4 @@
-import ProductImages from "../components/product/ProductImages";
-import ProductDetail from "../components/product/ProductDetail";
+import { useParams } from "react-router-dom";
 import { ShowImageProductData2 } from "../constraints/SHOWIMAGE_DATA";
 import { product_list } from "../constraints/PRODUCT_DATA_V2";
 import { useParams,useNavigate } from "react-router-dom";

@@ -1,13 +1,13 @@
 import { useState } from "react";
+import { useScrollLockStore } from "../store/scrollLock.store";
 import { product_list, ProductDataType } from "../constraints/PRODUCT_DATA_V2";
 import ScrollToTopButton from "../components/button/ScrollToTopButton";
 import ProductCard from "../components/collections/ProductCard";
 import ProductOptions from "../components/collections/ProductOptions";
-import { useScrollLockStore } from "../store/scrollLock.store";
 
 function CollectionsPage() {
-  const [selectedProduct, setSelectedProduct] = useState<ProductDataType | null>(null);
   const { openComponents, handleScrollLock } = useScrollLockStore();
+  const [selectedProduct, setSelectedProduct] = useState<ProductDataType | null>(null);
   const isProductOptionsOpen = openComponents["ProductOptions"] || false;
 
   const toggleProductOption = (product: ProductDataType) => {

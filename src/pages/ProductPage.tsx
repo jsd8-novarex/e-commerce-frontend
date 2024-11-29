@@ -1,11 +1,13 @@
 import { useParams } from "react-router-dom";
 import { ShowImageProductData2 } from "../constraints/SHOWIMAGE_DATA";
 import { product_list } from "../constraints/PRODUCT_DATA_V2";
-import ProductImages from "../components/product/ProductImages";
-import ProductDetail from "../components/product/ProductDetail";
+import { useParams,useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
 function ProductPage() {
   const { productChoiceId } = useParams<{ productChoiceId: string }>();
+  const navigate = useNavigate();
+
   const filterData = ShowImageProductData2.filter(
     (item) => item.product_choice_id === productChoiceId,
   );
@@ -16,6 +18,12 @@ function ProductPage() {
   const productChoiceData = findProductChoice?.product_choice.find(
     (choice) => choice.id === productChoiceId,
   );
+
+  useEffect(() => {
+    if (!filterData.length || !productChoiceData) {
+      navigate("*");
+    }
+  }, [filterData, productChoiceData, navigate]);
 
   return (
     <div className='grid h-full w-full gap-3 py-32 sm:grid-cols-12 sm:px-10'>

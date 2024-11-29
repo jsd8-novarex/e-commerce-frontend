@@ -8,7 +8,7 @@ export interface GetTestType {
 
 async function getTest(): AxiosReturn<GetTestType> {
   try {
-    const response = await client.get<GetTestType>("/");
+    const response = await client.get<GetTestType>("/customer");
     return [response.data, null];
   } catch (error) {
     return onHandleErrorFromAPI(error);

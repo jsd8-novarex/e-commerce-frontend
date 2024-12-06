@@ -27,7 +27,7 @@ function Footer() {
               <a className='link-hover link'>Cookie policy</a>
             </nav>
 
-            <form>
+            <form className='hidden sm:block'>
               <h6 className='footer-title text-white'>SIGN UP FOR GUCCI UPDATES</h6>
               <fieldset className='form-control w-80 text-black'>
                 <label className='label'>
@@ -93,7 +93,7 @@ function Footer() {
             </a>
           </p>
         </div>
-        <div className='mb-0 pt-7 text-center text-7xl md:text-9xl'>
+        <div className='mb-0 pt-7 text-center text-6xl md:text-9xl'>
           <span>SHINING</span>
         </div>
       </div>

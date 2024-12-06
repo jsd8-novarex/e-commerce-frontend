@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { handleInputObjectFieldChange, isPasswordValid } from "../../helpers/utils";
+import client from "../../config/axiosConfig"; // Import axios client
 
 type DataForVerifyType = {
   email: string;
@@ -30,7 +31,7 @@ function useRegistration() {
     return emailRegex.test(email);
   };
 
-  const handleRegistration = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleRegistration = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     setIsProcessing(true);
@@ -40,7 +41,7 @@ function useRegistration() {
     let valid = true;
     const newErrors: { [key: string]: string } = {};
 
-    // ตรวจสอบเงื่อนไข error
+    // Validation
     if (!isEmailValid(dataForVerify.email)) {
       newErrors.email = "Email is not valid.";
       valid = false;
@@ -55,13 +56,30 @@ function useRegistration() {
       valid = false;
     }
 
-    // แสดง error
+    // Show Errors
     if (!valid) {
       setErrors(newErrors);
       setRegStatus("Registration failed.");
-    } else {
+      setIsProcessing(false);
+      return;
+    }
+
+    // Call API
+    try {
+      const response = await client.post("/auth/register", {
+        email: dataForVerify.email,
+        password1: dataForVerify.password,
+        password2: dataForVerify.confirm_password,
+      });
+
       setRegStatus("Successfully registered.");
       setDataForVerify({ email: "", password: "", confirm_password: "" });
+
+      console.log("API Response:", response.data);
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } catch (error: any) {
+      console.error("API Error:", error.response?.data || error.message);
+      setRegStatus("Registration failed. Please try again.");
     }
 
     setIsProcessing(false);

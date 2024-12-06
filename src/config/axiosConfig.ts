@@ -5,6 +5,21 @@ const axiosApiInstance = axios.create({
   withCredentials: true,
 });
 
+// Interceptor สำหรับเพิ่ม Token ใน Header
+axiosApiInstance.interceptors.request.use(
+  (config) => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      config.headers["Authorization"] = `Bearer ${token}`;
+    }
+    return config;
+  },
+  (error) => {
+    return Promise.reject(error);
+  },
+);
+
+// Interceptor สำหรับ Response Error
 axiosApiInstance.interceptors.response.use(
   (response) => {
     console.log("Response from API:", response);
@@ -15,6 +30,5 @@ axiosApiInstance.interceptors.response.use(
     return Promise.reject(error);
   },
 );
-
 const client = axiosApiInstance;
 export default client;

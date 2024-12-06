@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { handleInputObjectFieldChange } from "../../helpers/utils";
 import { useNavigate } from "react-router-dom";
+import client from "../../config/axiosConfig";
 
 type DataForVerifyType = {
   email: string;
@@ -21,20 +22,32 @@ function useAuthentication() {
     handleInputObjectFieldChange<DataForVerifyType>(event, setDataForVerify);
   };
 
-  const handleAuthentication = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleAuthentication = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     setIsProcessing(true);
     setAuthStatus("Verifying user information...");
 
-    if (dataForVerify.email === "earth@gamil.com" && dataForVerify.password === "12345678") {
+    try {
+      const response = await client.post("/auth/login", {
+        email: dataForVerify.email,
+        password: dataForVerify.password,
+      });
+
+      const { token } = response.data; // Backend ส่ง Token กลับมา
+      localStorage.setItem("token", token);
+      localStorage.setItem("email", dataForVerify.email);
+
       setAuthStatus("Successfully authenticated.");
       setTimeout(() => {
         navigate("/", { replace: true });
       }, 500);
-    } else {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } catch (error: any) {
+      console.error("Error during login:", error.response?.data || error.message);
       setAuthStatus("Invalid credentials. Please try again.");
     }
+
     setIsProcessing(false);
   };
 

@@ -11,9 +11,25 @@ export interface Customer {
   password: string;
 }
 
-export async function getCustomerById(id: string): AxiosReturn<Customer> {
+// ดึงข้อมูล Customer โดยใช้ email
+export async function getCustomerProfile(): AxiosReturn<Customer> {
   try {
-    const response = await client.get<{ data: Customer }>(`/customer/${id}`);
+    const email = localStorage.getItem("email");
+    const token = localStorage.getItem("token");
+
+    if (!email) {
+      throw new Error("Email is missing. Please log in again.");
+    }
+
+    if (!token) {
+      throw new Error("Authentication token is missing. Please log in again.");
+    }
+
+    const response = await client.get<{ data: Customer }>(`/customer/email/${email}`, {
+      headers: {
+        Authorization: `Bearer ${token}`, // ส่ง Token ใน Header
+      },
+    });
 
     return [response.data.data, null];
   } catch (error) {

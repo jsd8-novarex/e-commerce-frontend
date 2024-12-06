@@ -93,78 +93,76 @@ function ProductOptions({ productData, productChoice }: ProductOptionPropsType) 
   return (
     <>
       {isProductOptionsOpen && (
-        <div className='fixed bottom-4 left-[2%] right-[2%] z-[12] max-h-[90vh] max-w-[90vw] overflow-auto rounded-lg bg-white p-4 shadow-lg transition-transform sm:left-auto sm:right-5 sm:max-w-md md:max-h-[600px] md:max-w-[600px]'>
+        <div className='fixed bottom-8 left-[5%] right-[2%] z-[12] max-h-[90vh] max-w-[90vw] overflow-auto bg-white p-4 shadow-lg transition-transform sm:left-auto sm:right-8 sm:max-w-md md:max-h-[600px] md:max-w-[600px]'>
           <div className='flex flex-col items-center gap-4 md:gap-6'>
             <div className='relative w-full'>
               <button
                 onClick={() => handleScrollLock("ProductOptions", false)}
-                className='absolute right-2 top-0 rounded-full bg-gray-300 p-[2px] text-gray-600 hover:bg-gray-400 hover:text-gray-800 focus:outline-none'
+                className='absolute right-2 top-0 rounded-full bg-gray-300 p-[0.5px] text-gray-600 hover:bg-gray-400 hover:text-gray-800 focus:outline-none'
                 aria-label='Close'
               >
                 ✕
               </button>
             </div>
-            <div className='flex w-full flex-col items-center gap-4 rounded-md shadow-md sm:flex-row sm:items-start'>
-              <img
-                src={imageProduct || ""}
-                alt={productData.name || "Product"}
-                className='aspect-square w-1/2 rounded-lg object-cover sm:w-1/3'
-              />
-              <div className='flex flex-col items-center sm:items-start'>
-                <h2 className='text-lg font-bold text-gray-800 md:text-xl'>
-                  {productData.name || "Product Name"}:{selectedColor}
-                </h2>
-                <p className='text-md text-gray-600 md:text-lg'>Price: {currentPrice}</p>
+            <div className='sm:flex md:flex lg:flex'>
+              <div className='flex w-full flex-col items-center gap-4 sm:flex-row sm:items-start'>
+                <img
+                  src={imageProduct || ""}
+                  alt={productData.name || "Product"}
+                  className='aspect-square w-full object-cover sm:w-full'
+                />
               </div>
-            </div>
 
-            <div className='w-full'>
-              <div className='mb-2 text-center'>
-                <p className='text-gray-700'>Colors</p>
-              </div>
-              <div className='flex flex-wrap justify-center gap-2'>
-                {availableColors.map((color) => (
+              <div className='w-full'>
+                <div className='flex flex-col items-center sm:items-start'>
+                  <h2 className='text-lg font-bold text-gray-800 md:text-xl'>
+                    {productData.name || "Product Name"} {selectedColor}
+                  </h2>
+                  <p className='text-xl text-gray-600 md:text-lg'>Price: {currentPrice}</p>
+                </div>
+                <div className='mb-2 text-center'>
+                  {/* <p className='text-gray-700'>Colors</p> */}
+                </div>
+                <div className='flex flex-wrap justify-center gap-2'>
+                  {availableColors.map((color) => (
+                    <button
+                      key={color}
+                      className={`h-8 w-8 rounded-full border-2 ${
+                        selectedColor === color ? "ring-4 ring-red-500" : ""
+                      }`}
+                      style={{ backgroundColor: color }}
+                      onClick={() => setSelectedColor(color)}
+                    ></button>
+                  ))}
+                </div>
+                <div className='mb-2 text-center'>
+                  {/* <p className='text-gray-700'>Size</p> */}
+                </div>
+                <div className='flex flex-wrap justify-center gap-2'>
+                  {availableSizes.map((size) => (
+                    <button
+                      key={size}
+                      className={`border px-4 py-2 ${
+                        selectedSize === size ? "bg-black text-white" : "bg-gray-200"
+                      }`}
+                      onClick={() => setSelectedSize(size)}
+                    >
+                      {size}
+                    </button>
+                  ))}
+                </div>
+                <div className='mt-4 flex justify-center'>
                   <button
-                    key={color}
-                    className={`h-8 w-8 rounded-full border-2 ${
-                      selectedColor === color ? "ring-4 ring-red-500" : ""
+                    className={`px-6 py-3 text-white ${
+                      isSoldOut ? "cursor-not-allowed bg-gray-400" : "bg-black hover:bg-green-600"
                     }`}
-                    style={{ backgroundColor: color }}
-                    onClick={() => setSelectedColor(color)}
-                  ></button>
-                ))}
-              </div>
-            </div>
-
-            <div className='w-full'>
-              <div className='mb-2 text-center'>
-                <p className='text-gray-700'>Size</p>
-              </div>
-              <div className='flex flex-wrap justify-center gap-2'>
-                {availableSizes.map((size) => (
-                  <button
-                    key={size}
-                    className={`rounded-lg border px-4 py-2 ${
-                      selectedSize === size ? "bg-black text-white" : "bg-gray-200"
-                    }`}
-                    onClick={() => setSelectedSize(size)}
+                    onClick={handleAddToCart}
+                    disabled={isSoldOut}
                   >
-                    {size}
+                    {isSoldOut ? "Sold Out" : "Add To Cart"}
                   </button>
-                ))}
+                </div>
               </div>
-            </div>
-
-            <div className='mt-4 flex justify-center'>
-              <button
-                className={`rounded-lg px-6 py-3 text-white ${
-                  isSoldOut ? "cursor-not-allowed bg-gray-400" : "bg-black hover:bg-green-600"
-                }`}
-                onClick={handleAddToCart}
-                disabled={isSoldOut}
-              >
-                {isSoldOut ? "Sold Out" : "Add To Cart"}
-              </button>
             </div>
           </div>
         </div>

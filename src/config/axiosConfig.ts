@@ -7,7 +7,6 @@ const axiosApiInstance = axios.create({
 
 axiosApiInstance.interceptors.response.use(
   (response) => {
-    console.log("Response from API:", response);
     return response;
   },
   (error) => {

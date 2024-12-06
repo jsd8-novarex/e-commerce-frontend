@@ -22,7 +22,6 @@ axiosApiInstance.interceptors.request.use(
 // Interceptor สำหรับ Response Error
 axiosApiInstance.interceptors.response.use(
   (response) => {
-    console.log("Response from API:", response);
     return response;
   },
   (error) => {

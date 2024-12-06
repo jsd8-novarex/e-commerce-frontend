@@ -15,8 +15,7 @@ function ProductCard({ productData, isProductOptionsOpen }: ProductCardPropsType
   // const addProductToCart = useShoppingCartStore((state) => state.addProductToCart);
   const price = productData.product_choice[0].price ? productData.product_choice[0].price : "N/A";
   // const timestamp = dayjs().toISOString();
-  const productChoiceId = productData.product_choice[0].id;
-  console.log(productChoiceId);
+  const productChoiceId = productData.product_choice[0].id
   const imageProduct = ShowImageProductData2.find(
     (item) => item.product_choice_id === productData.product_choice[0].id,
   );

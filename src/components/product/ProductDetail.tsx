@@ -66,7 +66,7 @@ function ProductDetail({ findProductChoice, productChoiceData }: ProductDetailPr
   return (
     <section className='px-4 sm:sm:col-span-4'>
       <div>
-        <h3>{findProductChoice.name || "Product Name"}:{selectedColor}</h3>
+        <h3>{findProductChoice.name || "Product Name"}-{selectedColor}</h3>
         <h3 className='my-4 text-gray-500'>${productChoiceData?.price}</h3>
       </div>
       <ul className='my-4 flex border-b-2'>

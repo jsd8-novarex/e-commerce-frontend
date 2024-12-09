@@ -1,9 +1,5 @@
 import { Link } from "react-router-dom";
-// import { v4 as uuidv4 } from "uuid";
-// import dayjs from "dayjs";
-// import useShoppingCartStore from "../../store/shoppingCart.store";
-import { ProductDataType } from "../../constraints/PRODUCT_DATA_V2";
-import { ShowImageProductData2 } from "../../constraints/SHOWIMAGE_DATA";
+import { ProductDataType } from "../../service/products/getProduct.type";
 import { isFormatPrice } from "../../helpers/utils";
 
 type ProductCardPropsType = {
@@ -12,27 +8,12 @@ type ProductCardPropsType = {
 };
 
 function ProductCard({ productData, isProductOptionsOpen }: ProductCardPropsType) {
-  // const addProductToCart = useShoppingCartStore((state) => state.addProductToCart);
-  const price = productData.product_choice[0].price ? productData.product_choice[0].price : "N/A";
-  // const timestamp = dayjs().toISOString();
-  const productChoiceId = productData.product_choice[0].id
-  const imageProduct = ShowImageProductData2.find(
-    (item) => item.product_choice_id === productData.product_choice[0].id,
-  );
-
-  // const handleAddToCart = () => {
-  //   const newProduct = {
-  //     id: uuidv4(),
-  //     cart_id: "",
-  //     product_choice_id: productData.product_choice[0].id,
-  //     quantity: 1,
-  //     create_timestamp: timestamp,
-  //     last_updated_timestamp: timestamp,
-  //     creator_id: "admin",
-  //     last_op_id: "admin",
-  //   };
-  //   addProductToCart(newProduct);
-  // };
+  // เลือกราคาใน product_choice จากข้อมูล API
+  const price = productData.product_choices[0]?.price ? productData.product_choices[0].price : "N/A";  
+  
+  // เลือก product_choice_id และรูปภาพจาก product_choices
+  const productChoiceId = productData.product_choices[0]?.id;
+  const imageProduct = productData.product_choices[0]?.images[0]?.url; // เลือกรูปภาพแรกจาก images  
 
   return (
     <div className='relative overflow-hidden rounded-ee-xl rounded-ss-xl drop-shadow-xl'>
@@ -59,7 +40,8 @@ function ProductCard({ productData, isProductOptionsOpen }: ProductCardPropsType
       </div>
       <div className='bg-slate-100'>
         <Link to={`/product/${productChoiceId}`}>
-          <img src={imageProduct?.url} alt={productData.name} />
+          {/* แสดงภาพจาก product_choices */}
+          <img src={imageProduct} alt={productData.name} />
         </Link>
       </div>
       <div className='absolute bottom-0 w-full px-4 py-2 sm:py-3 xl:py-4'>

@@ -1,10 +1,26 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
 
 function UserButton() {
   const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
+  const navigate = useNavigate();
+
   const toggleDropdown = () => {
     setIsOpen(!isOpen);
+  };
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    setIsLoggedIn(!!token);
+  }, []);
+
+  const handleSignOut = () => {
+    localStorage.removeItem("email");
+    localStorage.removeItem("token");
+    setIsLoggedIn(false);
+    setIsOpen(false);
+    navigate("/sign-in");
   };
 
   return (
@@ -27,15 +43,33 @@ function UserButton() {
       </button>
       {isOpen && (
         <ul className='absolute right-0 mt-5 w-32 bg-zinc-800 p-2 shadow-2xl'>
-          <Link to='/profile' onClick={toggleDropdown}>
-            <li className='p-2 text-white hover:bg-gray-500'>Profile</li>
-          </Link>
-
-          <Link to='/transaction' onClick={toggleDropdown}>
-            <li className='p-2 text-white hover:bg-gray-500'>Order</li>
-          </Link>
-
-          <li className='p-2 text-white hover:bg-gray-500'>Log out</li>
+          {isLoggedIn ? (
+            <>
+              <Link to='/profile' onClick={toggleDropdown}>
+                <li className='p-2 text-white hover:bg-gray-500'>Profile</li>
+              </Link>
+              <Link to='/transaction' onClick={toggleDropdown}>
+                <li className='p-2 text-white hover:bg-gray-500'>Order</li>
+              </Link>
+              <li
+                className='cursor-pointer p-2 text-white hover:bg-gray-500'
+                onClick={handleSignOut}
+              >
+                Sign Out
+              </li>
+            </>
+          ) : (
+            <Link to='/sign-in' onClick={toggleDropdown}>
+              <li
+                className='cursor-pointer p-2 text-white hover:bg-gray-500'
+                onClick={() => {
+                  setIsOpen(false);
+                }}
+              >
+                Sign In
+              </li>
+            </Link>
+          )}
         </ul>
       )}
     </>

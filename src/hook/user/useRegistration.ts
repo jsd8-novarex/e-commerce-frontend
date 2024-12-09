@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { handleInputObjectFieldChange, isPasswordValid } from "../../helpers/utils";
 import client from "../../config/axiosConfig"; // Import axios client
+import { useNavigate } from "react-router-dom";
 
 type DataForVerifyType = {
   email: string;
@@ -9,6 +10,7 @@ type DataForVerifyType = {
 };
 
 function useRegistration() {
+  const navigate = useNavigate();
   const [regStatus, setRegStatus] = useState<string>("");
   const [errors, setErrors] = useState<{ [key: string]: string }>({
     email: "",
@@ -73,6 +75,10 @@ function useRegistration() {
       });
 
       setRegStatus("Successfully registered.");
+      setTimeout(() => {
+        navigate("/sign-in", { replace: true });
+      }, 500);
+
       setDataForVerify({ email: "", password: "", confirm_password: "" });
 
       console.log("API Response:", response.data);

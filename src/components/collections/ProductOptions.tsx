@@ -89,12 +89,12 @@ function ProductOptions({ productData }: ProductOptionPropsType) {
   return (
     <>
       {isProductOptionsOpen && (
-        <div className='fixed bottom-8 left-[5%] right-[2%] z-[12] max-h-[90vh] max-w-[90vw] overflow-auto bg-white p-4 shadow-lg transition-transform sm:left-auto sm:right-8 sm:max-w-md md:max-h-[600px] md:max-w-[600px]'>
+        <div className='fixed bottom-8 left-[5%] right-[2%] z-[12] max-h-[90vh] max-w-[90vw] overflow-auto bg-white p-4 shadow-lg transition-transform sm:left-auto sm:max-w-md md:max-w-[800px]'>
           <div className='flex flex-col items-center gap-4 md:gap-6'>
             <div className='relative w-full'>
               <button
                 onClick={() => handleScrollLock("ProductOptions", false)}
-                className='absolute right-2 top-0 rounded-full bg-gray-300 p-[0.5px] text-gray-600 hover:bg-gray-400 hover:text-gray-800 focus:outline-none'
+                className='top- absolute right-2 h-6 w-6 rounded-full bg-gray-300 text-gray-600 hover:bg-gray-400 hover:text-gray-800 focus:outline-none'
                 aria-label='Close'
               >
                 ✕
@@ -109,12 +109,16 @@ function ProductOptions({ productData }: ProductOptionPropsType) {
                 />
               </div>
 
-              <div className='w-full'>
-                <div className='flex flex-col items-center sm:items-start'>
-                  <h2 className='text-lg font-bold text-gray-800 md:text-xl'>
-                    {productData.name || "Product Name"} {selectedColor}
-                  </h2>
-                  <p className='text-xl text-gray-600 md:text-lg'>Price: {currentPrice}</p>
+              <div className='flex w-full flex-col gap-y-4'>
+                <div className='flex flex-col items-center pb-4 sm:items-start'>
+                  <div className='pb-4'>
+                    <h2 className='text-lg font-bold text-gray-800 md:text-xl'>
+                      {productData.name || "Product Name"} {selectedColor}
+                    </h2>
+                  </div>
+                  <div>
+                    <p className='text-xl text-gray-600 md:text-xl'>Price: {currentPrice}</p>
+                  </div>
                 </div>
                 <div className='mb-2 text-center'>
                   {/* <p className='text-gray-700'>Colors</p> */}

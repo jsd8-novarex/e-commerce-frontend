@@ -1,17 +1,16 @@
 import { useState, useEffect } from "react";
 import { useScrollLockStore } from "../../store/scrollLock.store";
 import useShoppingCartStore from "../../store/shoppingCart.store";
-import { ProductDataType, ProductChoiceType } from "../../constraints/PRODUCT_DATA_V2";
-import { ShowImageProductData2 } from "../../constraints/SHOWIMAGE_DATA";
+import { ProductDataType, ProductChoiceType } from "../../service/products/getProduct.type";
 import { v4 as uuidv4 } from "uuid";
 import dayjs from "dayjs";
 
 type ProductOptionPropsType = {
   productData: ProductDataType | null;
-  productChoice: ProductChoiceType | null;
+  productChoice: ProductChoiceType | null;  
 };
 
-function ProductOptions({ productData, productChoice }: ProductOptionPropsType) {
+function ProductOptions({ productData }: ProductOptionPropsType) {
   const { openComponents, handleScrollLock } = useScrollLockStore();
   const isProductOptionsOpen = openComponents["ProductOptions"] || false;
 
@@ -24,29 +23,26 @@ function ProductOptions({ productData, productChoice }: ProductOptionPropsType) 
   const addProductToCart = useShoppingCartStore((state) => state.addProductToCart);
 
   useEffect(() => {
-    if (productData && productData.product_choice.length > 0) {
-      const defaultChoice = productData.product_choice[0];
+    if (productData && productData.product_choices.length > 0) {
+      const defaultChoice = productData.product_choices[0];
       setSelectedColor(defaultChoice.color);
       setSelectedSize(defaultChoice.size);
       setImageProduct(
-        ShowImageProductData2.find((item) => item.product_choice_id === defaultChoice.id)?.url ||
-          null,
+        defaultChoice.images.length > 0 ? defaultChoice.images[0].url : null
       );
       setCurrentPrice(defaultChoice.price || "N/A");
-
       setIsSoldOut(defaultChoice.quantity === 0);
     }
-  }, [productData, productChoice]);
+  }, [productData]);
 
   useEffect(() => {
     if (selectedColor && selectedSize && productData) {
-      const matchingChoice = productData.product_choice.find(
+      const matchingChoice = productData.product_choices.find(
         (choice) => choice.color === selectedColor && choice.size === selectedSize,
       );
       if (matchingChoice) {
         setImageProduct(
-          ShowImageProductData2.find((item) => item.product_choice_id === matchingChoice.id)?.url ||
-            null,
+          matchingChoice.images.length > 0 ? matchingChoice.images[0].url : null
         );
         setCurrentPrice(matchingChoice.price || "N/A");
         setIsSoldOut(matchingChoice.quantity === 0);
@@ -57,11 +53,11 @@ function ProductOptions({ productData, productChoice }: ProductOptionPropsType) 
   const handleAddToCart = () => {
     if (!selectedColor || !selectedSize || !productData || isSoldOut) return;
 
-    const matchingChoice = productData.product_choice.find(
+    const matchingChoice = productData.product_choices.find(
       (choice) => choice.color === selectedColor && choice.size === selectedSize,
     );
 
-    if (matchingChoice) {
+    if (matchingChoice && matchingChoice.id) {
       const timestamp = dayjs().toISOString();
       const newProduct = {
         id: uuidv4(),
@@ -72,22 +68,22 @@ function ProductOptions({ productData, productChoice }: ProductOptionPropsType) 
         last_updated_timestamp: timestamp,
         creator_id: "admin",
         last_op_id: "admin",
-        selectedColor,
+        selectedColor: matchingChoice.color,
       };
       addProductToCart(newProduct);
       handleScrollLock("ProductOptions", false);
     }
   };
 
-  if (!productData || productData.product_choice.length === 0) {
+  if (!productData || productData.product_choices.length === 0) {
     return null;
   }
 
   const availableColors = Array.from(
-    new Set(productData.product_choice.map((choice) => choice.color)),
+    new Set(productData.product_choices.map((choice) => choice.color)),
   );
   const availableSizes = Array.from(
-    new Set(productData.product_choice.map((choice) => choice.size)),
+    new Set(productData.product_choices.map((choice) => choice.size)),
   );
 
   return (

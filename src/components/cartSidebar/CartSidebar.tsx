@@ -1,34 +1,22 @@
-import { useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 import clsx from "clsx";
-import useShoppingCartStore from "../../store/shoppingCart.store";
 import { useScrollLockStore } from "../../store/scrollLock.store";
-import { product_list } from "../../constraints/PRODUCT_DATA_V2";
-import ProductInCart from "./ProductInCart";
-import Backdrop from "../Backdrop";
-import CartSummary from "./CartSummary";
+import usePostCurrentCart from "../../hook/cart/usePostCurrentCart";
+import ProductInCartMemo from "./ProductInCart";
+import BackdropMemo from "../Backdrop";
+import CartSummaryMemo from "./CartSummary";
 
 function CartSidebar() {
   const navigate = useNavigate();
+  const customerId = "674dd487b3b919f3dfe2d47d";
+  const { data: cartData } = usePostCurrentCart(customerId);
   const { openComponents, handleScrollLock } = useScrollLockStore();
-  const cart = useShoppingCartStore((state) => state.cart);
+
+  // const cart = useShoppingCartStore((state) => state.cart);
   const isCartSidebarOpen = openComponents["CartSidebar"] || false;
-  const totalItems = (cart?.items ?? []).reduce((total, item) => total + item.quantity, 0);
-
-  const productChoiceMap = useMemo(() => {
-    const map: Record<string, { price: number; quantity: number }> = {};
-    product_list.forEach((product) => {
-      product.product_choice.forEach((choice) => {
-        map[choice.id] = { price: choice.price, quantity: choice.quantity };
-      });
-    });
-    return map;
-  }, []);
-
-  const totalPrice = cart?.items.reduce((sum, item) => {
-    const productChoice = productChoiceMap[item.product_choice_id];
-    return sum + productChoice.price * item.quantity;
-  }, 0);
+  const totalPrice = cartData?.cart.total_price || 0;
+  const cartItemLength =
+    cartData?.cart?.cart_item.reduce((total, item) => total + item.quantity, 0) || 0;
 
   const handleLink = (path: string) => {
     handleScrollLock("CartSidebar", false);
@@ -37,7 +25,11 @@ function CartSidebar() {
 
   return (
     <>
-      <Backdrop isPageScrollLocked={isCartSidebarOpen} handleScrollLock={handleScrollLock} />
+      <BackdropMemo
+        name='CartSidebar'
+        isPageScrollLocked={isCartSidebarOpen}
+        handleScrollLock={handleScrollLock}
+      />
       <div
         className={clsx(
           "fixed right-0 top-0 z-[12] flex h-full w-full flex-col bg-white transition-all duration-300 sm:w-[520px]",
@@ -49,7 +41,7 @@ function CartSidebar() {
       >
         <div className='flex items-center justify-between border-y-2 px-5 py-4'>
           <h3 className='text-xl'>
-            {totalItems === 0 ? "Your cart is empty" : `${totalItems} item(s) in your cart`}
+            {cartItemLength === 0 ? "Your cart is empty" : `${cartItemLength} item(s) in your cart`}
           </h3>
           <button
             type='button'
@@ -70,7 +62,7 @@ function CartSidebar() {
         </div>
         {/* แสดงรายการสินค้า */}
         <div className='flex flex-grow flex-col gap-y-2 overflow-auto px-4 pt-4'>
-          {totalItems === 0 ? (
+          {totalPrice === 0 ? (
             <div className='flex flex-grow items-center justify-center'>
               <div className='flex flex-col items-center justify-center gap-y-8'>
                 <h2>Your cart is empty </h2>
@@ -80,10 +72,11 @@ function CartSidebar() {
               </div>
             </div>
           ) : (
-            cart?.items.map((item) => <ProductInCart key={item.id} item={item} />)
+            cartData &&
+            cartData.cart.cart_item.map((item) => <ProductInCartMemo key={item.id} item={item} />)
           )}
         </div>
-        {totalItems > 0 && <CartSummary totalPrice={totalPrice} handleLink={handleLink} />}
+        {totalPrice > 0 && <CartSummaryMemo totalPrice={totalPrice} handleLink={handleLink} />}
       </div>
     </>
   );

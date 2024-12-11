@@ -1,15 +1,21 @@
-import { useEffect, useState } from "react";
-import useShoppingCartStore, { CartProductItemType } from "../../store/shoppingCart.store";
-import { ProductChoiceType } from "../../constraints/PRODUCT_DATA_V2";
+import { memo, useEffect, useState } from "react";
 import InputNumber from "../input/InputNumber";
+import { postCurrentCartStore } from "../../store/cart/postCurrentCart.store";
+import { removeItemFromCartStore } from "../../store/cart/removeItemFromCart.store";
+import { updateItemQuantityStore } from "../../store/cart/updateItemQuantity.store";
+import { ProductChoiceType } from "../../service/products/getProduct.type";
+import { CartItemType } from "../../service/cart/cart.type";
 
 type ProductInCartPropsType = {
-  item: CartProductItemType;
+  item: CartItemType;
   productChoice: ProductChoiceType | undefined;
 };
 
 function CartItemActions({ item, productChoice }: ProductInCartPropsType) {
-  const { removeProductFromCart, updateProductQuantity } = useShoppingCartStore();
+  const customerId = "674dd487b3b919f3dfe2d47d";
+  const { removeItem } = removeItemFromCartStore();
+  const { updateQuantity } = updateItemQuantityStore();
+  const { fetchCurrentCartData } = postCurrentCartStore();
   const [inputValue, setInputValue] = useState<string>(item.quantity.toString());
 
   useEffect(() => {
@@ -20,7 +26,7 @@ function CartItemActions({ item, productChoice }: ProductInCartPropsType) {
     setInputValue(event.target.value);
   };
 
-  const handleBlur = () => {
+  const handleBlur = async () => {
     let newQuantity = parseInt(inputValue, 10);
 
     if (!newQuantity || newQuantity < 1) {
@@ -31,7 +37,13 @@ function CartItemActions({ item, productChoice }: ProductInCartPropsType) {
     }
 
     setInputValue(newQuantity.toString());
-    updateProductQuantity(item.product_choice_id, newQuantity);
+    await updateQuantity({ customerId, productChoiceId: item.product_choice_id, quantity: newQuantity });
+    await fetchCurrentCartData(customerId)
+  };
+
+  const handleRemove = async () => {
+    await removeItem({ customerId, productChoiceId: item.product_choice_id });    
+    await fetchCurrentCartData(customerId)
   };
 
   return (
@@ -43,9 +55,10 @@ function CartItemActions({ item, productChoice }: ProductInCartPropsType) {
         onChange={handleQuantityChange}
         onBlur={handleBlur}
       />
-      <button onClick={() => removeProductFromCart(item.product_choice_id)}>Remove</button>
+      <button onClick={handleRemove}>Remove</button>
     </div>
   );
 }
 
-export default CartItemActions;
+const CartItemActionsMemo = memo(CartItemActions)
+export default CartItemActionsMemo;

@@ -1,4 +1,5 @@
 export interface ProductType {
+  length: number;
   status: string;
   products: ProductDataType[];
 }
@@ -19,7 +20,7 @@ export interface ProductDataType {
 }
 
 export interface ProductChoiceType {
-  id?: string;
+  _id: string;
   color: string;
   size: string;
   price: number;

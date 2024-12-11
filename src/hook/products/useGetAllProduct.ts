@@ -2,12 +2,12 @@ import { useEffect } from "react";
 import { useGetAllProductStore } from "../../store/products/getAllProduct.store";
 
 function useGetAllProduct(filter: { gender?: string }) {
-  const { data, error, fetchProductsData } = useGetAllProductStore();
+  const { data, error, isLoading, fetchProductsData } = useGetAllProductStore();
   useEffect(() => {
     fetchProductsData(filter);
   }, [fetchProductsData, filter]);  
 
-  return { data, error };
+  return { data, error, isLoading };
 }
 
 export default useGetAllProduct;

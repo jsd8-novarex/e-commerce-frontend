@@ -5,7 +5,7 @@ function useGetAllProduct(filter: { gender?: string }) {
   const { data, error, fetchProductsData } = useGetAllProductStore();
   useEffect(() => {
     fetchProductsData(filter);
-  }, [fetchProductsData, filter]);  
+  }, [fetchProductsData, filter]);
 
   return { data, error };
 }

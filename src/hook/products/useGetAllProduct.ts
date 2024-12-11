@@ -8,7 +8,7 @@ function useGetAllProduct(filter: string) {
     fetchProductsData(filter);
   }, [fetchProductsData, filter]);
 
-  return { data, error };
+  return { data, error, isLoading };
 }
 
 export default useGetAllProduct;

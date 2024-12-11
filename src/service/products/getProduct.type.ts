@@ -1,4 +1,5 @@
 export interface ProductType {
+  length: number;
   status: string;
   products: ProductDataType[];
 }

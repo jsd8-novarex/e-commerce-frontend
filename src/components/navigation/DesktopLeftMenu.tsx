@@ -8,7 +8,7 @@ function DesktopLeftMenu() {
         .filter((item) => item.showOnDesktop)
         .map((item) => (
           <li key={item.order}>
-            <NavLink to={`${item.path}?gender=${item.name.toUpperCase()}`} className='p-2 uppercase text-white'>
+            <NavLink to={`${item.path}?gender=${item.name.toLowerCase()}`} className='p-2 uppercase text-white'>
               {item.name}
             </NavLink>
           </li>

@@ -57,12 +57,12 @@ function ProductOptions({ productData }: ProductOptionPropsType) {
       (choice) => choice.color === selectedColor && choice.size === selectedSize,
     );
 
-    if (matchingChoice && matchingChoice.id) {
+    if (matchingChoice && matchingChoice._id) {
       const timestamp = dayjs().toISOString();
       const newProduct = {
         id: uuidv4(),
         cart_id: "",
-        product_choice_id: matchingChoice.id,
+        product_choice_id: matchingChoice._id,
         quantity: 1,
         create_timestamp: timestamp,
         last_updated_timestamp: timestamp,

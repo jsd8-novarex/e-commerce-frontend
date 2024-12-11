@@ -1,10 +1,13 @@
+import usePostCurrentCart from "../../hook/cart/usePostCurrentCart";
 import { useScrollLockStore } from "../../store/scrollLock.store";
-import useShoppingCartStore from "../../store/shoppingCart.store";
 
 function CartButton() {
+  const customerId = "674dd487b3b919f3dfe2d47d";
+  const { data: cartData } = usePostCurrentCart(customerId);
   const handleScrollLock = useScrollLockStore((state) => state.handleScrollLock);
-  const cart = useShoppingCartStore((state) => state.cart);
-  const totalItems = cart?.items?.reduce((total, item) => total + item.quantity, 0) || 0;
+
+  const cartItemLength =
+    cartData?.cart?.cart_item.reduce((total, item) => total + item.quantity, 0) || 0;
 
   return (
     <button
@@ -12,9 +15,9 @@ function CartButton() {
       className='indicator p-2'
       onClick={() => handleScrollLock("CartSidebar", true)}
     >
-      {totalItems > 0 && (
+      {cartItemLength > 0 && (
         <span className='absolute left-5 top-0.5 rounded-full bg-red-700 px-1.5 py-0.5 text-[0.57rem] text-white'>
-          {totalItems > 99 ? "99+" : totalItems}
+          {cartItemLength > 99 ? "99+" : cartItemLength}
         </span>
       )}
       <svg

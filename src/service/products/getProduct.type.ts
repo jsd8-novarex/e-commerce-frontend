@@ -19,7 +19,7 @@ export interface ProductDataType {
 }
 
 export interface ProductChoiceType {
-  id?: string;
+  _id: string;
   color: string;
   size: string;
   price: number;

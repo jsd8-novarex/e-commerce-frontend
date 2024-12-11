@@ -9,7 +9,7 @@ import { useLocation } from "react-router-dom";
 
 function CollectionsPage() {
   const { search } = useLocation();  // ใช้เพื่อดึง query parameters จาก URL
-  const [filter, setFilter] = useState<{ gender?: string }>({});  // เก็บตัวกรอง
+  const [filter, setFilter] = useState<string>('');  // เก็บตัวกรอง
   const { data, error } = useGetAllProduct(filter);  
   const { openComponents, handleScrollLock } = useScrollLockStore();
   const [selectedProduct, setSelectedProduct] = useState<ProductDataType | null>(null);
@@ -19,7 +19,7 @@ function CollectionsPage() {
     const urlParams = new URLSearchParams(search);  // ดึงค่า query parameter
     const genderParam = urlParams.get("gender");  // รับค่าพารามิเตอร์ gender จาก URL
     if (genderParam) {
-      setFilter({ gender: genderParam });  // ตั้งค่าตัวกรองตามพารามิเตอร์ที่รับมา
+      setFilter(genderParam);  // ตั้งค่าตัวกรองตามพารามิเตอร์ที่รับมา
     }
   }, [search]);
   

@@ -1,9 +1,10 @@
 import usePostCurrentCart from "../../hook/cart/usePostCurrentCart";
+import { useCustomerStore } from "../../store/customers/customerStore";
 import { useScrollLockStore } from "../../store/scrollLock.store";
 
 function CartButton() {
-  const customerId = "674dd487b3b919f3dfe2d47d";
-  const { data: cartData } = usePostCurrentCart(customerId);
+  const { customer } = useCustomerStore();
+  const { data: cartData } = usePostCurrentCart(customer ? customer._id : "");
   const handleScrollLock = useScrollLockStore((state) => state.handleScrollLock);
 
   const cartItemLength =

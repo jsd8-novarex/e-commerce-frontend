@@ -7,6 +7,7 @@ interface PostCurrentCartStateType {
   error: string | null;
   loading: boolean;
   fetchCurrentCartData: (customerId: string) => Promise<void>;
+  removeData: () => void;
 }
 
 export const postCurrentCartStore = create<PostCurrentCartStateType>((set) => ({
@@ -20,7 +21,10 @@ export const postCurrentCartStore = create<PostCurrentCartStateType>((set) => ({
     if (!customerId) {
       set({ data: null, error: error, loading: false });
     }
-    
+
     set({ data: response, error: error, loading: false });
   },
+  removeData: () => {
+    set({data: null, error: null, loading: false})
+  }
 }));

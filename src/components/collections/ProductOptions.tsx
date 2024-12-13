@@ -17,6 +17,8 @@ function ProductOptions({ productData }: ProductOptionPropsType) {
   const { addToCart } = addItemToCartStore();
   const { fetchCurrentCartData } = postCurrentCartStore();
   const { openComponents, handleScrollLock } = useScrollLockStore();
+
+  const customerId = customer ? customer._id : "";
   const isProductOptionsOpen = openComponents["ProductOptions"] || false;
   const navigate = useNavigate();
 
@@ -49,8 +51,8 @@ function ProductOptions({ productData }: ProductOptionPropsType) {
     [productData],
   );
 
-  const handleAddToCart = async () => {    
-    const token = localStorage.getItem("token");    
+  const handleAddToCart = async () => {
+    const token = localStorage.getItem("token");
     if (!token) {
       navigate("/sign-in");
       return;

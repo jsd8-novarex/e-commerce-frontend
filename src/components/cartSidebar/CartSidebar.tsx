@@ -5,11 +5,12 @@ import usePostCurrentCart from "../../hook/cart/usePostCurrentCart";
 import ProductInCartMemo from "./ProductInCart";
 import BackdropMemo from "../Backdrop";
 import CartSummaryMemo from "./CartSummary";
+import { useCustomerStore } from "../../store/customers/customerStore";
 
 function CartSidebar() {
   const navigate = useNavigate();
-  const customerId = "674dd487b3b919f3dfe2d47d";
-  const { data: cartData } = usePostCurrentCart(customerId);
+  const { customer } = useCustomerStore();
+  const { data: cartData } = usePostCurrentCart(customer ? customer._id : "");
   const { openComponents, handleScrollLock } = useScrollLockStore();
 
   // const cart = useShoppingCartStore((state) => state.cart);

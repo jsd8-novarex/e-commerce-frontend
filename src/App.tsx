@@ -12,6 +12,7 @@ import PaymentPage from "./pages/PaymentPage";
 import SignInAdminPage from "./pages/SignInAdminPage";
 import AdminPage from "./pages/AdminPage";
 import AboutUsPage from "./pages/AboutUsPage";
+import VerifyPaymentPage from "./pages/VerifyPaymentPage";
 // import useGetTest from "./hook/useGetTest";
 
 function App() {
@@ -27,6 +28,7 @@ function App() {
           <Route path='transaction' element={<TransactionPage />} caseSensitive />
           <Route path='payment' element={<PaymentPage />} caseSensitive />
           <Route path='about' element={<AboutUsPage />} caseSensitive />
+          <Route path='verify' element={<VerifyPaymentPage />} caseSensitive />
         </Route>
         <Route path='sign-in' element={<SignInPage />} caseSensitive />
         <Route path='sign-up' element={<SignUpPage />} caseSensitive />

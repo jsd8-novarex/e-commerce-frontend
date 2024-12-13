@@ -5,6 +5,7 @@ import { removeItemFromCartStore } from "../../store/cart/removeItemFromCart.sto
 import { updateItemQuantityStore } from "../../store/cart/updateItemQuantity.store";
 import { ProductChoiceType } from "../../service/products/getProduct.type";
 import { CartItemType } from "../../service/cart/cart.type";
+import { useCustomerStore } from "../../store/customers/customerStore";
 
 type ProductInCartPropsType = {
   item: CartItemType;
@@ -12,12 +13,13 @@ type ProductInCartPropsType = {
 };
 
 function CartItemActions({ item, productChoice }: ProductInCartPropsType) {
-  const customerId = "674dd487b3b919f3dfe2d47d";
+  const { customer } = useCustomerStore();
   const { removeItem } = removeItemFromCartStore();
   const { updateQuantity } = updateItemQuantityStore();
   const { fetchCurrentCartData } = postCurrentCartStore();
   const [inputValue, setInputValue] = useState<string>(item.quantity.toString());
 
+  const customerId = customer ? customer._id : "";
   useEffect(() => {
     setInputValue(item.quantity.toString());
   }, [item.quantity]);
@@ -37,13 +39,17 @@ function CartItemActions({ item, productChoice }: ProductInCartPropsType) {
     }
 
     setInputValue(newQuantity.toString());
-    await updateQuantity({ customerId, productChoiceId: item.product_choice_id, quantity: newQuantity });
-    await fetchCurrentCartData(customerId)
+    await updateQuantity({
+      customerId,
+      productChoiceId: item.product_choice_id,
+      quantity: newQuantity,
+    });
+    await fetchCurrentCartData(customerId);
   };
 
   const handleRemove = async () => {
-    await removeItem({ customerId, productChoiceId: item.product_choice_id });    
-    await fetchCurrentCartData(customerId)
+    await removeItem({ customerId, productChoiceId: item.product_choice_id });
+    await fetchCurrentCartData(customerId);
   };
 
   return (
@@ -60,5 +66,5 @@ function CartItemActions({ item, productChoice }: ProductInCartPropsType) {
   );
 }
 
-const CartItemActionsMemo = memo(CartItemActions)
+const CartItemActionsMemo = memo(CartItemActions);
 export default CartItemActionsMemo;

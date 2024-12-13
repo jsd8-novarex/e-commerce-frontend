@@ -3,6 +3,7 @@ import { useScrollLockStore } from "../../store/scrollLock.store";
 import { postCurrentCartStore } from "../../store/cart/postCurrentCart.store";
 import { addItemToCartStore } from "../../store/cart/addItemToCart.store";
 import { ProductDataType, ProductChoiceType } from "../../service/products/getProduct.type";
+import { useCustomerStore } from "../../store/customers/customerStore";
 
 type ProductOptionPropsType = {
   productData: ProductDataType | null;
@@ -10,10 +11,12 @@ type ProductOptionPropsType = {
 };
 
 function ProductOptions({ productData }: ProductOptionPropsType) {
-  const customerId = "674dd487b3b919f3dfe2d47d";
+  const { customer } = useCustomerStore();
   const { addToCart } = addItemToCartStore();
   const { fetchCurrentCartData } = postCurrentCartStore();
   const { openComponents, handleScrollLock } = useScrollLockStore();
+
+  const customerId = customer ? customer._id : "";
   const isProductOptionsOpen = openComponents["ProductOptions"] || false;
 
   const [selectedChoice, setSelectedChoice] = useState<ProductChoiceType | null>(null);

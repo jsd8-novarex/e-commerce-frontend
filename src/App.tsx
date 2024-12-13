@@ -15,10 +15,10 @@ import PaymentPage from "./pages/PaymentPage";
 import SignInAdminPage from "./pages/SignInAdminPage";
 import AdminPage from "./pages/AdminPage";
 import AboutUsPage from "./pages/AboutUsPage";
-// import useGetTest from "./hook/useGetTest";
+import VerifyPaymentPage from "./pages/VerifyPaymentPage";
 
 function App() {
-  const { fetchCustomerProfile} = useCustomerProfile();
+  const { fetchCustomerProfile } = useCustomerProfile();
   const secret = localStorage.getItem("token");
   const isMounted = useRef<boolean>(true);
 
@@ -29,7 +29,6 @@ function App() {
       } else {
         throw new Error(" Invalid secret");
       }
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
     } catch (error) {
       console.error("Error parsing secret or fetching register:", error);
     }
@@ -44,7 +43,7 @@ function App() {
       isMounted.current = false;
     };
   }, [getCustomer, secret]);
-  
+
   return (
     <>
       <Routes>
@@ -53,11 +52,12 @@ function App() {
           <Route path='about' element={<AboutUsPage />} caseSensitive />
           <Route path='/product/:productChoiceId' element={<ProductPage />} caseSensitive />
           <Route path='collections' element={<CollectionsPage />} caseSensitive />
-          <Route path='profile' element={<ProfilePage />} caseSensitive />
-          <Route path='transaction' element={<TransactionPage />} caseSensitive />
-          <Route path='payment' element={<PaymentPage />} caseSensitive />
-          <Route path='about' element={<AboutUsPage />} caseSensitive />
-          <Route path='verify' element={<VerifyPaymentPage />} caseSensitive />
+          <Route element={<PrivateRoute />}>
+            <Route path='profile' element={<ProfilePage />} caseSensitive />
+            <Route path='payment' element={<PaymentPage />} caseSensitive />
+            <Route path='transaction' element={<TransactionPage />} caseSensitive />
+            <Route path='verify' element={<VerifyPaymentPage />} caseSensitive />
+          </Route>
         </Route>
         <Route path='sign-in' element={<SignInPage />} caseSensitive />
         <Route path='sign-up' element={<SignUpPage />} caseSensitive />

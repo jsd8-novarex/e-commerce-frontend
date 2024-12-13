@@ -30,5 +30,5 @@ function CartSummary({ totalPrice, handleLink }: CartSummaryPropsType) {
   );
 }
 
-const CartSummaryMemo = memo(CartSummary)
+const CartSummaryMemo = memo(CartSummary);
 export default CartSummaryMemo;

@@ -1,7 +1,7 @@
-import React from "react";
 import EditButton from "../../button/EditButton";
 import { profileData } from "../../../constraints/PROFILE_DATA";
-function OrederHistory() {
+
+function OrderHistory() {
   return (
     <>
       <div className='h-[400px] bg-[#fdfaf5] p-8 shadow-md md:w-[540px] lg:w-[700px] xl:w-[900px]'>
@@ -36,4 +36,4 @@ function OrederHistory() {
   );
 }
 
-export default OrederHistory;
+export default OrderHistory;

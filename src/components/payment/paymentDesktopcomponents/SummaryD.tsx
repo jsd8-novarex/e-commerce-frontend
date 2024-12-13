@@ -15,6 +15,7 @@ const SummaryD: React.FC<SummaryDProps> = ({ toggleSummary, isSummaryVisible, is
   const { customer } = useCustomerStore();
   const { data: cartData } = usePostCurrentCart(customer ? customer._id : "");
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const items = cartData?.cart?.cart_item || [];
 
   const totalPrice = useMemo(() => {

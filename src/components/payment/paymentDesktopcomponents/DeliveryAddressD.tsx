@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useCustomerProfile } from "../../../hook/customers/useCustomerHooks";
 import { useFetchAddresses } from "../../../hook/customers/UseCustomerAddressHooks";
 

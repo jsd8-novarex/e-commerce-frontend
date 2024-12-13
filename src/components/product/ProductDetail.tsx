@@ -6,6 +6,7 @@ import { postCurrentCartStore } from "../../store/cart/postCurrentCart.store";
 import { ProductChoiceType, ProductDataType } from "../../service/products/getProduct.type";
 import { SelectedOptionType } from "../../pages/ProductPage";
 import { useNavigate } from "react-router-dom";
+import { isFormatPrice } from "../../helpers/utils";
 
 type ProductDetailPropsType = {
   product: ProductDataType | undefined;
@@ -65,7 +66,7 @@ function ProductDetail({
     <section className='px-4 sm:sm:col-span-4'>
       <div className='border-b-2'>
         <h3>{product?.name}</h3>
-        <h3 className='my-4 text-gray-500'>${currentProductChoice?.price}</h3>
+        <h3 className='my-4 text-gray-500'>{isFormatPrice(currentProductChoice?.price ?? 0, 0)}</h3>
       </div>
       <div className='mt-7 flex flex-col gap-y-2'>
         <span>Color</span>

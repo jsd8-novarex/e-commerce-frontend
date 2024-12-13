@@ -5,7 +5,7 @@ import SummaryD from "./checkoutDesktopcomponents/SummaryD";
 import { useCustomerProfile } from "../../hook/customers/useCustomerHooks";
 function CheckoutDesktop() {
   const [isSummaryVisible, setIsSummaryVisible] = useState(false);
-  const [quantity, setQuantity] = useState(1);
+  // const [quantity, setQuantity] = useState(1);
   const [isPriceVisible, setIsPriceVisible] = useState(true);
   const { customer } = useCustomerProfile();
   const toggleSummary = () => {
@@ -13,13 +13,13 @@ function CheckoutDesktop() {
     setIsPriceVisible((prev) => !prev);
   };
 
-  const increaseQuantity = () => setQuantity(quantity + 1);
+  // const increaseQuantity = () => setQuantity(quantity + 1);
 
-  const decreaseQuantity = () => {
-    if (quantity > 1) {
-      setQuantity(quantity - 1);
-    }
-  };
+  // const decreaseQuantity = () => {
+  //   if (quantity > 1) {
+  //     setQuantity(quantity - 1);
+  //   }
+  // };
 
   const navigate = useNavigate();
   const handleContinue = () => {

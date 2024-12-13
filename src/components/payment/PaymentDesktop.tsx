@@ -3,15 +3,13 @@ import DeliveryAddressD from "./paymentDesktopcomponents/DeliveryAddressD";
 import SummaryD from "./paymentDesktopcomponents/SummaryD";
 import { useCustomerProfile } from "../../hook/customers/useCustomerHooks";
 import { useFetchAddresses } from "../../hook/customers/UseCustomerAddressHooks";
-import { placeOrderStripe, verifyPayment } from "../../service/paymentService";
-import { useNavigate } from "react-router-dom";
+import { placeOrderStripe } from "../../service/paymentService";
 
 function PaymentDesktop() {
   const [isSummaryVisible, setIsSummaryVisible] = useState(false);
 
   const [isPriceVisible, setIsPriceVisible] = useState(true);
   const [loading, setLoading] = useState(false);
-  const navigate = useNavigate();
 
   const toggleSummary = () => {
     setIsSummaryVisible((prev) => !prev);
@@ -57,9 +55,9 @@ function PaymentDesktop() {
         throw new Error(error);
       }
 
-      window.location.href = sessionUrl; // Redirect ไปยัง Stripe
-    } catch (error: any) {
-      alert(error.message || "Failed to initiate payment.");
+      window.location.href = sessionUrl ? sessionUrl : ""; // Redirect ไปยัง Stripe
+    } catch (error: unknown) {
+      alert(error || "Failed to initiate payment.");
     } finally {
       setLoading(false);
     }

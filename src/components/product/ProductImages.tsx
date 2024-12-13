@@ -1,29 +1,28 @@
-import { ShowImageProduct2DataType } from "../../constraints/SHOWIMAGE_DATA";
+import { memo } from "react";
+import { ProductChoiceType } from "../../service/products/getProduct.type";
 
 type ShowImageProductPropsType = {
-  data: ShowImageProduct2DataType[];
-  productChoiceId: string | undefined;
+  data: ProductChoiceType | null;
 };
 
-function ProductImages({ data, productChoiceId }: ShowImageProductPropsType) {
-  const filteredData = data.filter((item) => item.product_choice_id === productChoiceId);
-
-  // const filteredData = data.filter((item) => String(item.product_choice_id) === id);
+function ProductImages({ data }: ShowImageProductPropsType) {
   return (
     <section className='sm:col-span-8'>
       <div className='flex w-full snap-x snap-mandatory gap-1 overflow-x-scroll scroll-smooth sm:grid sm:grid-cols-2 sm:grid-rows-2 sm:gap-1 sm:overflow-x-hidden'>
-        {filteredData.map((item, index) => (
-          <div key={index} className='grid min-w-full snap-start'>
-            <img
-              src={item.url}
-              alt={item.product_choice_id}
-              className='max-w-screen w-screen sm:w-auto'
-            />
-          </div>
-        ))}
+        {data &&
+          data.images.map((item, index) => (
+            <div key={index} className='grid min-w-full snap-start'>
+              <img
+                src={item.url}
+                alt={`${data.sku}-${item.index}`}
+                className='max-w-screen w-screen sm:w-auto'
+              />
+            </div>
+          ))}
       </div>
     </section>
   );
 }
 
-export default ProductImages;
+const ProductImagesMemo = memo(ProductImages)
+export default ProductImagesMemo;

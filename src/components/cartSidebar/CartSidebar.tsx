@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import clsx from "clsx";
 import { useScrollLockStore } from "../../store/scrollLock.store";
+import { useCustomerStore } from "../../store/customers/customerStore";
 import usePostCurrentCart from "../../hook/cart/usePostCurrentCart";
 import ProductInCartMemo from "./ProductInCart";
 import BackdropMemo from "../Backdrop";
@@ -13,7 +14,6 @@ function CartSidebar() {
   const { data: cartData } = usePostCurrentCart(customer ? customer._id : "");
   const { openComponents, handleScrollLock } = useScrollLockStore();
 
-  // const cart = useShoppingCartStore((state) => state.cart);
   const isCartSidebarOpen = openComponents["CartSidebar"] || false;
   const totalPrice = cartData?.cart.total_price || 0;
   const cartItemLength =

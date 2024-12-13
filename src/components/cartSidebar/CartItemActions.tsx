@@ -1,5 +1,6 @@
 import { memo, useEffect, useState } from "react";
 import InputNumber from "../input/InputNumber";
+import { useCustomerStore } from "../../store/customers/customerStore";
 import { postCurrentCartStore } from "../../store/cart/postCurrentCart.store";
 import { removeItemFromCartStore } from "../../store/cart/removeItemFromCart.store";
 import { updateItemQuantityStore } from "../../store/cart/updateItemQuantity.store";

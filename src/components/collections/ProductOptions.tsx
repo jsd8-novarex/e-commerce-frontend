@@ -1,5 +1,6 @@
 import { useState, useEffect, useMemo } from "react";
 import { useScrollLockStore } from "../../store/scrollLock.store";
+import { useCustomerStore } from "../../store/customers/customerStore";
 import { postCurrentCartStore } from "../../store/cart/postCurrentCart.store";
 import { addItemToCartStore } from "../../store/cart/addItemToCart.store";
 import { ProductDataType, ProductChoiceType } from "../../service/products/getProduct.type";

@@ -1,4 +1,6 @@
+import { useCallback, useEffect, useRef } from "react";
 import { Routes, Route } from "react-router-dom";
+import { useCustomerProfile } from "./hook/customers/useCustomerHooks";
 import Layout from "./components/Layout";
 import PrivateRoute from "./components/PrivateRoute";
 import HomePage from "./pages/HomePage";
@@ -13,11 +15,9 @@ import PaymentPage from "./pages/PaymentPage";
 import SignInAdminPage from "./pages/SignInAdminPage";
 import AdminPage from "./pages/AdminPage";
 import AboutUsPage from "./pages/AboutUsPage";
-import { useCustomerProfile } from "./hook/customers/useCustomerHooks";
-import { useCallback, useEffect, useRef } from "react";
 
 function App() {
-  const { fetchCustomerProfile } = useCustomerProfile();
+  const { fetchCustomerProfile} = useCustomerProfile();
   const secret = localStorage.getItem("token");
   const isMounted = useRef<boolean>(true);
 
@@ -43,7 +43,7 @@ function App() {
       isMounted.current = false;
     };
   }, [getCustomer, secret]);
-
+  
   return (
     <>
       <Routes>

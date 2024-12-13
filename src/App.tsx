@@ -15,6 +15,7 @@ import PaymentPage from "./pages/PaymentPage";
 import SignInAdminPage from "./pages/SignInAdminPage";
 import AdminPage from "./pages/AdminPage";
 import AboutUsPage from "./pages/AboutUsPage";
+// import useGetTest from "./hook/useGetTest";
 
 function App() {
   const { fetchCustomerProfile} = useCustomerProfile();
@@ -52,11 +53,11 @@ function App() {
           <Route path='about' element={<AboutUsPage />} caseSensitive />
           <Route path='/product/:productChoiceId' element={<ProductPage />} caseSensitive />
           <Route path='collections' element={<CollectionsPage />} caseSensitive />
-          <Route element={<PrivateRoute />}>
-            <Route path='profile' element={<ProfilePage />} caseSensitive />
-            <Route path='transaction' element={<TransactionPage />} caseSensitive />
-            <Route path='payment' element={<PaymentPage />} caseSensitive />
-          </Route>
+          <Route path='profile' element={<ProfilePage />} caseSensitive />
+          <Route path='transaction' element={<TransactionPage />} caseSensitive />
+          <Route path='payment' element={<PaymentPage />} caseSensitive />
+          <Route path='about' element={<AboutUsPage />} caseSensitive />
+          <Route path='verify' element={<VerifyPaymentPage />} caseSensitive />
         </Route>
         <Route path='sign-in' element={<SignInPage />} caseSensitive />
         <Route path='sign-up' element={<SignUpPage />} caseSensitive />

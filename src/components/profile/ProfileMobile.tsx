@@ -1,8 +1,9 @@
 import React, { useState } from "react";
-import OrderHistoryM from "./profileMobilecomponents/OrderHistoryM";
+// import OrderHistoryM from "./profileMobilecomponents/OrderHistoryM";
 import ProfileM from "./profileMobilecomponents/ProfileM";
 import AddressBookM from "./profileMobilecomponents/AddressBookM";
-import PaymentsM from "./profileMobilecomponents/PaymentsM";
+// import PaymentsM from "./profileMobilecomponents/PaymentsM";
+import { useNavigate } from "react-router-dom";
 
 interface VisibilityState {
   isOrderHistoryVisible: boolean;
@@ -14,10 +15,18 @@ interface VisibilityState {
 const MobileProfilePage: React.FC = () => {
   const [visibility, setVisibility] = useState<VisibilityState>({
     isOrderHistoryVisible: false,
-    isProfileVisible: false,
-    isAddressVisible: false,
+    isProfileVisible: true,
+    isAddressVisible: true,
     isPaymentsVisible: false,
   });
+
+  const navigate = useNavigate();
+
+  const handleSignOut = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("email");
+    navigate("/sign-in");
+  };
 
   const toggleVisibility = (checked: keyof VisibilityState) => {
     setVisibility((prev) => ({
@@ -32,19 +41,19 @@ const MobileProfilePage: React.FC = () => {
         {/* Account Section */}
         <div className='flex items-center justify-between border-b py-2'>
           <h2 className='text-lg font-bold'>Account</h2>
-          <a href='#' className='text-sm text-gray-500 hover:underline'>
+          <button className='text-sm text-gray-500 hover:underline' onClick={handleSignOut}>
             Sign-out
-          </a>
+          </button>
         </div>
 
         {/* Order History */}
-        <OrderHistoryM visibility={visibility} toggleVisibility={toggleVisibility} />
+        {/* <OrderHistoryM visibility={visibility} toggleVisibility={toggleVisibility} /> */}
         {/* Profile Information */}
         <ProfileM visibility={visibility} toggleVisibility={toggleVisibility} />
         {/* Address Book */}
         <AddressBookM visibility={visibility} toggleVisibility={toggleVisibility} />
         {/* Payments */}
-        <PaymentsM visibility={visibility} toggleVisibility={toggleVisibility} />
+        {/* <PaymentsM visibility={visibility} toggleVisibility={toggleVisibility} /> */}
       </div>
     </div>
   );

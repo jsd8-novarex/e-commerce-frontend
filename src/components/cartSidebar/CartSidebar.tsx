@@ -6,11 +6,11 @@ import usePostCurrentCart from "../../hook/cart/usePostCurrentCart";
 import ProductInCartMemo from "./ProductInCart";
 import BackdropMemo from "../Backdrop";
 import CartSummaryMemo from "./CartSummary";
+import { useCustomerStore } from "../../store/customers/customerStore";
 
 function CartSidebar() {
   const navigate = useNavigate();
   const { customer } = useCustomerStore();
-  
   const { data: cartData } = usePostCurrentCart(customer ? customer._id : "");
   const { openComponents, handleScrollLock } = useScrollLockStore();
 

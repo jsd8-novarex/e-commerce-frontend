@@ -2,7 +2,7 @@ function AboutUsPage() {
   return (
     <div className='h-full w-full py-32'>
       {/* About Section */}
-      <div className='mb-12 text-center px-4'>
+      <div className='mb-12 px-4 text-center'>
         <h2 className='mb-4 text-3xl font-bold'>About Us</h2>
         <p className='text-lg text-gray-600'>
           We are a community-driven company focused on bringing artisans and human values together.

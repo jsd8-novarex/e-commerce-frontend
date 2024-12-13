@@ -1,19 +1,17 @@
 import React, { useState } from "react";
-// import OrderHistoryM from "./profileMobilecomponents/OrderHistoryM";
+import { useNavigate } from "react-router-dom";
 import ProfileM from "./profileMobilecomponents/ProfileM";
 import AddressBookM from "./profileMobilecomponents/AddressBookM";
-// import PaymentsM from "./profileMobilecomponents/PaymentsM";
-import { useNavigate } from "react-router-dom";
 
-interface VisibilityState {
+interface VisibilityStateType {
   isOrderHistoryVisible: boolean;
   isProfileVisible: boolean;
   isAddressVisible: boolean;
   isPaymentsVisible: boolean;
 }
 
-const MobileProfilePage: React.FC = () => {
-  const [visibility, setVisibility] = useState<VisibilityState>({
+function MobileProfilePage() {
+  const [visibility, setVisibility] = useState<VisibilityStateType>({
     isOrderHistoryVisible: false,
     isProfileVisible: true,
     isAddressVisible: true,
@@ -28,7 +26,7 @@ const MobileProfilePage: React.FC = () => {
     navigate("/sign-in");
   };
 
-  const toggleVisibility = (checked: keyof VisibilityState) => {
+  const toggleVisibility = (checked: keyof VisibilityStateType) => {
     setVisibility((prev) => ({
       ...prev,
       [checked]: !prev[checked],
@@ -57,6 +55,6 @@ const MobileProfilePage: React.FC = () => {
       </div>
     </div>
   );
-};
+}
 
 export default MobileProfilePage;

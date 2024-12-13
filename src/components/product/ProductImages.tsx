@@ -24,5 +24,5 @@ function ProductImages({ data }: ShowImageProductPropsType) {
   );
 }
 
-const ProductImagesMemo = memo(ProductImages)
+const ProductImagesMemo = memo(ProductImages);
 export default ProductImagesMemo;

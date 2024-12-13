@@ -25,6 +25,6 @@ export const postCurrentCartStore = create<PostCurrentCartStateType>((set) => ({
     set({ data: response, error: error, loading: false });
   },
   removeData: () => {
-    set({data: null, error: null, loading: false})
-  }
+    set({ data: null, error: null, loading: false });
+  },
 }));

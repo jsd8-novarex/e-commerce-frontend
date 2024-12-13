@@ -6,7 +6,7 @@ interface UpdateItemQuantityStoreType {
   data: CartReturnMessageType | null;
   error: string | null;
   loading: boolean;
-  updateQuantity: ({ customerId, productChoiceId, quantity }: ItemToCartPropsType) => Promise<void>
+  updateQuantity: ({ customerId, productChoiceId, quantity }: ItemToCartPropsType) => Promise<void>;
 }
 
 export const updateItemQuantityStore = create<UpdateItemQuantityStoreType>((set) => ({
@@ -15,7 +15,7 @@ export const updateItemQuantityStore = create<UpdateItemQuantityStoreType>((set)
   loading: false,
   updateQuantity: async ({ customerId, productChoiceId, quantity }) => {
     set({ loading: true, data: null, error: null });
-    const [response, error] = await updateItemQuantity({ customerId, productChoiceId, quantity })
+    const [response, error] = await updateItemQuantity({ customerId, productChoiceId, quantity });
     set({ data: response, error: error, loading: false });
-  }
-}))
+  },
+}));

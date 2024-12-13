@@ -9,7 +9,7 @@ function ShowcaseSection({ data }: ShowCaseSectionPropsType) {
   const genderQuery = data.gender ? data.gender : "";
   return (
     <NavLink
-      to={`/collections${genderQuery ? `?gender=${genderQuery}` : ""}`} 
+      to={`/collections${genderQuery ? `?gender=${genderQuery}` : ""}`}
       className='relative h-full w-full snap-center snap-always'
     >
       <section className='relative h-full w-full snap-center snap-always'>

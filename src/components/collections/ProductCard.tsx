@@ -9,11 +9,13 @@ type ProductCardPropsType = {
 
 function ProductCard({ productData, isProductOptionsOpen }: ProductCardPropsType) {
   // เลือกราคาใน product_choice จากข้อมูล API
-  const price = productData.product_choices[0]?.price ? productData.product_choices[0].price : "N/A";  
-  
+  const price = productData.product_choices[0]?.price
+    ? productData.product_choices[0].price
+    : "N/A";
+
   // เลือก product_choice_id และรูปภาพจาก product_choices
   const productChoiceId = productData.product_choices[0]?._id;
-  const imageProduct = productData.product_choices[0]?.images[0]?.url; // เลือกรูปภาพแรกจาก images  
+  const imageProduct = productData.product_choices[0]?.images[0]?.url; // เลือกรูปภาพแรกจาก images
 
   return (
     <div className='relative overflow-hidden rounded-ee-xl rounded-ss-xl drop-shadow-xl'>

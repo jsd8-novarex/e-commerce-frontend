@@ -35,6 +35,7 @@ export interface CartItemType {
   product_choice_id: string;
   quantity: number;
   color: string;
+  size: string;
   price: number;
   image_url: string;
   product_name: string;

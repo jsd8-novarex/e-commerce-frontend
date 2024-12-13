@@ -6,7 +6,6 @@ import usePostCurrentCart from "../../hook/cart/usePostCurrentCart";
 import ProductInCartMemo from "./ProductInCart";
 import BackdropMemo from "../Backdrop";
 import CartSummaryMemo from "./CartSummary";
-import { useCustomerStore } from "../../store/customers/customerStore";
 
 function CartSidebar() {
   const navigate = useNavigate();

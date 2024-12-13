@@ -29,7 +29,8 @@ function ProductInCart({ item }: ProductInCartPropsType) {
       <div className='flex w-48 items-center'>
         <div className='flex flex-col gap-y-1'>
           <h4 className='text-md font-bold'>{item && item.product_name}</h4>
-          <p>Color: {item.color}</p>
+          <p>{`Color ${item.color}`}</p>
+          <p>{`Size  ${item.size}`}</p>
           <p>{item && isFormatPrice(item.price, 0)}</p>
         </div>
       </div>

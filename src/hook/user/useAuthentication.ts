@@ -2,6 +2,7 @@ import { useState } from "react";
 import { handleInputObjectFieldChange } from "../../helpers/utils";
 import { useNavigate } from "react-router-dom";
 import client from "../../config/axiosConfig";
+import { useCustomerProfile } from "../customers/useCustomerHooks";
 
 type DataForVerifyType = {
   email: string;
@@ -10,6 +11,7 @@ type DataForVerifyType = {
 
 function useAuthentication() {
   const navigate = useNavigate();
+  const { fetchCustomerProfile } = useCustomerProfile();
 
   const [authStatus, setAuthStatus] = useState<string>("");
   const [isProcessing, setIsProcessing] = useState<boolean>(false);
@@ -37,6 +39,8 @@ function useAuthentication() {
       const { token } = response.data; // Backend ส่ง Token กลับมา
       localStorage.setItem("token", token);
       localStorage.setItem("email", dataForVerify.email);
+
+      fetchCustomerProfile();
 
       setAuthStatus("Successfully authenticated.");
       setTimeout(() => {

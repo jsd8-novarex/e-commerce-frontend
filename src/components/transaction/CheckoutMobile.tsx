@@ -2,23 +2,14 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import SummaryM from "./checkoutMobilecomponents/SummaryM";
 import AddressShippingM from "./checkoutMobilecomponents/AddressShippingM";
-
+import { useCustomerProfile } from "../../hook/customers/useCustomerHooks";
 function CheckoutMobile() {
   const [isSummaryVisible, setIsSummaryVisible] = useState(false);
-  const [quantity, setQuantity] = useState(1);
   const [isPriceVisible, setIsPriceVisible] = useState(true);
-
+  const { customer } = useCustomerProfile();
   const toggleSummary = () => {
     setIsSummaryVisible((prev) => !prev);
     setIsPriceVisible((prev) => !prev);
-  };
-
-  const increaseQuantity = () => setQuantity(quantity + 1);
-
-  const decreaseQuantity = () => {
-    if (quantity > 1) {
-      setQuantity(quantity - 1);
-    }
   };
 
   const navigate = useNavigate();
@@ -30,8 +21,6 @@ function CheckoutMobile() {
     <section className='w-full md:hidden'>
       <SummaryM
         toggleSummary={toggleSummary}
-        increaseQuantity={increaseQuantity}
-        decreaseQuantity={decreaseQuantity}
         isSummaryVisible={isSummaryVisible}
         isPriceVisible={isPriceVisible}
       />
@@ -39,7 +28,7 @@ function CheckoutMobile() {
         <div className='font-bold'>Account</div>
       </div>
       <div className='flex border border-t-0 p-4'>
-        <div>email@gmail.com</div>
+        <div>{customer?.email}</div>
       </div>
 
       <AddressShippingM handleContinue={handleContinue} />

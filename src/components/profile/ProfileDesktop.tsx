@@ -1,11 +1,11 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import ProfileSidebar from "./profileDesktopcomponents/ProfileSidebar";
 import ProfileInformation from "./profileDesktopcomponents/ProfileInformation";
 import AddressBook from "./profileDesktopcomponents/AddressBook";
-import OrederHistory from "./profileDesktopcomponents/OrderHistory";
-import Payments from "./profileDesktopcomponents/Payments";
+// import OrederHistory from "./profileDesktopcomponents/OrderHistory";
+// import Payments from "./profileDesktopcomponents/Payments";
 
-const DesktopProfilePage: React.FC = () => {
+function DesktopProfilePage() {
   const [activePage, setActivePage] = useState<"profile" | "address" | "orderhistory" | "payments">(
     "profile",
   );
@@ -20,12 +20,12 @@ const DesktopProfilePage: React.FC = () => {
         <div>
           {activePage === "profile" && <ProfileInformation />}
           {activePage === "address" && <AddressBook />}
-          {activePage === "orderhistory" && <OrederHistory />}
-          {activePage === "payments" && <Payments />}
+          {/* {activePage === "orderhistory" && <OrederHistory />} */}
+          {/* {activePage === "payments" && <Payments />} */}
         </div>
       </div>
     </main>
   );
-};
+}
 
 export default DesktopProfilePage;

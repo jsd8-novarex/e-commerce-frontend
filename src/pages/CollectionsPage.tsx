@@ -21,7 +21,7 @@ function CollectionsPage() {
     const urlParams = new URLSearchParams(search); // ดึงค่า query parameter
     const genderParam = urlParams.get("gender"); // รับค่าพารามิเตอร์ gender จาก URL
     if (genderParam === "man" || genderParam === "woman") {
-      setFilter(genderParam); 
+      setFilter(genderParam);
     } else {
       setFilter("");
     }
@@ -32,8 +32,8 @@ function CollectionsPage() {
     handleScrollLock("ProductOptions", !isProductOptionsOpen);
   };
 
-   // ฟังก์ชันการจัดเรียงสินค้าตาม sortOrder
-   const sortProducts = (products: ProductDataType[], sortOrder: string) => {
+  // ฟังก์ชันการจัดเรียงสินค้าตาม sortOrder
+  const sortProducts = (products: ProductDataType[], sortOrder: string) => {
     if (!products) return [];
     switch (sortOrder) {
       case "A-Z":
@@ -59,8 +59,10 @@ function CollectionsPage() {
 
   // การจัดเรียงสินค้าภายหลังจากการกรอง
   const sortedProducts = sortProducts(
-    (data?.products || []).filter((item) => !filter || item.gender.toLowerCase() === filter.toLowerCase()),
-    sortOrder
+    (data?.products || []).filter(
+      (item) => !filter || item.gender.toLowerCase() === filter.toLowerCase(),
+    ),
+    sortOrder,
   );
 
   const shopTitle = filter === "man" ? "Men" : filter === "woman" ? "Women" : "Shop All";
@@ -74,25 +76,25 @@ function CollectionsPage() {
 
       <section className='col-span-full'>
         <div className='mb-8'>
-          <NavLink to="/" className="hover:underline">
+          <NavLink to='/' className='hover:underline'>
             Home
           </NavLink>
           {" / "}
-          <NavLink to={`/collections/?gender=${filter}`} className="hover:underline">
+          <NavLink to={`/collections/?gender=${filter}`} className='hover:underline'>
             {shopTitle}
           </NavLink>
         </div>
         <h3 className='font-bold'>{shopTitle}</h3>
-        <div className='mr-4 mt-4 sm:flex sm:justify-between sm:flex-wrap'>
+        <div className='mr-4 mt-4 sm:flex sm:flex-wrap sm:justify-between'>
           <p className='text-justify text-sm sm:max-w-[40rem] sm:text-base xl:text-lg'>
             Build your SHINING wardrobe with styles made from innovative materials. Discover our
             tracksuits, t-shirts, activewear, and outerwear for women in nature-inspired colors.
           </p>
           <div>
-          <CollectionsFilterBar setSortOrder={setSortOrder} /> 
+            <CollectionsFilterBar setSortOrder={setSortOrder} />
           </div>
         </div>
-      </section>      
+      </section>
 
       <section className='col-span-full mb-16 px-2'>
         <div className='grid grid-cols-12 gap-x-4 gap-y-8 justify-self-center sm:gap-8'>

@@ -1,10 +1,10 @@
 import { useState, useEffect, useMemo } from "react";
 import { useScrollLockStore } from "../../store/scrollLock.store";
+import { useCustomerStore } from "../../store/customers/customerStore";
 import { postCurrentCartStore } from "../../store/cart/postCurrentCart.store";
 import { addItemToCartStore } from "../../store/cart/addItemToCart.store";
 import { ProductDataType, ProductChoiceType } from "../../service/products/getProduct.type";
 import { hexColor } from "../../helpers/hexColor";
-import { useCustomerStore } from "../../store/customers/customerStore";
 import { useNavigate } from "react-router-dom";
 
 type ProductOptionPropsType = {
@@ -17,10 +17,11 @@ function ProductOptions({ productData }: ProductOptionPropsType) {
   const { addToCart } = addItemToCartStore();
   const { fetchCurrentCartData } = postCurrentCartStore();
   const { openComponents, handleScrollLock } = useScrollLockStore();
+
+  const customerId = customer ? customer._id : "";
   const isProductOptionsOpen = openComponents["ProductOptions"] || false;
   const navigate = useNavigate();
 
-  const customerId = customer ? customer._id : "";
   const [selectedChoice, setSelectedChoice] = useState<ProductChoiceType | null>(null);
 
   useEffect(() => {
@@ -49,8 +50,8 @@ function ProductOptions({ productData }: ProductOptionPropsType) {
     [productData],
   );
 
-  const handleAddToCart = async () => {    
-    const token = localStorage.getItem("token");    
+  const handleAddToCart = async () => {
+    const token = localStorage.getItem("token");
     if (!token) {
       navigate("/sign-in");
       return;

@@ -5,14 +5,12 @@ import DeliveryAddressM from "./paymentMobilecomponents/DeliveryAddressM";
 import { useCustomerProfile } from "../../hook/customers/useCustomerHooks";
 import { useFetchAddresses } from "../../hook/customers/UseCustomerAddressHooks";
 import { placeOrderStripe } from "../../service/paymentService";
-import { useNavigate } from "react-router-dom";
 
 function PaymentMobile() {
   const [isSummaryVisible, setIsSummaryVisible] = useState(false);
 
   const [isPriceVisible, setIsPriceVisible] = useState(true);
   const [loading, setLoading] = useState(false);
-  const navigate = useNavigate();
 
   const { customer } = useCustomerProfile(); // ดึงข้อมูลลูกค้า
   const { addresses, fetchAddressesByCustomerId } = useFetchAddresses(customer?._id || "");
@@ -52,12 +50,12 @@ function PaymentMobile() {
       const [sessionUrl, error] = await placeOrderStripe(customer._id);
 
       if (error) {
-        throw new Error(error.message);
+        throw new Error(error);
       }
 
-      window.location.href = sessionUrl; // Redirect ไปยัง Stripe
+      window.location.href = sessionUrl ?? ""; // Redirect ไปยัง Stripe
     } catch (error) {
-      alert(error.message || "Failed to initiate payment.");
+      alert(error || "Failed to initiate payment.");
     } finally {
       setLoading(false);
     }

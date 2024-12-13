@@ -3,7 +3,7 @@ import customerAddressService from "../../service/customerAddressService";
 import { CustomerAddress } from "../../service/customerAddressType";
 
 interface CustomerAddressStoreState {
-  addresses: (CustomerAddress | null)[];
+  addresses: CustomerAddress[] | [];
   error: string | null;
   fetchAddressesByCustomerId: (customerId: string) => Promise<void>;
   createAddress: (addressData: Partial<CustomerAddress>) => Promise<void>;
@@ -35,7 +35,9 @@ export const useCustomerAddressStore = create<CustomerAddressStoreState>((set) =
       return;
     }
 
-    set((state) => ({ addresses: [...state.addresses, newAddress], error: null }));
+    if (newAddress) {
+      set((state) => ({ addresses: [...state.addresses, newAddress], error: null }));
+    }
   },
 
   updateAddress: async (customerId: string, addressData: Partial<CustomerAddress>) => {

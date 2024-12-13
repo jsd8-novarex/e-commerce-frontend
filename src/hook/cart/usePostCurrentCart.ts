@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { postCurrentCartStore } from "../../store/cart/postCurrentCart.store";
 
 function usePostCurrentCart(customerId: string) {
-  const { data, error, fetchCurrentCartData} = postCurrentCartStore();
+  const { data, error, fetchCurrentCartData } = postCurrentCartStore();
 
   useEffect(() => {
     if (customerId) {
@@ -10,7 +10,7 @@ function usePostCurrentCart(customerId: string) {
     }
   }, [fetchCurrentCartData, customerId]);
 
-  return { data, error};
+  return { data, error };
 }
 
 export default usePostCurrentCart;

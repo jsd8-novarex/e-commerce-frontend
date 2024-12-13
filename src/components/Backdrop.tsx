@@ -1,7 +1,7 @@
 import { memo } from "react";
 
 type BackdropPropsType = {
-  name: string
+  name: string;
   isPageScrollLocked: boolean;
   handleScrollLock: (componentName: string, isOpen: boolean) => void;
 };

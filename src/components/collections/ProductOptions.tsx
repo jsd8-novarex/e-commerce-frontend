@@ -1,9 +1,11 @@
 import { useState, useEffect, useMemo } from "react";
 import { useScrollLockStore } from "../../store/scrollLock.store";
+import { useCustomerStore } from "../../store/customers/customerStore";
 import { postCurrentCartStore } from "../../store/cart/postCurrentCart.store";
 import { addItemToCartStore } from "../../store/cart/addItemToCart.store";
 import { ProductDataType, ProductChoiceType } from "../../service/products/getProduct.type";
-import { useCustomerStore } from "../../store/customers/customerStore";
+import { hexColor } from "../../helpers/hexColor";
+import { useNavigate } from "react-router-dom";
 
 type ProductOptionPropsType = {
   productData: ProductDataType | null;
@@ -18,6 +20,7 @@ function ProductOptions({ productData }: ProductOptionPropsType) {
 
   const customerId = customer ? customer._id : "";
   const isProductOptionsOpen = openComponents["ProductOptions"] || false;
+  const navigate = useNavigate();
 
   const [selectedChoice, setSelectedChoice] = useState<ProductChoiceType | null>(null);
 
@@ -27,10 +30,20 @@ function ProductOptions({ productData }: ProductOptionPropsType) {
     }
   }, [productData]);
 
-  const availableColors = useMemo(
-    () => Array.from(new Set(productData?.product_choices.map((choice) => choice.color) || [])),
-    [productData],
-  );
+  const availableColors = useMemo(() => {
+    const colorSet = Array.from(
+      new Set(productData?.product_choices.map((choice) => choice.color) || []),
+    );
+    return colorSet.map((color) => {
+      const matchingColor = Object.keys(hexColor).find(
+        (key) => key.toLowerCase() === color.toLowerCase(),
+      );
+      return {
+        name: color,
+        hexCode: matchingColor ? hexColor[matchingColor].hexColor : color,
+      };
+    });
+  }, [productData]);
 
   const availableSizes = useMemo(
     () => Array.from(new Set(productData?.product_choices.map((choice) => choice.size) || [])),
@@ -38,6 +51,12 @@ function ProductOptions({ productData }: ProductOptionPropsType) {
   );
 
   const handleAddToCart = async () => {
+    const token = localStorage.getItem("token");
+    if (!token) {
+      navigate("/sign-in");
+      return;
+    }
+
     if (!selectedChoice || selectedChoice.quantity === 0) return;
 
     try {
@@ -69,17 +88,17 @@ function ProductOptions({ productData }: ProductOptionPropsType) {
   return (
     <>
       {isProductOptionsOpen && (
-        <div className='fixed bottom-8 left-[5%] right-[2%] z-[12] max-h-[90vh] max-w-[90vw] overflow-auto bg-white p-4 drop-shadow-2xl transition-transform sm:left-auto sm:max-w-md md:max-w-[800px]'>
-          <div className='flex flex-col items-center gap-4 md:gap-6'>
-            <div className='relative w-full'>
-              <button
-                onClick={() => handleScrollLock("ProductOptions", false)}
-                className='top- absolute right-2 h-6 w-6 rounded-full bg-gray-300 text-gray-600 hover:bg-gray-400 hover:text-gray-800 focus:outline-none'
-                aria-label='Close'
-              >
-                ✕
-              </button>
-            </div>
+        <div className='drop-shadow-3xl fixed bottom-8 left-[5%] right-[2%] z-[12] max-h-[90vh] max-w-[90vw] overflow-auto rounded-lg bg-white transition-transform sm:left-auto sm:max-w-md md:max-w-[800px]'>
+          <div className='absolute right-1 top-2 w-full'>
+            <button
+              onClick={() => handleScrollLock("ProductOptions", false)}
+              className='absolute right-2 top-0 h-8 w-8 rounded-full bg-gray-300 text-gray-600 hover:bg-gray-400 hover:text-gray-800 focus:outline-none'
+              aria-label='Close'
+            >
+              ✕
+            </button>
+          </div>
+          <div className='flex flex-col items-center gap-4 p-4 md:gap-6'>
             <div className='sm:flex md:flex lg:flex'>
               <div className='flex w-full flex-col items-center gap-4 sm:flex-row sm:items-start'>
                 <img
@@ -91,7 +110,7 @@ function ProductOptions({ productData }: ProductOptionPropsType) {
 
               <div className='flex w-full flex-col gap-y-4'>
                 <div className='mb-2 flex flex-col items-center pb-4 sm:items-start'>
-                  <div className='pb-4'>
+                  <div className='pb-4 pt-8'>
                     <h2 className='text-lg font-bold text-gray-800 md:text-xl'>
                       {`${productData?.name} ${selectedChoice?.color}`}
                     </h2>
@@ -102,19 +121,19 @@ function ProductOptions({ productData }: ProductOptionPropsType) {
                     </p>
                   </div>
                 </div>
-                <div className='mb-2 flex flex-wrap justify-center gap-2'>
-                  {availableColors.map((color, index) => (
+                <div className='mb-2 flex flex-wrap justify-center gap-2 pt-4 sm:justify-start'>
+                  {availableColors.map((colorItem, index) => (
                     <button
                       key={index}
                       className={`h-8 w-8 rounded-full border-2 ${
-                        selectedChoice?.color === color ? "ring-4 ring-red-500" : ""
+                        selectedChoice?.color === colorItem.name ? "ring-4 ring-black" : ""
                       }`}
-                      style={{ backgroundColor: color }}
-                      onClick={() => handleColorChange(color)}
+                      style={{ backgroundColor: colorItem.hexCode }}
+                      onClick={() => handleColorChange(colorItem.name)}
                     ></button>
                   ))}
                 </div>
-                <div className='flex flex-wrap justify-center gap-2'>
+                <div className='flex flex-wrap justify-center gap-2 sm:justify-start'>
                   {availableSizes.map((size) => (
                     <button
                       key={size}
@@ -127,12 +146,12 @@ function ProductOptions({ productData }: ProductOptionPropsType) {
                     </button>
                   ))}
                 </div>
-                <div className='mt-4 flex justify-center'>
+                <div className='mt-4 flex justify-center sm:mr-1 sm:mt-5 sm:justify-end'>
                   <button
                     className={`px-6 py-3 text-white ${
                       selectedChoice?.quantity === 0
                         ? "cursor-not-allowed bg-gray-400"
-                        : "bg-black hover:bg-green-600"
+                        : "bg-black hover:bg-gray-600"
                     }`}
                     onClick={handleAddToCart}
                     disabled={selectedChoice?.quantity === 0}

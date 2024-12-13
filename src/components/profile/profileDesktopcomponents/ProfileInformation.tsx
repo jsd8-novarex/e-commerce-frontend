@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import {
   useCustomerProfile,
   useUpdateCustomer,
@@ -15,7 +15,7 @@ export const isPasswordValid = (password: string): boolean => {
   return passwordRegex.test(password);
 };
 
-const ProfileInformation: React.FC = () => {
+function ProfileInformation() {
   // Hooks
   const { customer, error: fetchError } = useCustomerProfile();
   const { updateCustomerInfo, error: updateError } = useUpdateCustomer();
@@ -281,6 +281,6 @@ const ProfileInformation: React.FC = () => {
       )}
     </div>
   );
-};
+}
 
 export default ProfileInformation;

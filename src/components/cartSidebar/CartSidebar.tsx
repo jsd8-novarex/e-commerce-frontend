@@ -10,7 +10,6 @@ import CartSummaryMemo from "./CartSummary";
 function CartSidebar() {
   const navigate = useNavigate();
   const { customer } = useCustomerStore();
-  console.log(customer?._id);
   
   const { data: cartData } = usePostCurrentCart(customer ? customer._id : "");
   const { openComponents, handleScrollLock } = useScrollLockStore();

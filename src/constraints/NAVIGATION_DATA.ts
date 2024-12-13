@@ -1,31 +1,36 @@
-export type NavigationDataType = {
-  order: number;
-  name: string;
-  path: string;
+import { FilterOptionsDataType } from "./COLLECTIONS_FILTER_DATA";
+
+export interface NavigationDataType extends FilterOptionsDataType {
   showOnDesktop: boolean;
-};
+}
 
 export const navigationData: NavigationDataType[] = [
   {
     order: 0,
-    name: "Woman",
+    name: "All",
     path: "/collections",
     showOnDesktop: true,
   },
   {
     order: 1,
-    name: "Man",
+    name: "Woman",
     path: "/collections",
     showOnDesktop: true,
   },
   {
     order: 2,
-    name: "About",
+    name: "Man",
     path: "/collections",
-    showOnDesktop: false,
+    showOnDesktop: true,
   },
   {
     order: 3,
+    name: "About",
+    path: "/about",
+    showOnDesktop: false,
+  },
+  {
+    order: 4,
     name: "Login",
     path: "/sign-in",
     showOnDesktop: false,

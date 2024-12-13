@@ -1,15 +1,19 @@
+import { memo } from "react";
+
 type BackdropPropsType = {
-  isCartSidebarOpen: boolean;
-  toggleCartSidebar: () => void;
+  name: string;
+  isPageScrollLocked: boolean;
+  handleScrollLock: (componentName: string, isOpen: boolean) => void;
 };
 
-function Backdrop({ isCartSidebarOpen, toggleCartSidebar }: BackdropPropsType) {
+function Backdrop({ name, isPageScrollLocked, handleScrollLock }: BackdropPropsType) {
   return (
     <div
-      onClick={toggleCartSidebar}
-      className={`absolute inset-0 z-[11] h-full w-full bg-black/50 ${isCartSidebarOpen ? "visible" : "invisible"}`}
+      onClick={() => handleScrollLock(name, false)}
+      className={`absolute inset-0 z-[11] h-full w-full bg-black/50 ${isPageScrollLocked ? "visible" : "invisible"}`}
     />
   );
 }
 
-export default Backdrop;
+const BackdropMemo = memo(Backdrop);
+export default BackdropMemo;

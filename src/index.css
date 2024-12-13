@@ -33,9 +33,18 @@
   .hide-scroll {
     scrollbar-width: none;
   }
-
   .hide-scroll::-webkit-scrollbar {
     display: none;
+  }
+
+  /*hide-number-spin*/
+  .hide-number-spin {
+    -moz-appearance: textfield;
+  }
+  .hide-number-spin::-webkit-inner-spin-button,
+  .hide-number-spin::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
   }
 
   /* button  */

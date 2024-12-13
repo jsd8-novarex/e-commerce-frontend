@@ -1,4 +1,3 @@
-import clsx from "clsx";
 import { PropsWithChildren } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -38,13 +37,21 @@ function AuthenticationForm({
           />
         </svg>
       </button>
-      <div
-        className={clsx("col-span-5 hidden bg-gradient-to-r md:block lg:col-span-7", {
-          "from-[#000851] to-white": status === "sign-in",
-          "from-[#B38728] to-white": status === "sign-up",
-          "from-[#fd1d1d] to-white": status === "sign-in-admin",
-        })}
-      />
+      <div className='col-span-5 hidden bg-gradient-to-r from-black to-blue-900 md:block lg:col-span-7'>
+        {status === "sign-in" || status === "sign-up" || status === "sign-in-admin" ? (
+          <div className='mx-16 flex h-full flex-col justify-center gap-8'>
+            <h2 className='text-xl text-white sm:text-3xl md:text-5xl lg:text-6xl'>
+              {status === "sign-in" && "Welcome back!"}
+              {status === "sign-up" && "Join SHINING"}
+              {status === "sign-in-admin" && "Welcome"}
+            </h2>
+            <p className='text-white sm:text-3xl md:text-4xl lg:text-5xl'>
+              {status === "sign-in" && "New styles are ready for you."}
+              {status === "sign-up" && "and discover your style!"}
+            </p>
+          </div>
+        ) : null}
+      </div>
       <div className='col-span-full grid w-full grid-rows-7 p-4 md:col-span-7 lg:col-span-5 xl:p-12'>
         <div className='row-start-2 flex flex-col items-center gap-4'>
           <h2 className='text-4xl font-bold uppercase md:text-5xl'>Shining</h2>

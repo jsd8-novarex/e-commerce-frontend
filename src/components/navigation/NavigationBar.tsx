@@ -1,19 +1,16 @@
-import { useState } from "react";
 import { NavLink, useLocation } from "react-router-dom";
+import { useScrollLockStore } from "../../store/scrollLock.store";
+import clsx from "clsx";
 import HamburgerMenu from "./HamburgerMenu";
 import MobileMenu from "./MobileMenu";
 import DesktopLeftMenu from "./DesktopLeftMenu";
 import DesktopRightMenu from "./DesktopRightMenu";
-import clsx from "clsx";
 
-type NavigationBarPropsType = {
-  toggleCartSidebar: () => void;
-};
-
-function NavigationBar({ toggleCartSidebar }: NavigationBarPropsType) {
+function NavigationBar() {
   const location = useLocation();
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState<boolean>(false);
+  const { openComponents, handleScrollLock } = useScrollLockStore();
 
+  const isMobileMenuOpen = openComponents["MobileMenu"] || false;
   const isHome = location.pathname === "/";
 
   return (
@@ -26,17 +23,14 @@ function NavigationBar({ toggleCartSidebar }: NavigationBarPropsType) {
       >
         <div className='block sm:hidden'>
           <div className='block h-10 w-10 sm:hidden' />
-          <HamburgerMenu
-            isMobileMenuOpen={isMobileMenuOpen}
-            setIsMobileMenuOpen={setIsMobileMenuOpen}
-          />
+          <HamburgerMenu isMobileMenuOpen={isMobileMenuOpen} handleScrollLock={handleScrollLock} />
           {isMobileMenuOpen && <MobileMenu />}
         </div>
         <DesktopLeftMenu />
         <NavLink to={"/"}>
           <h3 className='font-bold uppercase text-white'>Shining</h3>
         </NavLink>
-        <DesktopRightMenu toggleCartSidebar={toggleCartSidebar} />
+        <DesktopRightMenu />
       </div>
     </nav>
   );

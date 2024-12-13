@@ -1,33 +1,29 @@
 import { Link } from "react-router-dom";
-import { ProductDataType } from "../../constraints/PRODUCT_DATA_V2";
-import useCartStore from "../../store/cartItems.store";
-import dayjs from "dayjs";
+import { ProductDataType } from "../../service/products/getProduct.type";
+import { isFormatPrice } from "../../helpers/utils";
 
 type ProductCardPropsType = {
   productData: ProductDataType;
+  isProductOptionsOpen: () => void;
 };
 
-function ProductCard({ productData }: ProductCardPropsType) {
-  const addToCart = useCartStore((state) => state.addToCart);
-  const price = productData.price ? productData.price : "N/A";
+function ProductCard({ productData, isProductOptionsOpen }: ProductCardPropsType) {
+  // เลือกราคาใน product_choice จากข้อมูล API
+  const price = productData.product_choices[0]?.price
+    ? productData.product_choices[0].price
+    : "N/A";
 
-  const handleAddToCart = () => {
-    const newProduct = {
-      productId: productData.id,
-      productChoiceId: productData.product_choice[0].id,
-      name: productData.name,
-      price: productData.price,
-      quantity: 1,
-      timestamp: dayjs().toISOString(),
-    };
-
-    addToCart(newProduct);
-  };
+  // เลือก product_choice_id และรูปภาพจาก product_choices
+  const productChoiceId = productData.product_choices[0]?._id;
+  const imageProduct = productData.product_choices[0]?.images[0]?.url; // เลือกรูปภาพแรกจาก images
 
   return (
     <div className='relative overflow-hidden rounded-ee-xl rounded-ss-xl drop-shadow-xl'>
       <div className='absolute right-0 top-0 flex h-16 w-16 items-center justify-center'>
-        <button onClick={handleAddToCart} className='btn btn-circle z-[2] mx-1 h-12 w-12 bg-white'>
+        <button
+          onClick={isProductOptionsOpen}
+          className='btn btn-circle z-[2] mx-1 h-12 w-12 bg-white'
+        >
           <svg
             xmlns='http://www.w3.org/2000/svg'
             fill='none'
@@ -45,18 +41,18 @@ function ProductCard({ productData }: ProductCardPropsType) {
         </button>
       </div>
       <div className='bg-slate-100'>
-        <Link to={"/product"}>
-          <img
-            src='https://pangaia.com/cdn/shop/files/Recycled-Cotton-Hoodie-Black-1.png?crop=center&height=1023&v=1724674090&width=768'
-            alt='Mens 365 Heavyweight Hoodie'
-          />
+        <Link to={`/product/${productChoiceId}`}>
+          {/* แสดงภาพจาก product_choices */}
+          <img src={imageProduct} alt={productData.name} />
         </Link>
       </div>
       <div className='absolute bottom-0 w-full px-4 py-2 sm:py-3 xl:py-4'>
         <div className='flex w-full justify-between gap-x-1 lg:gap-x-4'>
           <p className='text-base font-semibold'>{productData.name}</p>
           <div className='flex items-end'>
-            <span className='text-lg font-semibold xl:text-xl'>${price}</span>
+            <span className='text-lg font-semibold xl:text-xl'>
+              {typeof price === "number" ? isFormatPrice(price, 0) : price}
+            </span>
           </div>
         </div>
       </div>

@@ -1,23 +1,32 @@
 import React, { useState } from "react";
-import EditButton from "../button/EditButton";
-import { profileData } from "../../constraints/PROFILE_DATA";
+import { useNavigate } from "react-router-dom";
+import ProfileM from "./profileMobilecomponents/ProfileM";
+import AddressBookM from "./profileMobilecomponents/AddressBookM";
 
-interface VisibilityState {
+interface VisibilityStateType {
   isOrderHistoryVisible: boolean;
   isProfileVisible: boolean;
   isAddressVisible: boolean;
   isPaymentsVisible: boolean;
 }
 
-const MobileProfilePage: React.FC = () => {
-  const [visibility, setVisibility] = useState<VisibilityState>({
+function MobileProfilePage() {
+  const [visibility, setVisibility] = useState<VisibilityStateType>({
     isOrderHistoryVisible: false,
-    isProfileVisible: false,
-    isAddressVisible: false,
+    isProfileVisible: true,
+    isAddressVisible: true,
     isPaymentsVisible: false,
   });
 
-  const toggleVisibility = (checked: keyof VisibilityState) => {
+  const navigate = useNavigate();
+
+  const handleSignOut = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("email");
+    navigate("/sign-in");
+  };
+
+  const toggleVisibility = (checked: keyof VisibilityStateType) => {
     setVisibility((prev) => ({
       ...prev,
       [checked]: !prev[checked],
@@ -30,113 +39,22 @@ const MobileProfilePage: React.FC = () => {
         {/* Account Section */}
         <div className='flex items-center justify-between border-b py-2'>
           <h2 className='text-lg font-bold'>Account</h2>
-          <a href='#' className='text-sm text-gray-500 hover:underline'>
+          <button className='text-sm text-gray-500 hover:underline' onClick={handleSignOut}>
             Sign-out
-          </a>
+          </button>
         </div>
 
         {/* Order History */}
-        <div className='mt-4'>
-          <button
-            className='flex w-full items-center justify-between border-b border-t py-2 text-left'
-            onClick={() => toggleVisibility("isOrderHistoryVisible")}
-          >
-            <span className='font-semibold'>Order History</span>
-            <span>{visibility.isOrderHistoryVisible ? "▲" : "▼"}</span>
-          </button>
-
-          {visibility.isOrderHistoryVisible && (
-            <div className='border border-t-0 p-4'>
-              <p>Order history content goes here...</p>
-            </div>
-          )}
-        </div>
-
+        {/* <OrderHistoryM visibility={visibility} toggleVisibility={toggleVisibility} /> */}
         {/* Profile Information */}
-        <div className='mt-4'>
-          <button
-            className='flex w-full items-center justify-between border-b border-t py-2 text-left'
-            onClick={() => toggleVisibility("isProfileVisible")}
-          >
-            <span className='font-semibold'>Profile Information</span>
-            <span>{visibility.isProfileVisible ? "▲" : "▼"}</span>
-          </button>
-
-          {visibility.isProfileVisible && (
-            <div className='flex justify-between border border-t-0 p-4'>
-              <div>
-                <p>
-                  <strong>Name:</strong> {profileData.name}
-                </p>
-                <p>
-                  <strong>E-mail:</strong> {profileData.email}
-                </p>
-                <p>
-                  <strong>Telephone:</strong> {profileData.tel}
-                </p>
-                <p>
-                  <strong>Date of birth:</strong> {profileData.dob}
-                </p>
-                <p>
-                  <strong>Password:</strong> ********
-                </p>
-                <hr className='my-4' />
-                <p className='font-semibold'>Billing address</p>
-                <p>{profileData.name}</p>
-                <p>
-                  {` 
-                    ${profileData.address.address}
-                    ${profileData.address.subdistrict}, ${profileData.address.district}
-                    ${profileData.address.province}, ${profileData.address.postal_code}, ${profileData.tel}`}
-                </p>
-                <p>{profileData.tel}</p>
-                <p className='mt-2 text-sm text-gray-500'>
-                  Billing name and address must match the credit card you will be using.
-                </p>
-              </div>
-              <div>
-                <EditButton />
-              </div>
-            </div>
-          )}
-        </div>
-
+        <ProfileM visibility={visibility} toggleVisibility={toggleVisibility} />
         {/* Address Book */}
-        <div className='mt-4'>
-          <button
-            className='flex w-full items-center justify-between border-b border-t py-2 text-left'
-            onClick={() => toggleVisibility("isAddressVisible")}
-          >
-            <span className='font-semibold'>Address Book</span>
-            <span>{visibility.isAddressVisible ? "▲" : "▼"}</span>
-          </button>
-
-          {visibility.isAddressVisible && (
-            <div className='border border-t-0 p-4'>
-              <p>Address book content goes here...</p>
-            </div>
-          )}
-        </div>
-
+        <AddressBookM visibility={visibility} toggleVisibility={toggleVisibility} />
         {/* Payments */}
-        <div className='mt-4'>
-          <button
-            className='flex w-full items-center justify-between border-b border-t py-2 text-left'
-            onClick={() => toggleVisibility("isPaymentsVisible")}
-          >
-            <span className='font-semibold'>Payments</span>
-            <span>{visibility.isPaymentsVisible ? "▲" : "▼"}</span>
-          </button>
-
-          {visibility.isPaymentsVisible && (
-            <div className='border border-t-0 p-4'>
-              <p>Payment information goes here...</p>
-            </div>
-          )}
-        </div>
+        {/* <PaymentsM visibility={visibility} toggleVisibility={toggleVisibility} /> */}
       </div>
     </div>
   );
-};
+}
 
 export default MobileProfilePage;

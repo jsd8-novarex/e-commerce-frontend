@@ -1,34 +1,29 @@
-import { useEffect, useState } from "react";
-import { Outlet } from "react-router-dom";
+import { Outlet, useLocation } from "react-router-dom";
+import useScrollLock from "../hook/useScrollLock";
 import NavigationBar from "./navigation/NavigationBar";
-import CartSidebar from "./CartSidebar";
-// import Footer from "./Footer";
+import CartSidebar from "./cartSidebar/CartSidebar";
+import Footer from "./Footer";
+import BackdropProductOption from "./BackdropProductOption";
+import { useScrollLockStore } from "../store/scrollLock.store";
 
 function Layout() {
-  const [isCartSidebarOpen, setIsCartSidebarOpen] = useState<boolean>(false);
+  useScrollLock();
 
-  useEffect(() => {
-    if (isCartSidebarOpen) {
-      document.body.style.overflowY = "hidden ";
-    } else {
-      document.body.style.overflowY = "auto";
-    }
+  const location = useLocation();
+  const isHomePage = location.pathname === "/";
+  const { openComponents, handleScrollLock } = useScrollLockStore();
 
-    return () => {
-      document.body.style.overflowY = "auto";
-    };
-  }, [isCartSidebarOpen]);
-
-  const toggleCartSidebar = () => {
-    setIsCartSidebarOpen((prev) => !prev);
-  };
+  const isBackdropVisible = openComponents["ProductOptions"] || false;
 
   return (
-    <div className='relative flex h-full flex-col bg-white'>
-      <NavigationBar toggleCartSidebar={toggleCartSidebar} />
-      <CartSidebar isCartSidebarOpen={isCartSidebarOpen} toggleCartSidebar={toggleCartSidebar} />
+    <div className='relative flex h-full flex-col gap-y-32 bg-white'>
+      <NavigationBar />
+      <CartSidebar />
+      {isBackdropVisible && (
+        <BackdropProductOption isPageScrollLocked={true} handleScrollLock={handleScrollLock} />
+      )}
       <Outlet />
-      {/* <Footer /> */}
+      {!isHomePage && <Footer />}
     </div>
   );
 }

@@ -19,4 +19,5 @@ export const hexColor: Record<string, { hexColor: string }> = {
   "Foliage Green": { hexColor: "#123434" },
   Taupe: { hexColor: "#9c8d7b" },
   "Eucalyptus Blue": { hexColor: "#bccfc6" },
+  "Volcanic Grey": { hexColor: "#656062" }
 };

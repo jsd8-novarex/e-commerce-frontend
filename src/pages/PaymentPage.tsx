@@ -3,7 +3,7 @@ import PaymentM from "../components/payment/PaymentMobile";
 
 function PaymentPage() {
   return (
-    <div className='min-h-dvh w-full py-24'>
+    <div className='min-h-dvh w-full pt-24'>
       <PaymentM />
       <PaymentD />
     </div>

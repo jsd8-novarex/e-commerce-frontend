@@ -1,8 +1,8 @@
 import React, { useMemo } from "react";
 import { useNavigate } from "react-router-dom";
-import useShoppingCartStore from "../../../store/shoppingCart.store";
-import { product_list } from "../../../constraints/PRODUCT_DATA_V2";
-import ProductInCart from "../../cartSidebar/ProductInCart";
+import usePostCurrentCart from "../../../hook/cart/usePostCurrentCart";
+import ProductInCartMemo from "../../cartSidebar/ProductInCart";
+import { useCustomerStore } from "../../../store/customers/customerStore";
 
 interface SummaryDProps {
   toggleSummary: () => void;
@@ -12,26 +12,18 @@ interface SummaryDProps {
 
 const SummaryD: React.FC<SummaryDProps> = ({ toggleSummary, isSummaryVisible, isPriceVisible }) => {
   const navigate = useNavigate();
-  const { cart } = useShoppingCartStore();
-  const items = cart?.items || [];
+  const { customer } = useCustomerStore();
+  const { data: cartData } = usePostCurrentCart(customer ? customer._id : "");
 
-  const productChoiceMap = useMemo(() => {
-    const map: Record<string, { price: number }> = {};
-    product_list.forEach((product) => {
-      product.product_choice.forEach((choice) => {
-        map[choice.id] = { price: choice.price };
-      });
-    });
-    return map;
-  }, []);
+  const items = cartData?.cart?.cart_item || [];
 
-  const totalPrice = items.reduce((total, item) => {
-    const productChoice = productChoiceMap[item.product_choice_id];
-    const itemPrice = productChoice?.price || 0;
-    return total + itemPrice * item.quantity;
-  }, 0);
+  const totalPrice = useMemo(() => {
+    return items.reduce((total, item) => total + item.price * item.quantity, 0);
+  }, [items]);
 
-  const totalItems = items.reduce((total, item) => total + item.quantity, 0);
+  const totalItems = useMemo(() => {
+    return items.reduce((total, item) => total + item.quantity, 0);
+  }, [items]);
 
   const handleLink = (path: string) => {
     navigate(path);
@@ -68,7 +60,7 @@ const SummaryD: React.FC<SummaryDProps> = ({ toggleSummary, isSummaryVisible, is
                 </button>
               </div>
             ) : (
-              items.map((item) => <ProductInCart key={item.product_choice_id} item={item} />)
+              items.map((item) => <ProductInCartMemo key={item.product_choice_id} item={item} />)
             )}
           </div>
         </div>
@@ -76,7 +68,7 @@ const SummaryD: React.FC<SummaryDProps> = ({ toggleSummary, isSummaryVisible, is
 
       <div className='flex justify-between border border-t-0 p-4'>
         <span>SUBTOTAL</span>
-        <span>${totalPrice.toFixed(2)}</span>
+        <span>฿{totalPrice.toFixed(2)}</span>
       </div>
 
       <div className='flex justify-between border border-t-0 p-4'>
@@ -84,12 +76,12 @@ const SummaryD: React.FC<SummaryDProps> = ({ toggleSummary, isSummaryVisible, is
           <span>Shipping</span>
           <span>DHL e-commerce - Standard delivery</span>
         </div>
-        <div className='flex items-center'>$0.00</div>
+        <div className='flex items-center'>฿0.00</div>
       </div>
 
       <div className='flex justify-between border border-t-0 p-4'>
         <span>TOTAL</span>
-        <span>${totalPrice.toFixed(2)}</span>
+        <span>฿{totalPrice.toFixed(2)}</span>
       </div>
     </div>
   );

@@ -8,7 +8,6 @@ import { placeOrderStripe } from "../../service/paymentService";
 
 function PaymentMobile() {
   const [isSummaryVisible, setIsSummaryVisible] = useState(false);
-
   const [isPriceVisible, setIsPriceVisible] = useState(true);
   const [loading, setLoading] = useState(false);
 
@@ -16,7 +15,11 @@ function PaymentMobile() {
   const { addresses, fetchAddressesByCustomerId } = useFetchAddresses(customer?._id || "");
   const [primaryAddress, setPrimaryAddress] = useState({
     name: "",
+    province: "",
+    district: "",
+    subdistrict: "",
     address: "",
+    postal_code: "",
     phone: "",
   });
 
@@ -33,7 +36,11 @@ function PaymentMobile() {
       const address = addresses[0]; // ใช้ที่อยู่แรกในลิสต์
       setPrimaryAddress({
         name: customer?.name || "",
-        address: `${address.address}, ${address.subdistrict}, ${address.district}, ${address.province} ${address.postal_code}`,
+        province: address.province || "",
+        district: address.district || "",
+        subdistrict: address.subdistrict || "",
+        address: address.address || "",
+        postal_code: address.postal_code || "",
         phone: customer?.mobile_phone || "",
       });
     }
@@ -91,8 +98,10 @@ function PaymentMobile() {
 
           <div className='flex flex-col pt-4'>
             <span>{primaryAddress.name}</span>
-            <span>{primaryAddress.address}</span>
-            <span>{primaryAddress.phone}</span>
+            <span>
+              {`${primaryAddress.address || "No Address"}, ${primaryAddress.subdistrict || "No Subdistrict"}, ${primaryAddress.district || "No District"}, ${primaryAddress.province || "No Province"} ${primaryAddress.postal_code || ""}`}
+            </span>
+            <span>{primaryAddress.phone || "No Mobile Phone"}</span>
           </div>
         </div>
 

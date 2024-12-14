@@ -1,12 +1,11 @@
 import { create } from "zustand";
-import { CartReturnMessageType } from "../../service/cart/cart.type";
-import removeItemFromCart, { RemoveItemFromCart } from "../../service/cart/removeItemFromCart";
+import removeItemFromCart, {
+  RemoveItemFromCartPropsType,
+} from "../../service/cart/removeItemFromCart";
+import { CartStoreType } from "./cartStore.type";
 
-interface RemoveItemFromCartStoreType {
-  data: CartReturnMessageType | null;
-  error: string | null;
-  loading: boolean;
-  removeItem: ({ customerId, productChoiceId }: RemoveItemFromCart) => Promise<void>;
+interface RemoveItemFromCartStoreType extends CartStoreType {
+  removeItem: ({ customerId, productChoiceId }: RemoveItemFromCartPropsType) => Promise<void>;
 }
 
 export const removeItemFromCartStore = create<RemoveItemFromCartStoreType>((set) => ({

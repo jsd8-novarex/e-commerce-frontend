@@ -229,12 +229,16 @@ const ProfileM: React.FC<ProfileMProps> = ({ visibility, toggleVisibility }) => 
               </p>
               <hr className='my-4' />
               <p className='font-semibold'>Billing address</p>
+              <p>{customer?.name}</p>
+
               {addresses.map((address, index) => (
                 <p key={index}>
-                  {address.address}, {address.subdistrict}, {address.district}, {address.province}{" "}
-                  {address.postal_code}
+                  {address.address || "No Address"}, {address.subdistrict || "No Subdistrict"},{" "}
+                  {address.district || "No District"}, {address.province || "No Province"}{" "}
+                  {address.postal_code || "No Postal code"}
                 </p>
               ))}
+              <p>{customer?.mobile_phone || "No mobile phone"}</p>
             </div>
           )}
         </div>

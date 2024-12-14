@@ -130,12 +130,14 @@ const AddressBookM: React.FC<AddressBookMProps> = ({ visibility, toggleVisibilit
             <div className='flex justify-between'>
               <div>
                 <p className='text-xl'>{customer?.name}</p>
-                <p className='text-xl'>{customer?.mobile_phone}</p>
                 <p className='text-xl'>
-                  {address.address}, {address.subdistrict}, {address.district}, {address.province}{" "}
-                  {address.postal_code}
+                  {address.address || "No Address"}, {address.subdistrict || "No Subdistrict"},{" "}
+                  {address.district || "No District"}, {address.province || "No Province"}{" "}
+                  {address.postal_code || "No Postal code"}
+                  <p>{customer?.mobile_phone || "No Mobile Phone"}</p>
                 </p>
               </div>
+
               <div>
                 <EditButton onClick={handleEditToggle} />
               </div>

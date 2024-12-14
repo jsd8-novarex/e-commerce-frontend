@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import EditButton from "../../button/EditButton";
-import { useCustomerProfile } from "../../../hook/customers/useCustomerHooks";
+import { useCustomerProfile, useUpdateCustomer } from "../../../hook/customers/useCustomerHooks";
 import {
   useFetchAddresses,
   useUpdateAddress,
@@ -12,11 +12,14 @@ interface AddressShippingDProps {
 }
 
 const AddressShippingM: React.FC<AddressShippingDProps> = ({ handleContinue }) => {
-  const { customer } = useCustomerProfile(); // Fetch customer data
+  const { customer } = useCustomerProfile();
   const { addresses, fetchAddressesByCustomerId } = useFetchAddresses(customer?._id || "");
-  const { updateAddress, error: updateError } = useUpdateAddress();
-  const [isEditing, setIsEditing] = useState(false);
-  const [originalAddress, setOriginalAddress] = useState<Address | null>(null);
+  const { updateAddress } = useUpdateAddress();
+  const { updateCustomerInfo } = useUpdateCustomer();
+
+  const [isEditingAddress, setIsEditingAddress] = useState(false);
+  const [isEditingMobile, setIsEditingMobile] = useState(false);
+
   const [editAddress, setEditAddress] = useState<Address>({
     province: "",
     district: "",
@@ -25,25 +28,19 @@ const AddressShippingM: React.FC<AddressShippingDProps> = ({ handleContinue }) =
     postal_code: "",
   });
 
+  const [editMobile, setEditMobile] = useState(customer?.mobile_phone || "");
+  const [originalMobile, setOriginalMobile] = useState(customer?.mobile_phone || "");
+
   useEffect(() => {
-    // Fetch addresses if customer ID exists
     if (customer?._id) {
       fetchAddressesByCustomerId(customer._id);
     }
   }, [customer?._id, fetchAddressesByCustomerId]);
 
   useEffect(() => {
-    // Update state when addresses change
     if (addresses && addresses.length > 0) {
-      const address = addresses[0]; // Use the first address in the list
+      const address = addresses[0];
       setEditAddress({
-        province: address.province || "",
-        district: address.district || "",
-        subdistrict: address.subdistrict || "",
-        address: address.address || "",
-        postal_code: address.postal_code || "",
-      });
-      setOriginalAddress({
         province: address.province || "",
         district: address.district || "",
         subdistrict: address.subdistrict || "",
@@ -53,33 +50,48 @@ const AddressShippingM: React.FC<AddressShippingDProps> = ({ handleContinue }) =
     }
   }, [addresses]);
 
-  const handleEditToggle = () => setIsEditing((prev) => !prev);
-
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setEditAddress((prev) => ({
-      ...prev,
-      [name as keyof Address]: value,
-    }));
+  const handleEditAddressToggle = () => setIsEditingAddress((prev) => !prev);
+  const handleEditMobileToggle = () => {
+    setIsEditingMobile((prev) => !prev);
+    setEditMobile(customer?.mobile_phone || "");
   };
 
-  const handleSave = async () => {
+  const handleAddressInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setEditAddress((prev) => ({ ...prev, [name as keyof Address]: value }));
+  };
+
+  const handleMobileInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setEditMobile(e.target.value);
+  };
+
+  const handleSaveAddress = async () => {
     if (!customer?._id) return;
 
     try {
       await updateAddress(customer._id, editAddress);
       await fetchAddressesByCustomerId(customer._id);
-      setIsEditing(false);
+      setIsEditingAddress(false);
     } catch (error) {
-      console.error("Failed to update address:", error || updateError);
+      console.error("Failed to update address:", error);
     }
   };
 
-  const handleCancel = () => {
-    if (originalAddress) {
-      setEditAddress(originalAddress);
+  const handleSaveMobile = async () => {
+    if (!customer) return;
+
+    try {
+      await updateCustomerInfo({ ...customer, mobile_phone: editMobile });
+      setOriginalMobile(editMobile);
+      setIsEditingMobile(false);
+    } catch (error) {
+      console.error("Failed to update mobile phone:", error);
     }
-    setIsEditing(false);
+  };
+
+  const handleCancelMobile = () => {
+    setEditMobile(originalMobile);
+    setIsEditingMobile(false);
   };
 
   return (
@@ -88,7 +100,8 @@ const AddressShippingM: React.FC<AddressShippingDProps> = ({ handleContinue }) =
         <div className='mt-4 flex border p-4'>
           <div className='font-bold'>Delivery</div>
         </div>
-        {isEditing ? (
+
+        {isEditingAddress ? (
           <div className='grid grid-cols-1 gap-2 border p-4 sm:grid-cols-2'>
             {Object.keys(editAddress).map((field) => (
               <div key={field}>
@@ -101,20 +114,20 @@ const AddressShippingM: React.FC<AddressShippingDProps> = ({ handleContinue }) =
                   type='text'
                   name={field}
                   value={editAddress[field as keyof Address] || ""}
-                  onChange={handleInputChange}
+                  onChange={handleAddressInputChange}
                   className='mt-1 block w-full border-gray-300 p-1 shadow-sm sm:text-lg'
                 />
               </div>
             ))}
             <div className='flex justify-end gap-4 pt-4 sm:col-span-2'>
               <button
-                onClick={handleSave}
+                onClick={handleSaveAddress}
                 className='btn btn-primary rounded-none border-none bg-black text-white hover:bg-gray-500 hover:ring-green-500 focus:ring-green-500'
               >
                 Save
               </button>
               <button
-                onClick={handleCancel}
+                onClick={handleEditAddressToggle}
                 className='btn btn-primary rounded-none border-none bg-black text-white hover:bg-gray-500 hover:ring-green-500 focus:ring-green-500'
               >
                 Cancel
@@ -125,10 +138,47 @@ const AddressShippingM: React.FC<AddressShippingDProps> = ({ handleContinue }) =
           <div className='flex justify-between border border-t-0 p-4'>
             <div className='flex flex-col'>
               <div>Shipping address</div>
-              <span>{`${editAddress.address}, ${editAddress.subdistrict}, ${editAddress.district}, ${editAddress.province} ${editAddress.postal_code}`}</span>
+              <span>{editAddress.address || "No Address"}</span>
+              <span>
+                {editAddress.subdistrict || "No Subdistrict"},{" "}
+                {editAddress.district || "No District"}, {editAddress.province || "No Province"}{" "}
+                {editAddress.postal_code || "No Postal code"}
+              </span>
+              {isEditingMobile ? (
+                <div className='grid grid-cols-1 gap-2 border p-4 sm:grid-cols-2'>
+                  <div className='sm:col-span-2'>
+                    <label className='block text-sm font-medium text-gray-700'>Mobile Phone:</label>
+                    <input
+                      type='text'
+                      value={editMobile}
+                      onChange={handleMobileInputChange}
+                      className='mt-1 block w-full border-gray-300 p-1 shadow-sm sm:text-lg'
+                    />
+                  </div>
+                  <div className='flex justify-end gap-4 pt-4 sm:col-span-2'>
+                    <button
+                      onClick={handleSaveMobile}
+                      className='btn btn-primary rounded-none border-none bg-black text-white hover:bg-gray-500 hover:ring-green-500 focus:ring-green-500'
+                    >
+                      Save
+                    </button>
+                    <button
+                      onClick={handleCancelMobile}
+                      className='btn btn-primary rounded-none border-none bg-black text-white hover:bg-gray-500 hover:ring-green-500 focus:ring-green-500'
+                    >
+                      Cancel
+                    </button>
+                  </div>
+                </div>
+              ) : (
+                <p className='flex items-center gap-2'>
+                  <span>{editMobile || "No Mobile Phone"}</span>
+                  <EditButton className='' onClick={handleEditMobileToggle} />
+                </p>
+              )}
             </div>
             <div>
-              <EditButton onClick={handleEditToggle} />
+              <EditButton onClick={handleEditAddressToggle} />
             </div>
           </div>
         )}

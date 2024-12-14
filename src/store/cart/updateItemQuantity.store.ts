@@ -1,11 +1,9 @@
 import { create } from "zustand";
-import { CartReturnMessageType, ItemToCartPropsType } from "../../service/cart/cart.type";
 import updateItemQuantity from "../../service/cart/updateItemQuantity";
+import { ItemToCartPropsType } from "../../service/cart/cart.type";
+import { CartStoreType } from "./cartStore.type";
 
-interface UpdateItemQuantityStoreType {
-  data: CartReturnMessageType | null;
-  error: string | null;
-  loading: boolean;
+interface UpdateItemQuantityStoreType extends CartStoreType {
   updateQuantity: ({ customerId, productChoiceId, quantity }: ItemToCartPropsType) => Promise<void>;
 }
 

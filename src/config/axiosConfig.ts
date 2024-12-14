@@ -37,7 +37,9 @@ axiosApiInstance.interceptors.response.use(
     return response;
   },
   (error) => {
-    console.error("Error from API:", error.response?.data || error.message);
+    if (import.meta.env.MODE === "development") {
+      console.error("Error from API:", error.response?.data || error.message);
+    }
     return Promise.reject(error);
   },
 );

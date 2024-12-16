@@ -66,7 +66,27 @@ function useRegistration() {
       return;
     }
 
-    // Call API
+    // Check for duplicate email
+    try {
+      const checkEmailResponse = await client.post("/auth/check-email", {
+        email: dataForVerify.email,
+      });
+
+      if (checkEmailResponse.data.exists) {
+        newErrors.email = "This email is already registered.";
+        setErrors(newErrors);
+        setRegStatus("Registration failed.");
+        setIsProcessing(false);
+        return;
+      }
+    } catch (error) {
+      console.error("Error checking email:", error);
+      setRegStatus("Unable to verify email. Please try again.");
+      setIsProcessing(false);
+      return;
+    }
+
+    // Call registration API
     try {
       const response = await client.post("/auth/register", {
         email: dataForVerify.email,
@@ -82,9 +102,8 @@ function useRegistration() {
       setDataForVerify({ email: "", password: "", confirm_password: "" });
 
       console.log("API Response:", response.data);
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    } catch (error: any) {
-      console.error("API Error:", error.response?.data || error.message);
+    } catch (error) {
+      console.error("API Error:", error);
       setRegStatus("Registration failed. Please try again.");
     }
 

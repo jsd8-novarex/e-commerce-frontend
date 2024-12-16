@@ -1,100 +1,70 @@
-// import { useEffect } from "react";
-// import { useSearchParams, useNavigate } from "react-router-dom";
-// import { verifyPayment } from "../service/paymentService";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { postCompleteCartStore } from "../store/cart/postCompleteCart.store";
+import usePostCurrentCart from "../hook/cart/usePostCurrentCart";
+import { useCustomerStore } from "../store/customers/customerStore";
+import { postCurrentCartStore } from "../store/cart/postCurrentCart.store";
 
-// function VerifyPaymentPage() {
-//   const [searchParams] = useSearchParams();
-//   const navigate = useNavigate();
-
-//   useEffect(() => {
-//     const verifyPaymentStatus = async () => {
-//       const success = searchParams.get("success") === "true";
-//       const orderId = searchParams.get("orderId");
-
-//       if (!orderId) {
-//         navigate("/collections");
-//         return;
-//       }
-
-//       try {
-//         await verifyPayment({ orderId, success });
-
-//         if (success) {
-//           alert("Your purchase has been successfully completed!");
-//         } else {
-//           alert("Your purchase was not successful. Please try again.");
-//         }
-//         navigate("/collections");
-//       } catch (error) {
-//         console.error("Payment verification failed:", error);
-//         alert("Failed to verify payment.");
-//         navigate("/collections");
-//       }
-//     };
-
-//     verifyPaymentStatus();
-//   }, [searchParams, navigate]);
-
-//   return (
-//     <div className='flex h-screen items-center justify-center'>
-//       <p>Your purchase has been successfully completed!</p>
-//     </div>
-//   );
-// }
-
-// export default VerifyPaymentPage;
-import { useEffect } from "react";
-import { useSearchParams, useNavigate } from "react-router-dom";
-import { verifyPayment } from "../service/paymentService";
-
-function VerifyPaymentPage() {
-  const [searchParams] = useSearchParams();
+const VerifyPaymentPage = () => {
   const navigate = useNavigate();
+  const { customer } = useCustomerStore();
+  const { fetchCurrentCartData } = postCurrentCartStore();
+  const { data } = usePostCurrentCart(customer ? customer._id : "");
+  const { completeCart, loading, error } = postCompleteCartStore();
+
+  const [hasReloaded, setHasReloaded] = useState(false); // Track reload status
+
+  const cartId = data?.cart?._id || null;
+  const paymentMethod = "credit_card"; // Adjust as needed for your use case
+  const customerId = customer?._id;
 
   useEffect(() => {
-    const verifyPaymentStatus = async () => {
-      const success = searchParams.get("success") === "true";
-      const orderId = searchParams.get("orderId");
+    if (cartId && paymentMethod) {
+      completeCart({ cartId, paymentMethod }).catch((err) => {
+        console.error("Error completing cart:", err);
+      });
+    }
+  }, [cartId, paymentMethod, completeCart]);
 
-      if (!orderId) {
-        navigate("/collections");
-        return;
-      }
-
+  useEffect(() => {
+    const fetchData = async () => {
       try {
-        await verifyPayment({ orderId, success });
-
-        if (success) {
-          alert("Your purchase has been successfully completed!");
-        } else {
-          alert("Your purchase was not successful. Please try again.");
-        }
-        navigate("/collections");
-      } catch (error) {
-        console.error("Payment verification failed:", error);
-        alert("Failed to verify payment.");
-        navigate("/collections");
+        await fetchCurrentCartData(customerId as string);
+      } catch (err) {
+        console.error("Error fetching current cart data:", err);
       }
     };
 
-    verifyPaymentStatus();
-  }, [searchParams, navigate]);
+    if (customer?._id) {
+      fetchData();
+    }
+  }, [customer?._id, customerId, fetchCurrentCartData]);
+
+  // Reload only once when the cart is completed successfully
+  useEffect(() => {
+    if (!hasReloaded && !error && data) {
+      setHasReloaded(true); // Ensure reload happens only once
+      window.location.reload();
+    }
+  }, [hasReloaded, error, data]);
 
   return (
     <div className='flex h-screen items-center justify-center p-4'>
       <div className='w-full max-w-sm rounded-lg bg-white p-6 text-center shadow-lg'>
         <p className='mb-4 text-lg font-semibold text-gray-800'>
-          Your purchase has been successfully! <br /> Thank you !!!
+          Your purchase has been completed! <br /> Thank you!!!
         </p>
+
         <button
           className='mt-4 bg-black px-4 py-2 font-medium text-white shadow-md hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-opacity-75'
           onClick={() => navigate("/collections")}
+          disabled={loading}
         >
           Go to Collections
         </button>
       </div>
     </div>
   );
-}
+};
 
 export default VerifyPaymentPage;

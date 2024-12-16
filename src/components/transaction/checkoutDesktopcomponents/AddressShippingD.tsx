@@ -71,6 +71,8 @@ const AddressShippingD: React.FC<AddressShippingDProps> = ({ handleContinue }) =
     if (!customer?._id) return;
 
     try {
+      // Clear error message on successful validation and save
+      setErrorMessage("");
       await updateAddress(customer._id, editAddress);
       await fetchAddressesByCustomerId(customer._id);
       setIsEditingAddress(false);
@@ -83,6 +85,8 @@ const AddressShippingD: React.FC<AddressShippingDProps> = ({ handleContinue }) =
     if (!customer) return;
 
     try {
+      // Clear error message on successful validation and save
+      setErrorMessage("");
       await updateCustomerInfo({ ...customer, mobile_phone: editMobile });
       setOriginalMobile(editMobile);
       setIsEditingMobile(false);
@@ -164,6 +168,7 @@ const AddressShippingD: React.FC<AddressShippingDProps> = ({ handleContinue }) =
           <div className='flex justify-between border border-t-0 p-4'>
             <div className='flex flex-col'>
               <div>Shipping address</div>
+              <span>{customer?.name}</span>
               <span>{editAddress.address || "No Address"}</span>
               <span>
                 {editAddress.subdistrict || "No Subdistrict"},{" "}
@@ -171,7 +176,7 @@ const AddressShippingD: React.FC<AddressShippingDProps> = ({ handleContinue }) =
                 {editAddress.postal_code || "No Postal code"}
               </span>
               {isEditingMobile ? (
-                <div className='mt-4 grid grid-cols-1 gap-2 border p-4 sm:grid-cols-2'>
+                <div className='mt-4 grid w-[300px] grid-cols-1 gap-2 border p-4 sm:grid-cols-2'>
                   <div className='sm:col-span-2'>
                     <label className='block text-sm font-medium text-gray-700'>Mobile Phone:</label>
                     <input

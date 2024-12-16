@@ -6,7 +6,7 @@ function CollectionsFilterBar({ setSortOrder }: CollectionsFilterBarProps) {
   return (
     <section className='sticky top-[5rem] z-[2] col-span-full flex items-center justify-end bg-white/90 py-2 lg:top-[4.5rem] 2xl:top-[4.75rem]'>
       <div>
-        <select onChange={(e) => setSortOrder(e.target.value)} className='rounded border px-4 py-2'>
+        <select onChange={(e) => setSortOrder(e.target.value)} className='select select-bordered w-full max-w-xs'>
           <option value=''>Select</option>
           <option value='A-Z'>Sort by: A-Z</option>
           <option value='Z-A'>Sort by: Z-A</option>

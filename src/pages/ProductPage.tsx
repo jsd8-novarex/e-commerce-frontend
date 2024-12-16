@@ -46,13 +46,23 @@ function ProductPage() {
 
   return (
     <div className='grid h-full w-full gap-3 py-32 sm:grid-cols-12 sm:px-10'>
-      <ProductImagesMemo data={currentProductChoice} />
-      <ProductDetail
-        product={product}
-        currentProductChoice={currentProductChoice}
-        selectedOptions={selectedOptions}
-        setSelectedOptions={setSelectedOptions}
-      />
+      {currentProductChoice && product ? (
+        <>
+          <ProductImagesMemo data={currentProductChoice} />
+          <ProductDetail
+            product={product}
+            currentProductChoice={currentProductChoice}
+            selectedOptions={selectedOptions}
+            setSelectedOptions={setSelectedOptions}
+          />
+        </>
+      ) : (
+        <div className='col-span-full flex min-h-screen flex-col items-center justify-center'>
+          <div className='text-center'>
+            <h1 className='text-4xl font-bold sm:text-6xl'>Page not found</h1>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

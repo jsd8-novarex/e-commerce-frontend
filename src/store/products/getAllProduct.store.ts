@@ -10,13 +10,8 @@ interface GetAllProductStateType {
 
 export const useGetAllProductStore = create<GetAllProductStateType>((set) => ({
   data: null,
-  error: null,
-  isLoading: false,
-  fetchProductsData: async (gender?: string) => {
-    if (gender === undefined) {
-      set({ data: null, error: null });
-      return;
-    }
+  error: null,  
+  fetchProductsData: async (gender?: string) => {    
     set({ error: null });
     const [response, error] = await getAllProduct(gender);
     set({ data: response, error: error });

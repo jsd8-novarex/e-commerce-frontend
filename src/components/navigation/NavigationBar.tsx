@@ -1,10 +1,11 @@
-import { NavLink, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { useScrollLockStore } from "../../store/scrollLock.store";
 import clsx from "clsx";
 import HamburgerMenu from "./HamburgerMenu";
 import MobileMenu from "./MobileMenu";
 import DesktopLeftMenu from "./DesktopLeftMenu";
 import DesktopRightMenu from "./DesktopRightMenu";
+import SearchBar from "../search/SearchBar";
 
 function NavigationBar() {
   const location = useLocation();
@@ -27,9 +28,7 @@ function NavigationBar() {
           {isMobileMenuOpen && <MobileMenu />}
         </div>
         <DesktopLeftMenu />
-        <NavLink to={"/"}>
-          <h3 className='font-bold uppercase text-white'>Shining</h3>
-        </NavLink>
+        <SearchBar />
         <DesktopRightMenu />
       </div>
     </nav>

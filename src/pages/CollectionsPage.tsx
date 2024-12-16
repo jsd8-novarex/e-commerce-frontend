@@ -1,31 +1,51 @@
 import { useEffect, useState } from "react";
+import { NavLink, useLocation } from "react-router-dom";
 import { useScrollLockStore } from "../store/scrollLock.store";
 import { ProductDataType } from "../service/products/getProduct.type";
 import ScrollToTopButton from "../components/button/ScrollToTopButton";
 import ProductCardMemo from "../components/collections/ProductCard";
 import ProductOptions from "../components/collections/ProductOptions";
 import useGetAllProduct from "../hook/products/useGetAllProduct";
-import { NavLink, useLocation } from "react-router-dom";
 import CollectionsFilterBar from "../components/collections/CollectionsFilterBar";
 
 function CollectionsPage() {
   const { search } = useLocation(); // ใช้เพื่อดึง query parameters จาก URL
+  const { openComponents, handleScrollLock } = useScrollLockStore();
+
   const [filter, setFilter] = useState<string>(""); // เก็บตัวกรอง
   const [sortOrder, setSortOrder] = useState<string>("");
-  const { data } = useGetAllProduct(filter);
-  const { openComponents, handleScrollLock } = useScrollLockStore();
+  const [filteredProducts, setFilteredProducts] = useState<ProductDataType[]>([]);
   const [selectedProduct, setSelectedProduct] = useState<ProductDataType | null>(null);
+
+  const { data } = useGetAllProduct(filter);
+
   const isProductOptionsOpen = openComponents["ProductOptions"] || false;
 
   useEffect(() => {
-    const urlParams = new URLSearchParams(search); // ดึงค่า query parameter
-    const genderParam = urlParams.get("gender"); // รับค่าพารามิเตอร์ gender จาก URL
+    if (!data) return;
+
+    const urlParams = new URLSearchParams(search);
+    const genderParam = urlParams.get("gender");
+    const searchParam = urlParams.get("search") || "";
+
     if (genderParam === "man" || genderParam === "woman") {
       setFilter(genderParam);
     } else {
       setFilter("");
     }
-  }, [search]);
+
+    const filteredBySearch = searchParam
+      ? (data?.products || []).filter((item) =>
+          item.name.toLowerCase().includes(searchParam.toLowerCase()),
+        )
+      : data?.products || [];
+
+    const filteredByGender = filteredBySearch.filter(
+      (item) => !filter || item.gender.toLowerCase() === filter.toLowerCase(),
+    );
+
+    setFilteredProducts(filteredByGender);
+  }, [search, data, filter]);
 
   const toggleProductOption = (product: ProductDataType) => {
     setSelectedProduct(product);
@@ -58,14 +78,8 @@ function CollectionsPage() {
   };
 
   // การจัดเรียงสินค้าภายหลังจากการกรอง
-  const sortedProducts = sortProducts(
-    (data?.products || []).filter(
-      (item) => !filter || item.gender.toLowerCase() === filter.toLowerCase(),
-    ),
-    sortOrder,
-  );
-
-  const shopTitle = filter === "man" ? "Men" : filter === "woman" ? "Women" : "Shop All";
+  const sortedProducts = sortProducts(filteredProducts, sortOrder);
+  const shopTitle = filter === "man" ? "Men" : filter === "woman" ? "Women" : "Shop All"; 
 
   return (
     <main className='relative grid min-h-screen w-full grid-cols-12 gap-y-12 px-5 pt-32 sm:px-10 2xl:px-[7.5%]'>

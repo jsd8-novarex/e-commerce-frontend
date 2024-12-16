@@ -26,31 +26,31 @@ export async function placeOrderStripe(customerId: string): AxiosReturn<string> 
 }
 
 // ยืนยันสถานะการชำระเงิน
-export async function verifyPayment({
-  orderId,
-  success,
-}: {
-  orderId: string;
-  success: boolean;
-}): Promise<[null | undefined, null | Error]> {
-  try {
-    const token = localStorage.getItem("token");
+// export async function verifyPayment({
+//   orderId,
+//   success,
+// }: {
+//   orderId: string;
+//   success: boolean;
+// }): Promise<[null | undefined, null | Error]> {
+//   try {
+//     const token = localStorage.getItem("token");
 
-    if (!token) {
-      throw new Error("Missing credentials. Please log in again.");
-    }
+//     if (!token) {
+//       throw new Error("Missing credentials. Please log in again.");
+//     }
 
-    await client.post(
-      `/payment/verify-payment`,
-      { orderId, success },
-      {
-        headers: { Authorization: `Bearer ${token}` },
-      },
-    );
+//     await client.post(
+//       `/payment/verify-payment`,
+//       { orderId, success },
+//       {
+//         headers: { Authorization: `Bearer ${token}` },
+//       },
+//     );
 
-    return [null, null];
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  } catch (error: any) {
-    return [undefined, error];
-  }
-}
+//     return [null, null];
+//     // eslint-disable-next-line @typescript-eslint/no-explicit-any
+//   } catch (error: any) {
+//     return [undefined, error];
+//   }
+// }

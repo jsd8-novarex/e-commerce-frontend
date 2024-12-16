@@ -7,6 +7,7 @@ import { ProductChoiceType, ProductDataType } from "../../service/products/getPr
 import { SelectedOptionType } from "../../pages/ProductPage";
 import { useNavigate } from "react-router-dom";
 import { isFormatPrice } from "../../helpers/utils";
+import { hexColor } from "../../helpers/hexColor";
 
 type ProductDetailPropsType = {
   product: ProductDataType | undefined;
@@ -14,6 +15,9 @@ type ProductDetailPropsType = {
   selectedOptions: SelectedOptionType;
   setSelectedOptions: React.Dispatch<React.SetStateAction<SelectedOptionType>>;
 };
+interface SizeData {
+  [key: string]: string;
+}
 
 function ProductDetail({
   product,
@@ -62,6 +66,20 @@ function ProductDetail({
     }
   };
 
+  const tableData = [
+    { name: "Size", key: "size" },
+    { name: "Chest", key: "chest" },
+    { name: "Waist", key: "waist" },
+    { name: "Hip", key: "hip" },
+  ];
+
+  const sizeChart: SizeData[] = [
+    { size: "S", chest: '36"', waist: '30"', hip: '38"' },
+    { size: "M", chest: '38"', waist: '32"', hip: '40"' },
+    { size: "L", chest: '40"', waist: '34"', hip: '42"' },
+    { size: "XL", chest: '42"', waist: '36"', hip: '44"' },
+  ];
+
   return (
     <section className='px-4 sm:sm:col-span-4'>
       <div className='border-b-2'>
@@ -79,6 +97,9 @@ function ProductDetail({
               }`}
               title={color || "Unknown"}
               onClick={() => setSelectedOptions((prev) => ({ ...prev, color }))}
+              style={{
+                backgroundColor: hexColor[color]?.hexColor || color,
+              }}
             ></button>
           ))}
         </div>
@@ -113,7 +134,7 @@ function ProductDetail({
           className={clsx("h-12 w-full rounded-none text-white transition-all", {
             "cursor-not-allowed bg-gray-400":
               !currentProductChoice || !selectedOptions.color || !selectedOptions.size,
-            "bg-black hover:bg-green-600":
+            "bg-black hover:bg-gray-600":
               currentProductChoice && selectedOptions.color && selectedOptions.size,
           })}
           onClick={handleAddToCart}
@@ -122,6 +143,31 @@ function ProductDetail({
             ? "Select Options"
             : "Add To Cart"}
         </button>
+      </div>
+      <div className='mt-20'>
+        <span className="font-semibold">Size Chart</span>
+        <table className='mt-4 min-w-full table-auto border-collapse'>
+          <thead>
+            <tr className='border-b'>
+              {tableData.map((header) => (
+                <th key={header.key} className='px-4 py-2 text-left'>
+                  {header.name}
+                </th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {sizeChart.map((sizeData, index) => (
+              <tr key={index} className='border-b'>
+                {tableData.map((header) => (
+                  <td key={header.key} className='px-4 py-2'>
+                    {sizeData[header.key]}
+                  </td>
+                ))}
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </div>
     </section>
   );

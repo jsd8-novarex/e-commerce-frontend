@@ -6,8 +6,11 @@ const DeliveryAddressM = () => {
   const { customer } = useCustomerProfile(); // ดึงข้อมูลลูกค้า
   const { addresses, fetchAddressesByCustomerId } = useFetchAddresses(customer?._id || "");
   const [primaryAddress, setPrimaryAddress] = useState({
-    name: "",
+    province: "",
+    district: "",
+    subdistrict: "",
     address: "",
+    postal_code: "",
     phone: "",
   });
 
@@ -23,8 +26,11 @@ const DeliveryAddressM = () => {
     if (addresses && addresses.length > 0) {
       const address = addresses[0]; // ใช้ที่อยู่แรกในลิสต์
       setPrimaryAddress({
-        name: customer?.name || "",
-        address: `${address.address}, ${address.subdistrict}, ${address.district}, ${address.province} ${address.postal_code}`,
+        province: address.province || "",
+        district: address.district || "",
+        subdistrict: address.subdistrict || "",
+        address: address.address || "",
+        postal_code: address.postal_code || "",
         phone: customer?.mobile_phone || "",
       });
     }
@@ -42,15 +48,19 @@ const DeliveryAddressM = () => {
           </div>
           <div className='flex'>
             <div className='mr-6 flex flex-col'>
-              <span>{primaryAddress.name}</span>
-              <span>{primaryAddress.address}</span>
-              <span>{primaryAddress.phone}</span>
+              <span>{customer?.name || "No Name"}</span>
+              <span>
+                {primaryAddress.address
+                  ? `${primaryAddress.address}, ${primaryAddress.subdistrict}, ${primaryAddress.district}, ${primaryAddress.province} ${primaryAddress.postal_code}`
+                  : "No Address"}
+              </span>
+              <span>{primaryAddress.phone || "No Mobile Phone"}</span>
             </div>
             <div>
               <div>
                 <p>Shipping method</p>
                 <span>DHL e-commerce-Standard delivery</span>
-                <span> 0.00 ฿</span>
+                <span> ฿0.00</span>
               </div>
             </div>
           </div>

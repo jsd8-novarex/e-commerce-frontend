@@ -40,7 +40,7 @@ function AuthenticationForm({
       <div className='col-span-5 hidden bg-gradient-to-r from-black to-blue-900 md:block lg:col-span-7'>
         {status === "sign-in" || status === "sign-up" || status === "sign-in-admin" ? (
           <div className='mx-16 flex h-full flex-col justify-center gap-8'>
-            <h2 className='text-white text-xl sm:text-3xl md:text-5xl lg:text-6xl'>
+            <h2 className='text-xl text-white sm:text-3xl md:text-5xl lg:text-6xl'>
               {status === "sign-in" && "Welcome back!"}
               {status === "sign-up" && "Join SHINING"}
               {status === "sign-in-admin" && "Welcome"}

@@ -1,18 +1,18 @@
-// import { filterOptionsData } from "../../constraints/COLLECTIONS_FILTER_DATA";
+interface CollectionsFilterBarProps {
+  setSortOrder: React.Dispatch<React.SetStateAction<string>>;
+}
 
-function CollectionsFilterBar() {
+function CollectionsFilterBar({ setSortOrder }: CollectionsFilterBarProps) {
   return (
     <section className='sticky top-[5rem] z-[2] col-span-full flex items-center justify-end bg-white/90 py-2 lg:top-[4.5rem] 2xl:top-[4.75rem]'>
-      {/* <div className='hide-scroll hidden md:flex md:snap-x md:snap-proximity md:items-center md:overflow-y-hidden md:overflow-x-scroll md:scroll-smooth md:whitespace-nowrap'>
-        <span className='mr-8 text-xl font-bold uppercase'>Quick filter</span>
-        {filterOptionsData.map((item) => (
-          <span key={item.order} className='p-4 text-xl uppercase'>
-            {item.name}
-          </span>
-        ))}
-      </div> */}
       <div>
-        <button className='btn-black'>Filter</button>
+        <select onChange={(e) => setSortOrder(e.target.value)} className='select select-bordered w-full max-w-xs'>
+          <option value=''>Select</option>
+          <option value='A-Z'>Sort by: A-Z</option>
+          <option value='Z-A'>Sort by: Z-A</option>
+          <option value='low-high'>Price: Low to High</option>
+          <option value='high-low'>Price: High to Low</option>
+        </select>
       </div>
     </section>
   );

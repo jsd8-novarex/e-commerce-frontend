@@ -5,14 +5,15 @@ import { ProductType } from "../../service/products/getProduct.type";
 interface GetAllProductStateType {
   data: ProductType | null;
   error: string | null;
-  fetchProductsData: (filter: { gender?: string }) => Promise<void>;
+  fetchProductsData: (gender?: string) => Promise<void>;
 }
 
 export const useGetAllProductStore = create<GetAllProductStateType>((set) => ({
   data: null,
-  error: null,
-  fetchProductsData: async (filter: { gender?: string }) => {
-    const [response, error] = await getAllProduct(filter);
+  error: null,  
+  fetchProductsData: async (gender?: string) => {    
+    set({ error: null });
+    const [response, error] = await getAllProduct(gender);
     set({ data: response, error: error });
   },
 }));

@@ -1,3 +1,4 @@
+import { memo } from "react";
 import { isFormatPrice } from "../../helpers/utils";
 
 type CartSummaryPropsType = {
@@ -29,4 +30,5 @@ function CartSummary({ totalPrice, handleLink }: CartSummaryPropsType) {
   );
 }
 
-export default CartSummary;
+const CartSummaryMemo = memo(CartSummary);
+export default CartSummaryMemo;

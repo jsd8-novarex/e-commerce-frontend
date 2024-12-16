@@ -1,25 +1,32 @@
 import React, { useState } from "react";
-import OrderHistoryM from "./profileMobilecomponents/OrderHistoryM";
+import { useNavigate } from "react-router-dom";
 import ProfileM from "./profileMobilecomponents/ProfileM";
 import AddressBookM from "./profileMobilecomponents/AddressBookM";
-import PaymentsM from "./profileMobilecomponents/PaymentsM";
 
-interface VisibilityState {
+interface VisibilityStateType {
   isOrderHistoryVisible: boolean;
   isProfileVisible: boolean;
   isAddressVisible: boolean;
   isPaymentsVisible: boolean;
 }
 
-const MobileProfilePage: React.FC = () => {
-  const [visibility, setVisibility] = useState<VisibilityState>({
+function MobileProfilePage() {
+  const [visibility, setVisibility] = useState<VisibilityStateType>({
     isOrderHistoryVisible: false,
-    isProfileVisible: false,
-    isAddressVisible: false,
+    isProfileVisible: true,
+    isAddressVisible: true,
     isPaymentsVisible: false,
   });
 
-  const toggleVisibility = (checked: keyof VisibilityState) => {
+  const navigate = useNavigate();
+
+  const handleSignOut = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("email");
+    navigate("/sign-in");
+  };
+
+  const toggleVisibility = (checked: keyof VisibilityStateType) => {
     setVisibility((prev) => ({
       ...prev,
       [checked]: !prev[checked],
@@ -32,22 +39,22 @@ const MobileProfilePage: React.FC = () => {
         {/* Account Section */}
         <div className='flex items-center justify-between border-b py-2'>
           <h2 className='text-lg font-bold'>Account</h2>
-          <a href='#' className='text-sm text-gray-500 hover:underline'>
+          <button className='text-sm text-gray-500 hover:underline' onClick={handleSignOut}>
             Sign-out
-          </a>
+          </button>
         </div>
 
         {/* Order History */}
-        <OrderHistoryM visibility={visibility} toggleVisibility={toggleVisibility} />
+        {/* <OrderHistoryM visibility={visibility} toggleVisibility={toggleVisibility} /> */}
         {/* Profile Information */}
         <ProfileM visibility={visibility} toggleVisibility={toggleVisibility} />
         {/* Address Book */}
         <AddressBookM visibility={visibility} toggleVisibility={toggleVisibility} />
         {/* Payments */}
-        <PaymentsM visibility={visibility} toggleVisibility={toggleVisibility} />
+        {/* <PaymentsM visibility={visibility} toggleVisibility={toggleVisibility} /> */}
       </div>
     </div>
   );
-};
+}
 
 export default MobileProfilePage;

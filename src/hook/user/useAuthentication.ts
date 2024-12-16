@@ -2,6 +2,7 @@ import { useState } from "react";
 import { handleInputObjectFieldChange } from "../../helpers/utils";
 import { useNavigate } from "react-router-dom";
 import client from "../../config/axiosConfig";
+import { useCustomerProfile } from "../customers/useCustomerHooks";
 
 type DataForVerifyType = {
   email: string;
@@ -10,9 +11,11 @@ type DataForVerifyType = {
 
 function useAuthentication() {
   const navigate = useNavigate();
+  const { fetchCustomerProfile } = useCustomerProfile();
 
   const [authStatus, setAuthStatus] = useState<string>("");
   const [isProcessing, setIsProcessing] = useState<boolean>(false);
+  const [hasError, setHasError] = useState<boolean>(false);
   const [dataForVerify, setDataForVerify] = useState<DataForVerifyType>({
     email: "",
     password: "",
@@ -20,6 +23,7 @@ function useAuthentication() {
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     handleInputObjectFieldChange<DataForVerifyType>(event, setDataForVerify);
+    setHasError(false); // Reset error state when the user types
   };
 
   const handleAuthentication = async (event: React.FormEvent<HTMLFormElement>) => {
@@ -27,6 +31,7 @@ function useAuthentication() {
 
     setIsProcessing(true);
     setAuthStatus("Verifying user information...");
+    setHasError(false); // Reset error state when starting new authentication
 
     try {
       const response = await client.post("/auth/login", {
@@ -38,14 +43,16 @@ function useAuthentication() {
       localStorage.setItem("token", token);
       localStorage.setItem("email", dataForVerify.email);
 
+      fetchCustomerProfile();
+
       setAuthStatus("Successfully authenticated.");
       setTimeout(() => {
         navigate("/", { replace: true });
       }, 500);
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    } catch (error: any) {
-      console.error("Error during login:", error.response?.data || error.message);
-      setAuthStatus("Invalid credentials. Please try again.");
+    } catch (error) {
+      console.error("Error during login:", error);
+      setAuthStatus("Invalid Email & Password. Please try again.");
+      setHasError(true);
     }
 
     setIsProcessing(false);
@@ -57,6 +64,7 @@ function useAuthentication() {
     dataForVerify,
     handleInputChange,
     handleAuthentication,
+    hasError, // Return hasError for use in the UI
   };
 }
 

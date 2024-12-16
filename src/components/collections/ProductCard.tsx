@@ -1,6 +1,8 @@
 import { Link } from "react-router-dom";
+import { memo, useEffect, useState } from "react";
 import { ProductDataType } from "../../service/products/getProduct.type";
 import { isFormatPrice } from "../../helpers/utils";
+
 
 type ProductCardPropsType = {
   productData: ProductDataType;
@@ -8,12 +10,26 @@ type ProductCardPropsType = {
 };
 
 function ProductCard({ productData, isProductOptionsOpen }: ProductCardPropsType) {
-  // เลือกราคาใน product_choice จากข้อมูล API
-  const price = productData.product_choices[0]?.price ? productData.product_choices[0].price : "N/A";  
-  
-  // เลือก product_choice_id และรูปภาพจาก product_choices
-  const productChoiceId = productData.product_choices[0]?.id;
-  const imageProduct = productData.product_choices[0]?.images[0]?.url; // เลือกรูปภาพแรกจาก images  
+  // สถานะสำหรับเก็บ index ของตัวเลือกที่สุ่มเลือก
+  const [randomProductIndex, setRandomProductIndex] = useState<number>(0);
+
+  // จำนวนตัวเลือกสินค้า
+  const totalChoices = productData.product_choices.length;
+
+  // เลือก index ของตัวเลือกสินค้าจากข้อมูลที่ได้มาเมื่อคอมโพเนนต์ถูกโหลด
+  useEffect(() => {
+    if (totalChoices > 0) {
+      setRandomProductIndex(Math.floor(Math.random() * totalChoices));
+    }
+  }, [totalChoices]);
+
+  // ดึงราคาของสินค้า
+  const randomProduct = productData.product_choices[randomProductIndex];
+  const price = randomProduct?.price ?? "N/A"; 
+
+  // ดึง productChoiceId และ image URL ของสินค้า
+  const productChoiceId = randomProduct?._id;
+  const imageProductUrl = randomProduct?.images[0]?.url;
 
   return (
     <div className='relative overflow-hidden rounded-ee-xl rounded-ss-xl drop-shadow-xl'>
@@ -41,7 +57,7 @@ function ProductCard({ productData, isProductOptionsOpen }: ProductCardPropsType
       <div className='bg-slate-100'>
         <Link to={`/product/${productChoiceId}`}>
           {/* แสดงภาพจาก product_choices */}
-          <img src={imageProduct} alt={productData.name} />
+          <img src={imageProductUrl} alt={productData.name} />
         </Link>
       </div>
       <div className='absolute bottom-0 w-full px-4 py-2 sm:py-3 xl:py-4'>
@@ -58,4 +74,5 @@ function ProductCard({ productData, isProductOptionsOpen }: ProductCardPropsType
   );
 }
 
-export default ProductCard;
+const ProductCardMemo = memo(ProductCard);
+export default ProductCardMemo;

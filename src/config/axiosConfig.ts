@@ -1,4 +1,6 @@
 import axios from "axios";
+import dayjs from "dayjs";
+import { jwtDecode } from "jwt-decode";
 
 const axiosApiInstance = axios.create({
   baseURL: import.meta.env.VITE_API_URL,
@@ -9,8 +11,18 @@ const axiosApiInstance = axios.create({
 axiosApiInstance.interceptors.request.use(
   (config) => {
     const token = localStorage.getItem("token");
+
     if (token) {
-      config.headers["Authorization"] = `Bearer ${token}`;
+      const jwtData = jwtDecode<{ id: string; iat: number; exp: number }>(token);
+      const isExpired = dayjs.unix(jwtData.exp).diff(dayjs()) < 1;
+
+      if (!isExpired) {
+        config.headers["Authorization"] = `Bearer ${token}`;
+        return config;
+      } else {
+        localStorage.removeItem("token");
+      }
+      return config;
     }
     return config;
   },
@@ -25,7 +37,9 @@ axiosApiInstance.interceptors.response.use(
     return response;
   },
   (error) => {
-    console.error("Error from API:", error.response?.data || error.message);
+    if (import.meta.env.MODE === "development") {
+      console.error("Error from API:", error.response?.data || error.message);
+    }
     return Promise.reject(error);
   },
 );

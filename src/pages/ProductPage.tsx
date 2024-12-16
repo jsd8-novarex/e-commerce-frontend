@@ -1,5 +1,5 @@
 import { useMemo, useState } from "react";
-import { NavLink, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import ProductImagesMemo from "../components/product/ProductImages";
 import ProductDetail from "../components/product/ProductDetail";
 import useGetAllProduct from "../hook/products/useGetAllProduct";
@@ -46,29 +46,23 @@ function ProductPage() {
 
   return (
     <div className='grid h-full w-full gap-3 py-32 sm:grid-cols-12 sm:px-10'>
-       {currentProductChoice && product ? (
-    <>
-      <ProductImagesMemo data={currentProductChoice} />
-      <ProductDetail
-        product={product}
-        currentProductChoice={currentProductChoice}
-        selectedOptions={selectedOptions}
-        setSelectedOptions={setSelectedOptions}
-      />
-    </>
-  ) : (
-    <div className='col-span-full flex min-h-screen flex-col items-center justify-start'>
-      <div className='text-center'>
-        <h1 className='text-4xl font-bold sm:text-6xl'>Page not found</h1>
-        <p className='mt-2 text-lg sm:text-3xl'>Server Error.</p>
-      </div>
-      <div className='mt-8'>
-        <button type='button' className='btn-black px-6 py-2 text-lg sm:text-xl'>
-          <NavLink to='/'>Home</NavLink>
-        </button>
-      </div>
-    </div>
-  )}
+      {currentProductChoice && product ? (
+        <>
+          <ProductImagesMemo data={currentProductChoice} />
+          <ProductDetail
+            product={product}
+            currentProductChoice={currentProductChoice}
+            selectedOptions={selectedOptions}
+            setSelectedOptions={setSelectedOptions}
+          />
+        </>
+      ) : (
+        <div className='col-span-full flex min-h-screen flex-col items-center justify-center'>
+          <div className='text-center'>
+            <h1 className='text-4xl font-bold sm:text-6xl'>Page not found</h1>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

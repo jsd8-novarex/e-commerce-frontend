@@ -1,7 +1,7 @@
 import { FilterOptionsDataType } from "./COLLECTIONS_FILTER_DATA";
 
 export interface NavigationDataType extends FilterOptionsDataType {
-  showOnDesktop: boolean;
+  showOnDesktop: boolean;   
 }
 
 export const navigationData: NavigationDataType[] = [
@@ -31,8 +31,8 @@ export const navigationData: NavigationDataType[] = [
   },
   {
     order: 4,
-    name: "Login",
+    name: "Sign in",
     path: "/sign-in",
     showOnDesktop: false,
-  },
+  }
 ];

@@ -3,7 +3,7 @@ import { onHandleErrorFromAPI } from "../../config/errorFromAPI";
 import { AxiosReturn } from "../../config/errorFromAPI.type";
 import { CartReturnMessageType } from "./cart.type";
 
-export interface RemoveItemFromCart {
+export interface RemoveItemFromCartPropsType {
   customerId: string;
   productChoiceId: string;
 }
@@ -11,7 +11,7 @@ export interface RemoveItemFromCart {
 async function removeItemFromCart({
   customerId,
   productChoiceId,
-}: RemoveItemFromCart): AxiosReturn<CartReturnMessageType> {
+}: RemoveItemFromCartPropsType): AxiosReturn<CartReturnMessageType> {
   try {
     const response = await client.post<CartReturnMessageType>("/cart/delete", {
       customerId: customerId,

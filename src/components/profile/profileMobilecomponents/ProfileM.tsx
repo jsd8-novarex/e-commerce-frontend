@@ -209,32 +209,36 @@ const ProfileM: React.FC<ProfileMProps> = ({ visibility, toggleVisibility }) => 
             <div>
               <div className='flex justify-between'>
                 <p>
-                  <strong>Name:</strong> {customer?.name || "No name"}
+                  <strong>Name</strong>: {customer?.name || "No name"}
                 </p>
                 <EditButton onClick={() => setIsEditingProfile(true)} />
               </div>
 
               <p>
-                <strong>E-mail:</strong> {customer?.email || "No email"}
+                <strong>E-mail</strong>: {customer?.email || "No email"}
               </p>
               <p>
-                <strong>Telephone:</strong> {customer?.mobile_phone || "No mobile phone"}
+                <strong>Telephone</strong>: {customer?.mobile_phone || "No mobile phone"}
               </p>
               <p>
-                <strong>Date of Birth:</strong> {customer?.date_of_birth?.split("T")[0] || "No DOB"}
+                <strong>Date of Birth</strong>: {customer?.date_of_birth?.split("T")[0] || "No DOB"}
               </p>
-              <p>
-                <strong>Password:</strong> ********{" "}
-                <EditButton onClick={() => setIsEditingPassword(true)} />
+              <p className='flex items-center'>
+                <strong>Password</strong>: ********{" "}
+                <EditButton className='ml-2' onClick={() => setIsEditingPassword(true)} />
               </p>
               <hr className='my-4' />
               <p className='font-semibold'>Billing address</p>
+              <p>{customer?.name}</p>
+
               {addresses.map((address, index) => (
                 <p key={index}>
-                  {address.address}, {address.subdistrict}, {address.district}, {address.province}{" "}
-                  {address.postal_code}
+                  {address.address || "No Address"}, {address.subdistrict || "No Subdistrict"},{" "}
+                  {address.district || "No District"}, {address.province || "No Province"}{" "}
+                  {address.postal_code || "No Postal code"}
                 </p>
               ))}
+              <p>{customer?.mobile_phone || "No mobile phone"}</p>
             </div>
           )}
         </div>

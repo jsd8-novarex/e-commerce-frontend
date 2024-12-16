@@ -22,7 +22,7 @@ function SignUpPage() {
               value={dataForVerify.email}
               onChange={handleInputChange}
               disabled={isProcessing}
-              className='auth-form__input'
+              className={`auth-form__input ${errors.email ? "border-red-500" : ""}`}
               minLength={8}
               required
             />
@@ -40,7 +40,7 @@ function SignUpPage() {
               value={dataForVerify.password}
               onChange={handleInputChange}
               disabled={isProcessing}
-              className='auth-form__input'
+              className={`auth-form__input ${errors.password ? "border-red-500" : ""}`}
               minLength={8}
               required
             />
@@ -58,7 +58,7 @@ function SignUpPage() {
               value={dataForVerify.confirm_password}
               onChange={handleInputChange}
               disabled={isProcessing}
-              className='auth-form__input'
+              className={`auth-form__input ${errors.confirmPassword ? "border-red-500" : ""}`}
               minLength={8}
               required
             />

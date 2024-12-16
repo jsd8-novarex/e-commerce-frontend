@@ -3,7 +3,12 @@ import { navigationData } from "../../constraints/NAVIGATION_DATA";
 
 function DesktopLeftMenu() {
   return (
-    <ul className='hidden sm:flex sm:justify-between sm:gap-4'>
+    <ul className='hidden items-center sm:flex sm:justify-between sm:gap-x-2 md:gap-x-4'>
+      <li className=" hidden lg:block">
+        <NavLink to={"/"}>
+          <h3 className='font-bold uppercase text-white'>Shining</h3>
+        </NavLink>
+      </li>
       {navigationData
         .filter((item) => item.showOnDesktop)
         .map((item) => (

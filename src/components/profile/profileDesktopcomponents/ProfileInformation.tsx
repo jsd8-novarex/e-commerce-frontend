@@ -259,9 +259,9 @@ function ProfileInformation() {
             <p className='mb-8'>
               <strong>DOB</strong>: {customer.date_of_birth?.split("T")[0] || "No DOB"}
             </p>
-            <p className=''>
+            <p className='flex items-center'>
               <strong>Password</strong>: ********{" "}
-              <EditButton onClick={() => setIsEditingPassword(true)} />
+              <EditButton className='ml-2' onClick={() => setIsEditingPassword(true)} />
             </p>
           </div>
           <div className='flex w-1/2 flex-col gap-y-2 border-l pl-6 text-gray-600'>
@@ -271,11 +271,13 @@ function ProfileInformation() {
             <p>{customer.name}</p>
             {addresses.map((address, index) => (
               <p key={index}>
-                {address.address}, {address.subdistrict}, {address.district}, {address.province}{" "}
-                {address.postal_code}
+                {address.address || "No Address"}, {address.subdistrict || "No Subdistrict"},{" "}
+                {address.district || "No District"}, {address.province || "No Province"}{" "}
+                {address.postal_code || "No Postal code"}
               </p>
             ))}
-            <p>Billing name and address must match the credit card you will be using.</p>
+            <p>{customer?.mobile_phone || "No mobile phone"}</p>
+            {/* <p>Billing name and address must match the credit card you will be using.</p> */}
           </div>
         </div>
       )}

@@ -31,6 +31,8 @@ const AddressShippingM: React.FC<AddressShippingDProps> = ({ handleContinue }) =
   const [editMobile, setEditMobile] = useState(customer?.mobile_phone || "");
   const [originalMobile, setOriginalMobile] = useState(customer?.mobile_phone || "");
 
+  const [errorMessage, setErrorMessage] = useState("");
+
   useEffect(() => {
     if (customer?._id) {
       fetchAddressesByCustomerId(customer._id);
@@ -69,6 +71,8 @@ const AddressShippingM: React.FC<AddressShippingDProps> = ({ handleContinue }) =
     if (!customer?._id) return;
 
     try {
+      // Clear error message on successful validation and save
+      setErrorMessage("");
       await updateAddress(customer._id, editAddress);
       await fetchAddressesByCustomerId(customer._id);
       setIsEditingAddress(false);
@@ -81,6 +85,8 @@ const AddressShippingM: React.FC<AddressShippingDProps> = ({ handleContinue }) =
     if (!customer) return;
 
     try {
+      // Clear error message on successful validation and save
+      setErrorMessage("");
       await updateCustomerInfo({ ...customer, mobile_phone: editMobile });
       setOriginalMobile(editMobile);
       setIsEditingMobile(false);
@@ -92,6 +98,30 @@ const AddressShippingM: React.FC<AddressShippingDProps> = ({ handleContinue }) =
   const handleCancelMobile = () => {
     setEditMobile(originalMobile);
     setIsEditingMobile(false);
+  };
+
+  const handleValidation = () => {
+    const missingFields = [];
+    if (!editAddress.address) missingFields.push("Address");
+    if (!editAddress.subdistrict) missingFields.push("Subdistrict");
+    if (!editAddress.district) missingFields.push("District");
+    if (!editAddress.province) missingFields.push("Province");
+    if (!editAddress.postal_code) missingFields.push("Postal Code");
+    if (!editMobile) missingFields.push("Mobile Phone");
+
+    if (missingFields.length > 0) {
+      setErrorMessage(`Please fill out the following fields: ${missingFields.join(", ")}`);
+      return false;
+    }
+
+    setErrorMessage("");
+    return true;
+  };
+
+  const handleContinueClick = () => {
+    if (handleValidation()) {
+      handleContinue();
+    }
   };
 
   return (
@@ -138,6 +168,7 @@ const AddressShippingM: React.FC<AddressShippingDProps> = ({ handleContinue }) =
           <div className='flex justify-between border border-t-0 p-4'>
             <div className='flex flex-col'>
               <div>Shipping address</div>
+              <span>{customer?.name}</span>
               <span>{editAddress.address || "No Address"}</span>
               <span>
                 {editAddress.subdistrict || "No Subdistrict"},{" "}
@@ -145,11 +176,12 @@ const AddressShippingM: React.FC<AddressShippingDProps> = ({ handleContinue }) =
                 {editAddress.postal_code || "No Postal code"}
               </span>
               {isEditingMobile ? (
-                <div className='grid grid-cols-1 gap-2 border p-4 sm:grid-cols-2'>
+                <div className='mt-4 grid w-[200px] grid-cols-1 gap-2 border p-4 sm:grid-cols-2'>
                   <div className='sm:col-span-2'>
                     <label className='block text-sm font-medium text-gray-700'>Mobile Phone:</label>
                     <input
                       type='text'
+                      maxLength={10}
                       value={editMobile}
                       onChange={handleMobileInputChange}
                       className='mt-1 block w-full border-gray-300 p-1 shadow-sm sm:text-lg'
@@ -176,6 +208,11 @@ const AddressShippingM: React.FC<AddressShippingDProps> = ({ handleContinue }) =
                   <EditButton className='' onClick={handleEditMobileToggle} />
                 </p>
               )}
+              {errorMessage && (
+                <div className='p-4 text-red-500'>
+                  <p className='p-4 text-red-500'>{errorMessage}</p>
+                </div>
+              )}
             </div>
             <div>
               <EditButton onClick={handleEditAddressToggle} />
@@ -194,7 +231,7 @@ const AddressShippingM: React.FC<AddressShippingDProps> = ({ handleContinue }) =
         <div>฿ 0.00</div>
       </div>
       <div className='flex justify-center border border-t-0 p-4'>
-        <button className='bg-black px-16 py-4 text-white' onClick={handleContinue}>
+        <button className='bg-black px-16 py-4 text-white' onClick={handleContinueClick}>
           Continue
         </button>
       </div>

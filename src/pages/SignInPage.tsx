@@ -3,8 +3,14 @@ import AuthenticationForm from "../components/AuthenticationForm";
 import useAuthentication from "../hook/user/useAuthentication";
 
 function SignInPage() {
-  const { isProcessing, dataForVerify, authStatus, handleInputChange, handleAuthentication } =
-    useAuthentication();
+  const {
+    isProcessing,
+    dataForVerify,
+    authStatus,
+    handleInputChange,
+    handleAuthentication,
+    hasError,
+  } = useAuthentication();
 
   return (
     <AuthenticationForm status='sign-in' message='Enter your account details'>
@@ -23,7 +29,7 @@ function SignInPage() {
               onChange={handleInputChange}
               disabled={isProcessing}
               required
-              className='auth-form__input'
+              className={`auth-form__input ${hasError ? "border-red-500 focus:ring-red-500" : ""}`}
             />
           </div>
           <div className='flex flex-col'>
@@ -40,17 +46,18 @@ function SignInPage() {
               onChange={handleInputChange}
               disabled={isProcessing}
               required
-              className='auth-form__input'
+              className={`auth-form__input ${hasError ? "border-red-500 focus:ring-red-500" : ""}`}
             />
           </div>
-          <div>{authStatus && <div>{authStatus}</div>}</div>
+          <div>
+            {authStatus && (
+              <div className={`${hasError ? "text-red-500" : "text-black"}`}>{authStatus}</div>
+            )}
+          </div>
           <div className='flex flex-col justify-center'>
             <button type='submit' disabled={isProcessing} className='auth-form__btn uppercase'>
               sign in
             </button>
-            <NavLink to='/' className='mt-2 text-right hover:text-gray-400'>
-              Forgot Password?
-            </NavLink>
           </div>
         </form>
       </div>

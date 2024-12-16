@@ -259,9 +259,9 @@ function ProfileInformation() {
             <p className='mb-8'>
               <strong>DOB</strong>: {customer.date_of_birth?.split("T")[0] || "No DOB"}
             </p>
-            <p className=''>
+            <p className='flex items-center'>
               <strong>Password</strong>: ********{" "}
-              <EditButton onClick={() => setIsEditingPassword(true)} />
+              <EditButton className='ml-2' onClick={() => setIsEditingPassword(true)} />
             </p>
           </div>
           <div className='flex w-1/2 flex-col gap-y-2 border-l pl-6 text-gray-600'>
